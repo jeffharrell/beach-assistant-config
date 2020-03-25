@@ -1,0 +1,45 @@
+config:
+
+lovelace:
+  mode: yaml
+
+api:
+
+alexa: !include config/alexa.yaml
+
+http: !include config/http.yaml
+
+frontend: !include config/frontend.yaml
+
+history: !include config/history.yaml
+
+recorder: !include config/recorder.yaml
+
+notify: !include config/notify.yaml
+
+zwave: !include config/zwave.yaml
+
+script: !include packages/scripts.yaml
+
+system_health:
+
+sun:
+
+homeassistant:
+  name: Beach
+  latitude: 36.967572
+  longitude: -121.904895
+  elevation: 0
+  unit_system: "Imperial"
+  time_zone: "America/Los_Angeles"
+  packages:
+    climate: !include packages/climate.yaml
+    lights: !include packages/lights.yaml
+    media: !include packages/media.yaml
+    network: !include packages/network.yaml
+    scenes: !include packages/scenes.yaml
+    security: !include packages/security.yaml
+    system: !include packages/system.yaml
+    weather: !include packages/weather.yaml
+  whitelist_external_dirs:
+    - /tmp

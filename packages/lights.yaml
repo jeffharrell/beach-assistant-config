@@ -1,0 +1,48 @@
+light:
+  - platform: group
+    name: Living Room
+    entities:
+      - light.living_room_1
+      - light.living_room_2
+  - platform: group
+    name: Master Reading Lights
+    entities:
+      - light.master_reading_light_1
+      - light.master_reading_light_2
+      
+group:
+  backyard_lights:
+    name: Backyard
+    entities:
+      - switch.backyard_lights_left
+      - switch.backyard_lights_right
+
+automation:
+  - alias: Lights - Automatic front lights
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.front_door
+        to: "on"
+    condition:
+      condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: 
+          - switch.front_door
+          
+  - alias: Lights - Automatic back lights
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.kitchen_door
+        to: "on"
+    condition:
+      condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: 
+          - switch.backyard_lights_left
+          - switch.backyard_lights_right

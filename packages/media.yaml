@@ -1,0 +1,25 @@
+switch:
+  - platform: broadlink
+    host: 192.168.1.147
+    mac: "78:0F:77:63:1E:57"
+    timeout: 15
+    retry: 5
+    
+
+group:
+  shades:
+    - script.shade1up
+    - script.shade1down
+    - script.shade1stop
+    - script.shade2up
+    - script.shade2down
+    - script.shade2stop
+    - script.shade3up
+    - script.shade3down
+    - script.shade3stop
+    - script.shade4up
+    - script.shade4down
+    - script.shade4stop
+    - script.shade5up
+    - script.shade5down
+    - script.shade5stop

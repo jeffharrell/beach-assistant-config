@@ -1,0 +1,32 @@
+smart_home:
+  filter:
+    include_entities:
+      - group.backyard_lights
+    include_domains:
+      - switch
+      - light
+      - script
+      - scene
+    exclude_entities:
+      - switch.backyard_lights_right
+      - switch.backyard_lights_left
+      - light.living_room_1
+      - light.living_room_2
+      - light.master_reading_light_1
+      - light.master_reading_light_2
+      - script.shade1up
+      - script.shade1down
+      - script.shade1stop
+      - script.shade2up
+      - script.shade2down
+      - script.shade2stop
+      - script.shade3up
+      - script.shade3down
+      - script.shade3stop
+      - script.shade4up
+      - script.shade4down
+      - script.shade4stop
+      - script.shade5up
+      - script.shade5down
+      - script.shade5stop
+ 

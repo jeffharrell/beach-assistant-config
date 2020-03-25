@@ -1,0 +1,4 @@
+climate:
+  - platform: intesishome
+    username: !secret intensis_user
+    password: !secret intensis_pass

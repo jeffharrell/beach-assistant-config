@@ -1,0 +1,250 @@
+title: Beach
+
+custom_header:
+  compact_mode: true
+  menu_dropdown: true
+  hide_help: true
+  hide_unused: true
+  hide_config: true
+  footer_mode: true
+  tab_indicator_color: transparent
+  header_css: "height: 90px;"
+
+resources:
+  - type: module
+    url: /local/community/custom-header/custom-header.js
+  - type: module
+    url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
+  - type: module
+    url: /local/community/mini-graph-card/mini-graph-card-bundle.js
+    
+views:
+  - title: "Home"
+    cards:
+      - type: vertical-stack
+        title: Beach
+        cards:
+          - type: picture
+            image: /local/photos/house.jpg
+
+          - type: conditional
+            conditions:
+              - entity: alarm_control_panel.abode_alarm
+                state: "disarmed"
+            card:
+              type: horizontal-stack
+              cards:
+                - type: entity-button
+                  entity: scene.good_morning
+                  name: Good Morning
+                  icon: mdi:brightness-5
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data:
+                      entity_id: scene.good_morning
+              
+                - type: entity-button
+                  entity: scene.good_night
+                  name: Good Night
+                  icon: mdi:brightness-2
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data:
+                      entity_id: scene.good_night
+
+          - type: conditional
+            conditions:
+              - entity: alarm_control_panel.abode_alarm
+                state: "disarmed"
+            card:
+              type: horizontal-stack
+              cards:
+                - type: entity-button
+                  entity: scene.dinner_time
+                  name: Dinner Lights
+                  icon: mdi:food-fork-drink
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data:
+                      entity_id: scene.dinner_time
+
+                - type: entity-button
+                  entity: scene.chill_time
+                  name: Chill Lights
+                  icon: mdi:movie
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: scene.turn_on
+                    service_data:
+                      entity_id: scene.chill_time
+
+          - type: vertical-stack
+            title: "Status"
+            cards:
+              - type: markdown
+                content: >
+                  <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}°. {{ states('sensor.dark_sky_hourly_summary') }}
+
+
+                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.noaa_tides') }}
+                  {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
+
+                    <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
+                  {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
+
+                    <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
+                  {% else %}
+
+                    <ha-icon icon="mdi:shield-outline"></ha-icon> Alarm is disarmed
+                  {% endif %}
+    
+              - type: entity-filter
+                card:
+                  type: entities
+                  show_header_toggle: false
+                state_filter:
+                  - "on"
+                show_empty: false
+                entities:
+                  - entity: binary_sensor.front_door
+                    icon: mdi:door
+                  - entity: binary_sensor.kitchen_door
+                    icon: mdi:door
+                  - entity: binary_sensor.kitchen_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.bathroom_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.master_slider
+                    icon: mdi:door
+
+
+  - title: "Inside"
+    cards:
+      - type: entities
+        title: "Downstairs"
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - entity: climate.upstairs
+            type: custom:multiple-entity-row
+            name: "Climate"
+            show_state: false
+            entities: 
+              - entity: sensor.downstairs_trisensor_temperature
+                name: "Temperature"
+              - entity: climate.upstairs
+                name: "Mode"
+          - type: section
+          - entity: light.living_room
+          - entity: light.dining_lights
+          - entity: light.kitchen
+          - entity: light.cabinets
+          - entity: light.sink
+          - entity: switch.desk_light
+            icon: mdi:lightbulb
+          - entity: light.mood_lights
+          - entity: light.picture_lights
+          - entity: light.guest_bedroom
+          - type: section
+          - entity: group.shades
+            type: custom:multiple-entity-row
+            name: Shades
+            icon: mdi:grid-large
+            show_state: false
+            entities:
+              - icon: mdi:arrow-up
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.shades_up
+              - icon: mdi:menu
+                tap_action:
+                  action: more-info
+              - icon: mdi:arrow-down
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.shades_down
+                    
+      - type: entities
+        title: "Upstairs"
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - entity: climate.upstairs
+            type: custom:multiple-entity-row
+            name: "Climate"
+            show_state: false
+            entities: 
+              - entity: sensor.upstairs_trisensor_temperature
+                name: "Temperature"
+              - entity: climate.upstairs
+                name: "Mode"
+          - type: section
+          - entity: light.master
+          - entity: light.master_reading_lights
+          - entity: light.master_wall_lights
+          - entity: switch.upstairs_deck
+            icon: mdi:lightbulb
+          - entity: light.bunk_bedroom
+          - entity: light.hallway
+       
+  - title: "Outside"
+    cards:
+      - type: entities
+        title: "Weather"
+        show_header_toggle: false
+        entities:
+          - entity: sensor.dark_sky_temperature
+            name: Temperature
+          - entity: sensor.dark_sky_humidity
+            name: Humidity
+          - entity: sensor.dark_sky_uv_index
+            name: UV
+          - entity: sensor.dark_sky_wind_speed
+            name: Wind Speed
+            
+      - type: entities
+        title: "Landscape"
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - entity: switch.front_door
+            icon: mdi:lightbulb
+          - entity: switch.front_deck
+            icon: mdi:lightbulb
+          - entity: group.backyard_lights
+            icon: mdi:lightbulb
+          - entity: switch.backyard_stairs
+            icon: mdi:lightbulb
+          - entity: switch.twinkle_lights
+            icon: mdi:lightbulb
+
+      - type: entities
+        title: "Surf"
+        show_header_toggle: false
+        entities:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.current_manresa_max
+            group: true
+            height: 100
+            align_state: right
+            font_size: 75
+            line_color: "#0077FF"
+            show:
+              name: false
+              icon: false
+              graph: line
+          - entity: sensor.stars
+          - entity: sensor.swell_direction
+          - entity: sensor.swell_period
