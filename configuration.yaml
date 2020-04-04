@@ -1,8 +1,5 @@
 config:
 
-lovelace:
-  mode: yaml
-
 api:
 
 alexa: !include config/alexa.yaml
@@ -10,6 +7,8 @@ alexa: !include config/alexa.yaml
 http: !include config/http.yaml
 
 frontend: !include config/frontend.yaml
+
+lovelace: !include config/lovelace.yaml
 
 history: !include config/history.yaml
 

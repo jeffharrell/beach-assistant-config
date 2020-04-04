@@ -1,8 +1,3 @@
-abode:
-  username: !secret abode_user
-  password: !secret abode_pass
-
-
 automation:
   - alias: Alarm - Turn house on
     initial_state: True

@@ -48,7 +48,7 @@ scene:
       light.sink: off
       script.shades_up: on
 
-  - name: Good Night
+  - name: Lights Off
     entities:
       light.living_room: off
       light.dining_lights: off

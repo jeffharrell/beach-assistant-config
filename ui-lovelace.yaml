@@ -1,23 +1,19 @@
 title: Beach
 
 custom_header:
-  compact_mode: true
   menu_dropdown: true
   hide_help: true
   hide_unused: true
   hide_config: true
-  footer_mode: true
-  tab_indicator_color: transparent
-  header_css: "height: 90px;"
+  tab_indicator_color: transparent 
+  exceptions:
+    - conditions:
+        user_agent: Mobile
+      config:
+        compact_mode: true   
+        footer_mode: true
+        header_css: "height: 90px;"
 
-resources:
-  - type: module
-    url: /local/community/custom-header/custom-header.js
-  - type: module
-    url: /local/community/lovelace-multiple-entity-row/multiple-entity-row.js
-  - type: module
-    url: /local/community/mini-graph-card/mini-graph-card-bundle.js
-    
 views:
   - title: "Home"
     cards:
@@ -44,17 +40,17 @@ views:
                     service: scene.turn_on
                     service_data:
                       entity_id: scene.good_morning
-              
+
                 - type: entity-button
-                  entity: scene.good_night
-                  name: Good Night
+                  entity: scene.lights_off
+                  name: Lights Off
                   icon: mdi:brightness-2
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
                     service: scene.turn_on
                     service_data:
-                      entity_id: scene.good_night
+                      entity_id: scene.lights_off
 
           - type: conditional
             conditions:
@@ -104,7 +100,7 @@ views:
 
                     <ha-icon icon="mdi:shield-outline"></ha-icon> Alarm is disarmed
                   {% endif %}
-    
+
               - type: entity-filter
                 card:
                   type: entities
@@ -129,19 +125,9 @@ views:
     cards:
       - type: entities
         title: "Downstairs"
-        show_header_toggle: false
+        show_header_toggle: true
         state_color: true
         entities:
-          - entity: climate.upstairs
-            type: custom:multiple-entity-row
-            name: "Climate"
-            show_state: false
-            entities: 
-              - entity: sensor.downstairs_trisensor_temperature
-                name: "Temperature"
-              - entity: climate.upstairs
-                name: "Mode"
-          - type: section
           - entity: light.living_room
           - entity: light.dining_lights
           - entity: light.kitchen
@@ -152,6 +138,17 @@ views:
           - entity: light.mood_lights
           - entity: light.picture_lights
           - entity: light.guest_bedroom
+          - type: section
+          - entity: climate.downstairs
+            type: custom:multiple-entity-row
+            name: "Climate"
+            show_state: false
+            state_color: false
+            entities:
+              - entity: sensor.downstairs_trisensor_temperature
+                name: "Temperature"
+              - entity: climate.downstairs
+                name: "Mode"
           - type: section
           - entity: group.shades
             type: custom:multiple-entity-row
@@ -174,22 +171,12 @@ views:
                   service: script.turn_on
                   service_data:
                     entity_id: script.shades_down
-                    
+
       - type: entities
         title: "Upstairs"
-        show_header_toggle: false
+        show_header_toggle: true
         state_color: true
         entities:
-          - entity: climate.upstairs
-            type: custom:multiple-entity-row
-            name: "Climate"
-            show_state: false
-            entities: 
-              - entity: sensor.upstairs_trisensor_temperature
-                name: "Temperature"
-              - entity: climate.upstairs
-                name: "Mode"
-          - type: section
           - entity: light.master
           - entity: light.master_reading_lights
           - entity: light.master_wall_lights
@@ -197,7 +184,18 @@ views:
             icon: mdi:lightbulb
           - entity: light.bunk_bedroom
           - entity: light.hallway
-       
+          - type: section
+          - entity: climate.upstairs
+            type: custom:multiple-entity-row
+            name: "Climate"
+            show_state: false
+            state_color: false
+            entities:
+              - entity: sensor.upstairs_trisensor_temperature
+                name: "Temperature"
+              - entity: climate.upstairs
+                name: "Mode"
+
   - title: "Outside"
     cards:
       - type: entities
@@ -212,10 +210,10 @@ views:
             name: UV
           - entity: sensor.dark_sky_wind_speed
             name: Wind Speed
-            
+
       - type: entities
         title: "Landscape"
-        show_header_toggle: false
+        show_header_toggle: true
         state_color: true
         entities:
           - entity: switch.front_door
