@@ -124,7 +124,7 @@ views:
   - title: "Inside"
     cards:
       - type: entities
-        title: "Downstairs"
+        title: "Lights"
         show_header_toggle: true
         state_color: true
         entities:
@@ -137,19 +137,18 @@ views:
             icon: mdi:lightbulb
           - entity: light.mood_lights
           - entity: light.picture_lights
+          - entity: light.hallway
           - entity: light.guest_bedroom
-          - type: section
-          - entity: climate.downstairs
-            type: custom:multiple-entity-row
-            name: "Climate"
-            show_state: false
-            state_color: false
-            entities:
-              - entity: sensor.downstairs_trisensor_temperature
-                name: "Temperature"
-              - entity: climate.downstairs
-                name: "Mode"
-          - type: section
+          - entity: light.bunk_bedroom
+          - entity: light.master
+          - entity: light.master_reading_lights
+          - entity: light.master_wall_lights
+
+      - type: entities
+        title: "House"
+        show_header_toggle: false
+        state_color: true
+        entities:
           - entity: group.shades
             type: custom:multiple-entity-row
             name: Shades
@@ -171,23 +170,18 @@ views:
                   service: script.turn_on
                   service_data:
                     entity_id: script.shades_down
-
-      - type: entities
-        title: "Upstairs"
-        show_header_toggle: true
-        state_color: true
-        entities:
-          - entity: light.master
-          - entity: light.master_reading_lights
-          - entity: light.master_wall_lights
-          - entity: switch.upstairs_deck
-            icon: mdi:lightbulb
-          - entity: light.bunk_bedroom
-          - entity: light.hallway
           - type: section
+          - entity: climate.downstairs
+            type: custom:multiple-entity-row
+            show_state: false
+            state_color: false
+            entities:
+              - entity: sensor.downstairs_trisensor_temperature
+                name: "Temperature"
+              - entity: climate.downstairs
+                name: "Mode"
           - entity: climate.upstairs
             type: custom:multiple-entity-row
-            name: "Climate"
             show_state: false
             state_color: false
             entities:
@@ -203,13 +197,13 @@ views:
         show_header_toggle: false
         entities:
           - entity: sensor.dark_sky_temperature
-            name: Temperature
+            name: "Temperature"
           - entity: sensor.dark_sky_humidity
-            name: Humidity
+            name: "Humidity"
           - entity: sensor.dark_sky_uv_index
-            name: UV
+            name: "UV"
           - entity: sensor.dark_sky_wind_speed
-            name: Wind Speed
+            name: "Wind Speed"
 
       - type: entities
         title: "Landscape"
@@ -220,29 +214,20 @@ views:
             icon: mdi:lightbulb
           - entity: switch.front_deck
             icon: mdi:lightbulb
+          - entity: switch.twinkle_lights
+            icon: mdi:lightbulb
           - entity: group.backyard_lights
             icon: mdi:lightbulb
           - entity: switch.backyard_stairs
             icon: mdi:lightbulb
-          - entity: switch.twinkle_lights
+          - entity: switch.upstairs_deck
             icon: mdi:lightbulb
 
       - type: entities
         title: "Surf"
         show_header_toggle: false
         entities:
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.current_manresa_max
-            group: true
-            height: 100
-            align_state: right
-            font_size: 75
-            line_color: "#0077FF"
-            show:
-              name: false
-              icon: false
-              graph: line
+          - entity: sensor.current_manresa_max
           - entity: sensor.stars
           - entity: sensor.swell_direction
           - entity: sensor.swell_period
