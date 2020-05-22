@@ -7,13 +7,8 @@ automation:
       from: "armed_away"
       to: "disarmed"
     action:
-      - service: homeassistant.turn_on
-        entity_id:
-          - light.living_room
-          - light.kitchen
-          - switch.front_door
       - service: script.turn_on
-        entity_id: script.shades_up      
+        entity_id: script.welcome_home
 
   - alias: Alarm - Turn house off
     initial_state: True
@@ -22,32 +17,8 @@ automation:
       entity_id: alarm_control_panel.abode_alarm
       to: "armed_away"
     action:
-      - service: homeassistant.turn_off
-        entity_id:
-          - light.living_room
-          - light.dining_lights
-          - light.mood_lights
-          - light.picture_lights
-          - switch.desk_light
-          - light.guest_bedroom
-          - light.sink
-          - light.cabinets
-          - light.kitchen
-          - light.hallway
-          - light.master
-          - light.master_reading_light_1
-          - light.master_reading_light_2
-          - light.master_wall_lights
-          - light.bunk_bedroom
-          - switch.front_door
-          - switch.front_deck
-          - switch.backyard_lights_left
-          - switch.backyard_lights_right
-          - switch.twinkle_lights
-          - switch.backyard_stairs
-          - switch.upstairs_deck
       - service: script.turn_on
-        entity_id: script.shades_down
+        entity_id: script.goodbye
 
   - alias: Alarm - Notifications
     initial_state: True
@@ -59,11 +30,11 @@ automation:
         data_template:
           title: Beach House
           message: >
-            {% if states.alarm_control_panel.abode_alarm.state == "armed_home" %}
+            {% if states("alarm_control_panel.abode_alarm", "armed_home") %}
               Alarm armed home
-            {% elif states.alarm_control_panel.abode_alarm.state == "armed_away" %}
+            {% elif states("alarm_control_panel.abode_alarm", "armed_away") %}
               Alarm armed away
-            {% else %}
+            {% elif states("alarm_control_panel.abode_alarm", "disarmed") %}
               Alarm off
             {% endif %}
 

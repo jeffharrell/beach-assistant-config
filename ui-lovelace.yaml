@@ -31,26 +31,22 @@ views:
               type: horizontal-stack
               cards:
                 - type: entity-button
-                  entity: scene.good_morning
-                  name: Good Morning
-                  icon: mdi:brightness-5
+                  entity: script.good_morning
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
-                    service: scene.turn_on
+                    service: script.turn_on
                     service_data:
-                      entity_id: scene.good_morning
+                      entity_id: script.good_morning
 
                 - type: entity-button
-                  entity: scene.lights_off
-                  name: Lights Off
-                  icon: mdi:brightness-2
+                  entity: script.good_night
                   icon_height: 1.5em
                   tap_action:
                     action: call-service
-                    service: scene.turn_on
+                    service: script.turn_on
                     service_data:
-                      entity_id: scene.lights_off
+                      entity_id: script.good_night
 
           - type: conditional
             conditions:
@@ -61,7 +57,7 @@ views:
               cards:
                 - type: entity-button
                   entity: scene.dinner_time
-                  name: Dinner Lights
+                  name: Dinner Time
                   icon: mdi:food-fork-drink
                   icon_height: 1.5em
                   tap_action:
@@ -96,9 +92,6 @@ views:
                   {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
 
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
-                  {% else %}
-
-                    <ha-icon icon="mdi:shield-outline"></ha-icon> Alarm is disarmed
                   {% endif %}
 
               - type: entity-filter
@@ -149,6 +142,25 @@ views:
         show_header_toggle: false
         state_color: true
         entities:
+          - entity: climate.downstairs
+            type: custom:multiple-entity-row
+            show_state: false
+            state_color: false
+            entities:
+              - entity: sensor.downstairs_trisensor_temperature
+                name: "Temperature"
+              - entity: climate.downstairs
+                name: "Mode"
+          - entity: climate.upstairs
+            type: custom:multiple-entity-row
+            show_state: false
+            state_color: false
+            entities:
+              - entity: sensor.upstairs_trisensor_temperature
+                name: "Temperature"
+              - entity: climate.upstairs
+                name: "Mode"
+          - type: section 
           - entity: group.shades
             type: custom:multiple-entity-row
             name: Shades
@@ -170,25 +182,6 @@ views:
                   service: script.turn_on
                   service_data:
                     entity_id: script.shades_down
-          - type: section
-          - entity: climate.downstairs
-            type: custom:multiple-entity-row
-            show_state: false
-            state_color: false
-            entities:
-              - entity: sensor.downstairs_trisensor_temperature
-                name: "Temperature"
-              - entity: climate.downstairs
-                name: "Mode"
-          - entity: climate.upstairs
-            type: custom:multiple-entity-row
-            show_state: false
-            state_color: false
-            entities:
-              - entity: sensor.upstairs_trisensor_temperature
-                name: "Temperature"
-              - entity: climate.upstairs
-                name: "Mode"
 
   - title: "Outside"
     cards:

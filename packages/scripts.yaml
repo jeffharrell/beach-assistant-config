@@ -1,3 +1,61 @@
+welcome_home:
+  alias: "Welcome Home"
+  sequence:
+    - service: script.turn_on
+      entity_id: script.shades_up
+    - condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+    - service: homeassistant.turn_on
+      entity_id:
+        - light.kitchen
+        - switch.front_door
+
+goodbye:
+  alias: "Goodbye"
+  sequence:
+    - service: homeassistant.turn_off
+      entity_id: group.lights
+    - service: script.turn_on
+      entity_id: script.shades_down
+
+good_morning:
+  alias: "Good Morning"
+  icon: "mdi:brightness-5"
+  sequence:
+    - condition: state
+      entity_id: alarm_control_panel.abode_alarm
+      state: "disarmed"
+    - service: scene.turn_on
+      entity_id: scene.good_morning
+    - service: script.turn_on
+      entity_id: script.shades_up
+
+good_night:
+  alias: "Good Night"
+  icon: "mdi:brightness-2"
+  sequence:
+    - condition: state
+      entity_id: alarm_control_panel.abode_alarm
+      state: "disarmed"
+    - service: scene.turn_on
+      entity_id: scene.lights_off
+    - service: script.turn_on
+      entity_id: script.shades_down
+
+movie_time:
+  alias: "Movie Time"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: scene.turn_on
+      entity_id: scene.chill_time
+    - condition: state
+      entity_id: alarm_control_panel.abode_alarm
+      state: "disarmed"     
+    - service: script.turn_on
+      entity_id: script.shade4down
+    - service: script.turn_on
+      entity_id: script.shade5down
+
 shade1up:
   alias: "Shade 1 - Up"
   icon: "mdi:grid-large"
@@ -16,7 +74,6 @@ shade1down:
         host: 192.168.1.147
         packet: "sgCpAnxRNgoXCRcKFwkXCgwUFwoMFAwVFwoMFAwUFwoMFRYKFgoXChYKDBUMFAwVFgoMFQwUDBUWCgwVDBQMFQwUFwoWCgwVFgoXCRgJDRQWChcKFgoMFRaiUTYKFwoWChcJFwoMFRYKDBUMFBcKDBQMFRYKDBQXChcKFgoXCgsVDBUMFBcJDBUMFQwUFgoNFAwVDBQMFBcKFwoMFBcKFgoXCQwVFwkXChYKDBUWo1A3CRcKFwoWChYLDBQXCQwVDBUWCgwUDBUWCgwVFgoXChYKFwoMFAwVDBQXCgwUDBUMFBcKDBQMFQwUDBUWChcKDBQXChYKFwoMFBcKFgsWCgwUF6JRNgoWChcKFgoXCgwUFwoMFAwUFwoMFQwUFgsMFBcJFwoXCRcKDBUMFAwVFgoMFQwUDBUWCgwUDBUMFAwVFwkXCgwVFgoWChcKDBQXChcJFwoMFBeiUTcJFwoWChcKFgoMFBcKDBUMFBcKDBQMFRYKDBQXChcJFwoWCgwVDBQMFRYKDBUMFAwVFgoMFQwUDRQMFBcKFgoMFRYKFwoWCgwUGAkXChYKDBS6UDYKFwkXChcKFgoMFRYKDBUMFBcKDBQMFRYKDRQWChYLFgoWCwwUDBQNFBYLDBQMFQwUFwoMFAwUDRQMFBcKFwoMFBcJFwoXCgwUFwkXChcJDBUXolA3CRcKFgoXChYKDBUXCQ0UDBUWCgwUDBUWCwsVFwkXChYKFwoMFAwVDBQXCgwUDBUMFRYKDBQMFQwUDBUXCRcKDBQXChYKFwoMFBcKFgoXCgwUuVA3ChYKFwkXChcJDRQXCQ0UDBUWCgwVDBQXCgwUFwkXChcKFgoMFA0UDBQXCgwVDBQMFRYKDBQNFAwUDBUXCRcKDBQXChcKFgoMFBcKFwkXCgwUFwAF3AAAAAAAAAAAAAAAAAAAAA==" 
 
-        
 shade2up:
   alias: "Shade 2 - Up"
   icon: "mdi:grid-large"
@@ -126,32 +183,6 @@ FAwUDRQMFRYKFwkNFBcKFgoMFA0UFwkXChcKDBQWBKFQNwoWChcKFgoXCgwUFwoMFAwUFwoMFQwU
 FwoMFBcKFwkXChYKDBUWCgwVFwkMFQwUDBUWCgwVDBQNFAwUFwoWCgwVFwkXCgwUDBUWChcJFwoM
 FBcABdwAAAAAAAAAAAAAAAA="
 
-shadesallup:
-  alias: "Shades All - Up"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: broadlink.send
-      data:
-        host: 192.168.1.147
-        packet: "sgCsADcJFwoWChcKFgoMFRYKDBQNFBcJDRQMFRYKDBQXChcKFgoWChcKFwkXCgwUDBUXCRcKFgoM
-FQwUDBUMFBcKFgoNFBYKDRQMFBcKFgoXCgwUFwkXBKFQNwoXCRcKFgoXCgwUFwkNFAwVFgoMFQwU
-FwoMFBcJFwoXCRcKFwkXChcJDRQMFBgJFwkXCgwUDRQMFA0UFwkXCgwUFwoMFA0UFwkXChYKDBUX
-CRcABdwAAAAAAAAAAAAAAAA="
-
-shadesalldown:
-  alias: "Shades All - Down"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: broadlink.send
-      data:
-        host: 192.168.1.147
-        packet: "sgACATYKFwoWChcJGAkMFRYKDBUMFBcKDBQMFRYKDBUWChcKFgoXCRcKFwoWChYKDBUMFA0UFgoM
-FQwVDBQMFRYKFwkMFRcKDBQMFBcKDBQXChYKDBUWBKJQNgoXChYKFwkXCgwUFwoMFA0UFwkNFAwU
-FwoMFBcKFgoXChYKFwoXCRcKFgoMFQwUDBUWCgwVDBQMFQwUFwkXCgwVFwkMFQwUFwoMFBcKFgoM
-FBcEoVE2ChYKFwoWChcKDBQXCgwUDBUWCgwUDRQXCgwUFwoWChYLFgoXChYKFwkXCgwVDBQMFRYK
-DBQMFQwUDRQXCRcKDBQXCgwUDBUXCQ0UFwkXCgwUFwAF3AAAAAAAAA=="
-
-
 shades_up:
   alias: "Shades Up"
   icon: "mdi:grid-large"
@@ -180,18 +211,6 @@ shades_down:
       entity_id: script.shade2down
     - service: script.turn_on
       entity_id: script.shade3down
-    - service: script.turn_on
-      entity_id: script.shade4down
-    - service: script.turn_on
-      entity_id: script.shade5down
-      
-shades_movies:
-  alias: "Movie Shades"
-  icon: "mdi:grid-large"
-  sequence:
-    - condition: state
-      entity_id: alarm_control_panel.abode_alarm
-      state: "disarmed"
     - service: script.turn_on
       entity_id: script.shade4down
     - service: script.turn_on

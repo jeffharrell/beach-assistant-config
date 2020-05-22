@@ -46,7 +46,6 @@ scene:
       light.picture_lights: off
       light.kitchen: off
       light.sink: off
-      script.shades_up: on
 
   - name: Lights Off
     entities:
@@ -65,4 +64,3 @@ scene:
       switch.backyard_stairs: off
       switch.twinkle_lights: off
       switch.upstairs_deck: off
-      script.shades_down: on

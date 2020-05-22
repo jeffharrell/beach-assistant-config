@@ -11,11 +11,35 @@ light:
       - light.master_reading_light_2
       
 group:
+  frontyard_lights:
+    - switch.front_door
+    - switch.front_deck
   backyard_lights:
     name: Backyard
     entities:
       - switch.backyard_lights_left
       - switch.backyard_lights_right
+  lights:
+      - light.living_room
+      - light.dining_lights
+      - light.mood_lights
+      - light.picture_lights
+      - switch.desk_light
+      - light.guest_bedroom
+      - light.sink
+      - light.cabinets
+      - light.kitchen
+      - light.hallway
+      - light.master
+      - light.master_reading_light_1
+      - light.master_reading_light_2
+      - light.master_wall_lights
+      - light.bunk_bedroom
+      - group.frontyard_lights
+      - group.backyard_lights
+      - switch.twinkle_lights
+      - switch.backyard_stairs
+      - switch.upstairs_deck 
 
 automation:
   - alias: Lights - Automatic front lights
