@@ -9,7 +9,8 @@ light:
     entities:
       - light.master_reading_light_1
       - light.master_reading_light_2
-      
+
+
 group:
   frontyard_lights:
     - switch.front_door
@@ -39,7 +40,8 @@ group:
       - group.backyard_lights
       - switch.twinkle_lights
       - switch.backyard_stairs
-      - switch.upstairs_deck 
+      - switch.upstairs_deck
+
 
 automation:
   - alias: Lights - Automatic front lights
@@ -53,9 +55,9 @@ automation:
       value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
     action:
       - service: homeassistant.turn_on
-        entity_id: 
+        entity_id:
           - switch.front_door
-          
+
   - alias: Lights - Automatic back lights
     initial_state: True
     trigger:
@@ -67,6 +69,20 @@ automation:
       value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
     action:
       - service: homeassistant.turn_on
-        entity_id: 
-          - switch.backyard_lights_left
-          - switch.backyard_lights_right
+        entity_id:
+          - group.backyard_lights
+
+  - alias: Lights - Turn off after sunrise
+    initial_state: True
+    trigger:
+      platform: sun
+      event: sunrise
+    condition:
+      condition: state
+      entity_id: group.lights
+      state: "on"
+    action:
+      - delay: "02:00:00"
+      - service: homeassistant.turn_off
+        entity_id:
+          - group.lights

@@ -3,7 +3,6 @@ switch:
     host: 192.168.1.147
     mac: "78:0F:77:63:1E:57"
     timeout: 15
-    retry: 5
     
 
 group:

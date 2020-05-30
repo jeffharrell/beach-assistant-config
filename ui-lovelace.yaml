@@ -185,18 +185,14 @@ views:
 
   - title: "Outside"
     cards:
-      - type: entities
+      - type: glance
         title: "Weather"
-        show_header_toggle: false
+        show_name: false
         entities:
           - entity: sensor.dark_sky_temperature
-            name: "Temperature"
           - entity: sensor.dark_sky_humidity
-            name: "Humidity"
-          - entity: sensor.dark_sky_uv_index
-            name: "UV"
           - entity: sensor.dark_sky_wind_speed
-            name: "Wind Speed"
+          - entity: sensor.dark_sky_uv_index
 
       - type: entities
         title: "Landscape"
@@ -216,11 +212,11 @@ views:
           - entity: switch.upstairs_deck
             icon: mdi:lightbulb
 
-      - type: entities
+      - type: glance
         title: "Surf"
-        show_header_toggle: false
+        show_name: false
         entities:
           - entity: sensor.current_manresa_max
-          - entity: sensor.stars
           - entity: sensor.swell_direction
           - entity: sensor.swell_period
+          - entity: sensor.stars        
