@@ -1,17 +1,15 @@
 title: Beach
 
 custom_header:
-  menu_dropdown: true
-  hide_help: true
-  hide_unused: true
-  hide_config: true
-  tab_indicator_color: transparent 
+  tab_indicator_color: "transparent"
   exceptions:
     - conditions:
-        user_agent: Mobile
+        user_agent: "Mobile"
       config:
-        compact_mode: true   
+        compact_mode: true
         footer_mode: true
+        options_hide: true
+        reverse_button_direction: true
         header_css: "height: 90px;"
 
 views:
@@ -85,7 +83,8 @@ views:
                   <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}°. {{ states('sensor.dark_sky_hourly_summary') }}
 
 
-                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.noaa_tides') }}
+                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.noaa_tides') }}. Waves {{ states('sensor.surf_forecast') }}' at {{ states('sensor.surf_swell_period') }}.
+
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
 
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
@@ -138,7 +137,7 @@ views:
           - entity: light.master_wall_lights
 
       - type: entities
-        title: "House"
+        title: "Climate"
         show_header_toggle: false
         state_color: true
         entities:
@@ -160,7 +159,22 @@ views:
                 name: "Temperature"
               - entity: climate.upstairs
                 name: "Mode"
-          - type: section 
+
+
+  - title: "Outside"
+    cards:
+      - type: glance
+        title: "Weather"
+        show_name: false
+        entities:
+          - entity: sensor.dark_sky_temperature
+          - entity: sensor.dark_sky_humidity
+          - entity: sensor.dark_sky_wind_speed
+          - entity: sensor.dark_sky_uv_index
+
+      - type: entities
+        title: "Windows"
+        entities:
           - entity: group.shades
             type: custom:multiple-entity-row
             name: Shades
@@ -183,17 +197,6 @@ views:
                   service_data:
                     entity_id: script.shades_down
 
-  - title: "Outside"
-    cards:
-      - type: glance
-        title: "Weather"
-        show_name: false
-        entities:
-          - entity: sensor.dark_sky_temperature
-          - entity: sensor.dark_sky_humidity
-          - entity: sensor.dark_sky_wind_speed
-          - entity: sensor.dark_sky_uv_index
-
       - type: entities
         title: "Landscape"
         show_header_toggle: true
@@ -211,12 +214,3 @@ views:
             icon: mdi:lightbulb
           - entity: switch.upstairs_deck
             icon: mdi:lightbulb
-
-      - type: glance
-        title: "Surf"
-        show_name: false
-        entities:
-          - entity: sensor.current_manresa_max
-          - entity: sensor.swell_direction
-          - entity: sensor.swell_period
-          - entity: sensor.stars        
