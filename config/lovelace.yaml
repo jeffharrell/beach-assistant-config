@@ -5,5 +5,3 @@ resources:
     url: /hacsfiles/custom-header/custom-header.js
   - type: module
     url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
-  - type: module
-    url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js 
