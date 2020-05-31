@@ -70,7 +70,7 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - group.backyard_lights
+          - switch.backyard_lights_right
 
   - alias: Lights - Turn off after sunrise
     initial_state: True

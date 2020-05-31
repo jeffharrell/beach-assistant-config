@@ -16,7 +16,7 @@ scene:
       light.kitchen: off
       light.cabinets: off
       light.hallway: off
- 
+
 
   - name: Dinner Time
     entities:
@@ -38,7 +38,7 @@ scene:
       light.cabinets:
         state: on
         brightness: 255
-      switch.desk_light: on
+      switch.desk_light: off
       light.hallway: off
       light.living_room: off
       light.dining_lights: off
