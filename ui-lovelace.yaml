@@ -83,7 +83,7 @@ views:
                   <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}°. {{ states('sensor.dark_sky_hourly_summary') }}
 
 
-                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.noaa_tides') }}. Waves are {{ states('sensor.surf_forecast') }}'.
+                  <ha-icon icon="mdi:waves"></ha-icon> Waves are {{ states('sensor.surf_forecast') }}' today. {{ states('sensor.noaa_tides') }}.
 
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
 
@@ -146,7 +146,7 @@ views:
             show_state: false
             state_color: false
             entities:
-              - entity: sensor.downstairs_trisensor_temperature
+              - entity: sensor.downstairs_temp
                 name: "Temperature"
               - entity: climate.downstairs
                 name: "Mode"
@@ -155,7 +155,7 @@ views:
             show_state: false
             state_color: false
             entities:
-              - entity: sensor.upstairs_trisensor_temperature
+              - entity: sensor.upstairs_temp
                 name: "Temperature"
               - entity: climate.upstairs
                 name: "Mode"

@@ -2,3 +2,17 @@ climate:
   - platform: intesishome
     username: !secret intensis_user
     password: !secret intensis_pass
+
+
+sensor:
+  - platform: template
+    sensors:
+      downstairs_temp:
+        friendly_name: "Downstairs Temperature"
+        value_template: "{{ state_attr('climate.downstairs', 'current_temperature') }}"
+        unit_of_measurement: "°F"
+
+      upstairs_temp:
+        friendly_name: "Upstairs Temperature"
+        value_template: "{{ state_attr('climate.upstairs', 'current_temperature') }}"
+        unit_of_measurement: "°F"

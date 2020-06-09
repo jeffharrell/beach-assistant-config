@@ -25,18 +25,18 @@ automation:
     trigger:
       - platform: state
         entity_id: alarm_control_panel.abode_alarm
+        to: "armed_home"
+      - platform: state
+        entity_id: alarm_control_panel.abode_alarm
+        to: "armed_away"
+      - platform: state
+        entity_id: alarm_control_panel.abode_alarm
+        to: "disarmed"
     action:
       - service: notify.jeffs_phone
         data_template:
           title: Beach House
-          message: >
-            {% if states("alarm_control_panel.abode_alarm", "armed_home") %}
-              Alarm armed home
-            {% elif states("alarm_control_panel.abode_alarm", "armed_away") %}
-              Alarm armed away
-            {% elif states("alarm_control_panel.abode_alarm", "disarmed") %}
-              Alarm off
-            {% endif %}
+          message: Alarm is {{ states("alarm_control_panel.abode_alarm")|replace("_", " ") }}
 
   - alias: Alarm - Alert
     initial_state: True
