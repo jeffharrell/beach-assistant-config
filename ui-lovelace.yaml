@@ -137,6 +137,15 @@ views:
           - entity: light.master_wall_lights
 
       - type: entities
+        title: "Media"
+        show_header_toggle: false
+        state_color: true
+        entities:
+          - entity: media_player.living_room_tv
+          - entity: media_player.master_tv
+          - entity: media_player.bunk_bedroom_tv
+
+      - type: entities
         title: "Climate"
         show_header_toggle: false
         state_color: true

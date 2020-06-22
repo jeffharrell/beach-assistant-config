@@ -101,7 +101,18 @@ shade3up:
     - service: broadlink.send
       data:
         host: 192.168.1.147
-        packet: "sgCrAnxRNwkXChYKFwoWCgwVFgoMFQwUFwkMFQwVFgoMFBcKFgoXChcJFwoMFAwVDBQMFRcJFwoW_CgwVDBQMFQwUFwoWCgwVFgoMFRYKDRQMFA0UFgoXChajUDcJFwoWChcKFgoMFRcJDRQMFBcKDBQNFBcJDRQWChcKFgoXChYKDBUMFA0UDBQXChYKFgoMFQwUDRQMFRYKFwoMFBcJDBUXCgwUDBQMFRcJFwoXolA3ChcJFwoWChcKDBQXCgwUDBUWCgwVDBQXCQ0UFwoWChcKFgoXCgwUDBUMFAwVFgoXChYKDBQNFAwVDBQXCRcKDBQXCgwVFgoMFAwVDBQXChcJF6NQNgoXChYKFwkXCgwUFwoMFQwUFwoMFAwVFgoMFBcKFwoWChYKFwoMFAwVDBUMFBcJFwoWCgwVDBQMFQwUFwoXCQwVFgoMFRYKDBUMFA0UFgoXCRejUDcKFgoXChYKFwoMFBcKDBQMFBcKDBUMFBcJDRQWChcKFwkXChYKDBUMFA0UDBQXChcJFwoMFA0UDBQMFRYKFwoMFBcKDBQXCgwUDBUMFBcJFwoXolA3ChYKFwoXCRcKDBQXCgwUDRQWCwwUDBQXCgwUFwoXCRcKFgoXCgwUDBUMFA0UFgoXCRcKDBUMFAwVDBQXChYKDBQXCgwVFgoMFA0UDBUWChcJF6NQNwkXChYKFwoWCg0UFgoMFQwUFwoMFAwUGAkMFRYKFwkYCRcKFgoMFQwUDBUMFBcKFgoXCgwUDBUMFAwUFwoXCgwUFgoMFRcJDRQMFQwUFwkXCheiUDcKFgoXCRcKFwkNFBcJDRQMFRYKDBUMFBcKDBQWChcKFwkXChcJDBUMFA0UDBQXChcJFwoMFAwVDBUMFBcJFwoMFRYKDBQXCgwUDRQMFBcKFgoXAAXcAAAAAAAAAAAAAAAAAA=="
+        packet: "sgCnAn1QNwkXChcJFwoXCQ0UFwkMFQwUFwoMFA0UFwkNFBcJFwkXChcKFwkMFA0UDRQMFBcKFgoX
+CgwUDRMNFAwVFgoXCgwUFwkNFBcJDRQNFAwUFwoXCbpPNwoXCRcKFwkXCgwUFwoMFA0UFwkNFAwU
+FwoMFBcKFwkXChcJFwoMFA0UDBQNExcKFwoXCQ0UDBQNFAwUFwkYCQ0TGAkNExgJDRQMFAwUGAkX
+CRejUDcJFwoXCRcKFwkNFBcJDRQNExcKDBQNFBcJDRQXCRcKFwkXChcJDRQMFA0UDBQXChcJFwoM
+FA0UDBQNFBcJFwoMFBcKDBQXCgwUDBUMFBcKFwm6TzgJFwkXChcJGAkNExcKDBQNFBcJDRQMFBgJ
+DBQXChcJFwoXCRcKDBQNFAwUDRQXCRcKFwkNFAwUDBUMFBcKFwkNFBcJDBQYCQ0UDBQNFBcJFwoX
+olA3ChcJFwoXCRcJDRQXCQ0UDBUWCgwVDBQXCQ0UFwkYCRcKFgoXCQ0UDBQNFAwUFwoXCRcKDBQN
+FAwUDRQXCRcKDBQXCgwUFwoMFA0UDBQXChcJulA2ChcJGAkXCRgJDBQYCQwVDBQXCQ0UDBQYCQwV
+FwkXCRcKFwkXCgwUDRQMFQwUFwkXChcJDRQMFA0UDBQYCRcJDRQXCQ0UFwkNFAwUDRQXCRcKF6JQ
+NwoXCRcJGAkXCgwUFwoMFA0TGAkNEw0UFwkNFBcKFgoXChcJFwkNFAwUDRQNExcKFwoWCgwUDRQM
+FA0UFwoWCgwVFgoMFBgJDRMNFAwUGAkXCbpQNwkXCRcKFwkYCQ0TGAkMFQwUFwkNFA0UFwkNExcK
+FwoXCRcKFgoNEw0UDRQMFBcKFgoXCQ0UDBQNFAwUGAkXCgwUFwkNFBcJDRQMFA0UFwkYCRcABdwA"
 
 shade3down:
   alias: "Shade 3 - Down"
@@ -110,14 +121,18 @@ shade3down:
     - service: broadlink.send
       data:
         host: 192.168.1.147
-        packet: "sgCrATcKFgoWChcKFgsMFBYKDRQMFBcKDBQMFRYKDBUXCRcKFgoXChYKDBUMFBcKDBQMFQwUFwkN
-FAwVDBQMFBcKFwoMFBcKDBQXCQ0UFwoWChcJDRQWBKFQNwoXCRcKFgoXCgwUFwoMFAwVFwkNFAwU
-FwoMFBcKFwkXChYKFwoMFAwUFwoMFQwUDBUWCgwVDBQMFAwVFwkXCgwVFgoMFBcKDBQXChcJFwoM
-FBejTzcKFwkXChcKFgoMFBcKDBUMFBcKDBQMFBcKDBQXChcKFgoXChYKDBQNFBYKDBUMFA0UFwoM
-FAwUDBUMFBcKFwoMFBcKDBQXCQwVFgoXChYKDBQXo1A3ChYKFwkXChcKDBQXCgwUDBUWCgwUDRQX
-CgwUFwkXChcJFwoXCQ0UDBQXCgwUDBUMFBcKDBQMFQwUDBUXCRcKDBQXCgwUFwoMFBcKFgoXCQ0U
-F6JRNgoXCRcKFgoXCgwUFwoMFAwVFgoNFAwUFwoMFBcKFgoXChYKFwoMFAwUGAkMFQwUDBUWCgwV
-DBQMFQwUFwoWCgwUFwoMFRYKDBUWChcKFgoMFBcABdwAAAAAAAAAAAAAAAAA"
+        packet: "sgCAAhcKDBQNFBcJDRQMFAwVFwkNFAwUDBUMFBcKFwkNFBcJDRMYCQ0TGAkXChYKDRO6UDcJFwoX
+CRcKFwkNFBcJDBUMFBcKDBQNFBcJDRQXCRcKFwkXChcJDRQMFBcKDBQNFAwUFwoMFA0UDBQNFBcJ
+FwoMFBcJDRQXCQ0UFwoXCRcKDBQXo1A3CRcJGAkXCRcKDBQXCgwUDRQXCQ0UDBQXCgwVFgoXCRcK
+FwkXCgwUDRQXCQ0UDBQNFBcJDRQMFA0UDBQXChcJDRQXCQ0UFwkNFBcJFwoXCQ0UuVA3CRcKFwkX
+ChcKDBQXCQ0UDBQXCgwUDRQXCQ0UFwkXChcJGAkXCQ0UDBQXCgwUDRQMFBcKDBQNFAwUDRQXCRcK
+DBQXCgwUFwoMFBcKFwkXCgwUF6NQNwkXChcJFwkYCQ0TFwoMFA0UFwkNFAwUGAkMFRYKFwkYCRcJ
+FwoMFA0UFwkNFAwUDRQXCQ0UDBQNFAwUFwoXCQ0UFwkNFBcJDRQXCRcKFwkNFLlQNwkXChcJGAkX
+CQ0UFwkNFA0TGAkMFA0UFwkNFBcKFgoXCRcKFwkNFAwUFwoMFA0UDBQXCgwUDRQMFA0UFwkXCgwU
+FwoMFBcKDBQXChcJFwoMFLpQNgoXCRcKFwoWCgwVFwkNFAwUFwkNFAwUGAkNFBcJFwoXCRcKFwkM
+FA0UFwoMFAwVDBQXCQ0UDBQNFAwVFwkXCQ0UFwkNFBcJDRQXCRgJFwkNFLlQNwoXCRcJFwoXCQ0U
+FwkNFAwUFwoNFAwUFwoMFBcJGAkXCRcKFwkNFAwUGAkNEw0UDBUWCgwVDBQMFQwUFwkYCQwUGAkM
+FBcKDBQXChcKFgoMFBcABdwAAAAAAAAAAA=="
 
 shade4up:
   alias: "Shade 4 - Up"
@@ -206,27 +221,27 @@ shades_up:
       entity_id: alarm_control_panel.abode_alarm
       state: "disarmed"
     - service: script.turn_on
-      entity_id: script.shade1up
-    - service: script.turn_on
-      entity_id: script.shade2up
-    - service: script.turn_on
-      entity_id: script.shade3up
+      entity_id: script.shade5up
     - service: script.turn_on
       entity_id: script.shade4up
     - service: script.turn_on
-      entity_id: script.shade5up
+      entity_id: script.shade3up
+    - service: script.turn_on
+      entity_id: script.shade2up
+    - service: script.turn_on
+      entity_id: script.shade1up
 
 shades_down:
   alias: "Shades Down"
   icon: "mdi:grid-large"
   sequence:
     - service: script.turn_on
-      entity_id: script.shade1down
-    - service: script.turn_on
-      entity_id: script.shade2down
-    - service: script.turn_on
-      entity_id: script.shade3down
+      entity_id: script.shade5down
     - service: script.turn_on
       entity_id: script.shade4down
     - service: script.turn_on
-      entity_id: script.shade5down
+      entity_id: script.shade3down
+    - service: script.turn_on
+      entity_id: script.shade2down
+    - service: script.turn_on
+      entity_id: script.shade1down

@@ -12,6 +12,8 @@ lovelace: !include config/lovelace.yaml
 
 history: !include config/history.yaml
 
+influxdb: !include config/influxdb.yaml
+
 recorder: !include config/recorder.yaml
 
 notify: !include config/notify.yaml
@@ -25,7 +27,7 @@ system_health:
 sun:
 
 homeassistant:
-  name: Beach
+  name: Beach House
   latitude: 36.967572
   longitude: -121.904895
   elevation: 0
