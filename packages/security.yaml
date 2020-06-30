@@ -1,5 +1,5 @@
 automation:
-  - alias: Alarm - Turn house on
+  - alias: "Alarm - Welcome home"
     initial_state: True
     trigger:
       platform: state
@@ -10,7 +10,7 @@ automation:
       - service: script.turn_on
         entity_id: script.welcome_home
 
-  - alias: Alarm - Turn house off
+  - alias: "Alarm - Goodbye"
     initial_state: True
     trigger:
       platform: state
@@ -20,7 +20,7 @@ automation:
       - service: script.turn_on
         entity_id: script.goodbye
 
-  - alias: Alarm - Notifications
+  - alias: "Alarm - Notifications"
     initial_state: True
     trigger:
       - platform: state
@@ -38,10 +38,10 @@ automation:
     action:
       - service: notify.jeffs_phone
         data_template:
-          title: Beach House
+          title: "Beach House"
           message: Alarm is {{ states("alarm_control_panel.abode_alarm")|replace("_", " ") }}
 
-  - alias: Alarm - Alert
+  - alias: "Alarm - Alert"
     initial_state: True
     trigger:
       platform: event
@@ -49,10 +49,14 @@ automation:
     action:
       - service: notify.jeffs_phone
         data_template:
-          title: Beach House
+          title: "Beach House"
           message: "Alarm is going off!"
+      - service: homeassistant.turn_on
+        entity_id: group.lights
+      - service: script.turn_on
+        entity_id: script.shades_up
 
-  - alias: Alarm - Fault
+  - alias: "Alarm - Fault Notification"
     initial_state: True
     trigger:
       - platform: event
@@ -62,5 +66,5 @@ automation:
     action:
       - service: notify.jeffs_phone
         data_template:
-          title: Beach House
+          title: "Beach House"
           message: "Alarm {{ trigger.event.data.event_name }}"

@@ -1,3 +1,20 @@
+hvac_away:
+  sequence:
+    - service: climate.set_temperature
+      entity_id:
+        - climate.downstairs
+        - climate.upstairs
+      data:
+        temperature: 80
+        hvac_mode: "cool"
+
+hvac_windows_open:
+  sequence:
+    - service: climate.turn_off
+      entity_id:
+        - climate.downstairs
+        - climate.upstairs
+
 welcome_home:
   alias: "Welcome Home"
   sequence:
@@ -17,6 +34,7 @@ goodbye:
       entity_id: group.lights
     - service: script.turn_on
       entity_id: script.shades_down
+    - service: script.hvac_away
 
 good_morning:
   alias: "Good Morning"
@@ -222,12 +240,16 @@ shades_up:
       state: "disarmed"
     - service: script.turn_on
       entity_id: script.shade5up
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade4up
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade3up
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade2up
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade1up
 
@@ -237,11 +259,15 @@ shades_down:
   sequence:
     - service: script.turn_on
       entity_id: script.shade5down
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade4down
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade3down
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade2down
+    - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade1down
