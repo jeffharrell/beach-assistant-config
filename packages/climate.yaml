@@ -16,3 +16,15 @@ sensor:
         friendly_name: "Upstairs Temperature"
         value_template: "{{ state_attr('climate.upstairs', 'current_temperature') }}"
         unit_of_measurement: "°F"
+
+
+automation:
+  - alias: Climate - Windows Open
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: group.doors_and_windows
+        to: "on"
+        for: "00:05:00"
+    action:
+      service: script.hvac_windows_open

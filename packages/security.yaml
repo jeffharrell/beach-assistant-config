@@ -1,5 +1,18 @@
+group:
+  doors_and_windows:
+    entities:
+      - binary_sensor.bathroom_window
+      - binary_sensor.driveway_window
+      - binary_sensor.kitchen_window
+      - binary_sensor.master_slider
+      - binary_sensor.front_door
+      - binary_sensor.kitchen_door
+      - binary_sensor.downstairs_front_window_left
+      - binary_sensor.downstairs_front_window_right
+
+
 automation:
-  - alias: "Alarm - Welcome home"
+  - alias: "Alarm - Welcome Home"
     initial_state: True
     trigger:
       platform: state
@@ -36,10 +49,23 @@ automation:
       condition: template
       value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:
-      - service: notify.jeffs_phone
+      - service: notify.jeff_and_jillians_phone
         data_template:
           title: "Beach House"
           message: Alarm is {{ states("alarm_control_panel.abode_alarm")|replace("_", " ") }}
+      - condition: state
+        entity_id: group.doors_and_windows
+        state: "on"
+      - service: notify.jeffs_phone
+        data_template:
+          title: "Beach House"
+          message: >
+            Warning! The following are open:
+            {%- for entity in expand("group.doors_and_windows") -%}
+              {%- if entity.state == "on" -%}
+                {{ entity.name }}{{ "," if not loop.last }}
+              {%- endif -%}
+            {%- endfor -%}
 
   - alias: "Alarm - Alert"
     initial_state: True

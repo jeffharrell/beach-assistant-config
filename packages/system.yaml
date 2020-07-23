@@ -1,4 +1,22 @@
+google:
+  client_id: !secret google_id
+  client_secret: !secret google_secret
+
+
 automation:
+  - alias: System - Calendar alerts
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: calendar.beach_house
+        to: "on"
+    action:
+      - service: notify.jeff_and_jillians_phone
+        data_template:
+          title: Beach House
+          message: >
+            {{ state_attr('calendar.beach_house', 'message') }}
+
   - alias: System - Theme change
     initial_state: True
     trigger:

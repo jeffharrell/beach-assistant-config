@@ -1,6 +1,8 @@
 secrets.yaml
 zwave_device_config.yaml
+google_calendars.yaml
 home-assistant.sublime-workspace
+bin/
 deps/
 src/
 www/community/
@@ -9,6 +11,7 @@ __pycache__
 .DS_Store
 .HA_VERSION
 .storage
+.google.token
 .uuid
 *.txt
 *.pickle

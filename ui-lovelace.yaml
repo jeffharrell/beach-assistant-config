@@ -85,6 +85,11 @@ views:
 
                   <ha-icon icon="mdi:waves"></ha-icon> Waves are {{ states('sensor.surf_forecast') }}' today. {{ states('sensor.noaa_tides') }}.
 
+                  {% if is_state('calendar.beach_house', 'on') %}
+
+                    <ha-icon icon="mdi:calendar"></ha-icon> {{ state_attr('calendar.beach_house', 'message') }}
+                  {% endif %}
+
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
 
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
@@ -108,6 +113,12 @@ views:
                   - entity: binary_sensor.kitchen_window
                     icon: mdi:window-closed
                   - entity: binary_sensor.bathroom_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.driveway_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.downstairs_front_window_left
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.downstairs_front_window_right
                     icon: mdi:window-closed
                   - entity: binary_sensor.master_slider
                     icon: mdi:door
