@@ -69,11 +69,17 @@ movie_time:
       entity_id: alarm_control_panel.abode_alarm
       state: "disarmed"
     - service: script.turn_on
-      entity_id: script.shade4down
-    - service: script.turn_on
       entity_id: script.shade5down
+    - service: script.turn_on
+      entity_id: script.shade4down
     - condition: template
       value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+    - service: script.turn_on
+      entity_id: script.shade3down
+    - service: script.turn_on
+      entity_id: script.shade2down
+    - service: script.turn_on
+      entity_id: script.shade1down
     - service: scene.turn_on
       entity_id: scene.chill_time
 

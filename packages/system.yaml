@@ -2,22 +2,20 @@ google:
   client_id: !secret google_id
   client_secret: !secret google_secret
 
-
 automation:
-  - alias: System - Calendar alerts
+  - alias: System - UI home image
     initial_state: True
     trigger:
-      - platform: state
-        entity_id: calendar.beach_house
-        to: "on"
+      platform: time_pattern
+      minutes: "/2"
     action:
-      - service: notify.jeff_and_jillians_phone
-        data_template:
-          title: Beach House
-          message: >
-            {{ state_attr('calendar.beach_house', 'message') }}
+      - service: camera.snapshot
+        data:
+          entity_id:
+            - camera.beach
+          filename: /config/www/cameras/beach.png
 
-  - alias: System - Theme change
+  - alias: System - UI theme change
     initial_state: True
     trigger:
       - platform: homeassistant
@@ -26,6 +24,23 @@ automation:
       service: frontend.set_theme
       data_template:
         name: clear
+
+  - alias: System - Calendar alerts
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: calendar.beach_house
+        to: "on"
+      - platform: state
+        entity_id: calendar.beach_house
+        to: "off"
+    action:
+      - service: notify.jeff_and_jillians_phone
+        data_template:
+          title: Beach House
+          message: >
+            REMINDER: {% if trigger and trigger.to_state == "on" %}Disarm{% else %}Arm{% endif %} the alarm.
+            EVENT: {{ state_attr('calendar.beach_house', 'message') }}
 
   - alias: System - Low battery check
     initial_state: True

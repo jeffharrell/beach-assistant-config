@@ -1,4 +1,4 @@
-title: Beach
+title: Beach House
 
 custom_header:
   tab_indicator_color: "transparent"
@@ -16,10 +16,25 @@ views:
   - title: "Home"
     cards:
       - type: vertical-stack
-        title: Beach
+        title: Beach House
         cards:
-          - type: picture
-            image: /local/photos/house.jpg
+          - type: 'custom:refreshable-picture-card'
+            update_interval: 120
+            static_picture: /local/cameras/beach.png
+            style: |
+              .type-custom-refreshable-picture-card {
+                  overflow: hidden;
+                  min-height: 212px !important;
+                  max-height: 300px !important;
+              }
+              .type-custom-refreshable-picture-card p,
+              .type-custom-refreshable-picture-card br {
+                display: none;
+              }
+              .type-custom-refreshable-picture-card .thePic {
+                width: 100% !important;
+                border-radius: var(--ha-card-border-radius, 4px);
+              }
 
           - type: conditional
             conditions:
@@ -80,15 +95,15 @@ views:
             cards:
               - type: markdown
                 content: >
+                  {% if is_state('calendar.beach_house', 'on') %}
+                    <ha-icon icon="mdi:account-multiple"></ha-icon> {{ state_attr('calendar.beach_house', 'message') }}
+
+                  {% endif %}
                   <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}°. {{ states('sensor.dark_sky_hourly_summary') }}
 
 
-                  <ha-icon icon="mdi:waves"></ha-icon> Waves are {{ states('sensor.surf_forecast') }}' today. {{ states('sensor.noaa_tides') }}.
+                  <ha-icon icon="mdi:waves"></ha-icon> {{ state_attr('sensor.tides', 'next_tide_type') }} tide at {{ state_attr('sensor.tides', 'next_tide_time') }}. Water is {{ states('sensor.water_temp') }} {{ state_attr('sensor.water_temp', 'unit_of_measurement') }}.
 
-                  {% if is_state('calendar.beach_house', 'on') %}
-
-                    <ha-icon icon="mdi:calendar"></ha-icon> {{ state_attr('calendar.beach_house', 'message') }}
-                  {% endif %}
 
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
 
@@ -111,6 +126,10 @@ views:
                   - entity: binary_sensor.kitchen_door
                     icon: mdi:door
                   - entity: binary_sensor.kitchen_window
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.bay_window_left
+                    icon: mdi:window-closed
+                  - entity: binary_sensor.bay_window_right
                     icon: mdi:window-closed
                   - entity: binary_sensor.bathroom_window
                     icon: mdi:window-closed

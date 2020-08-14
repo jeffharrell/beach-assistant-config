@@ -1,15 +1,14 @@
 sensor:
-  - platform: magicseaweed
-    api_key: !secret magic_seaweed_key
-    name: Surf
-    spot_id: 258 # Manresa
-    monitored_conditions:
-      - swell_forecast
-      - max_breaking_swell
-
   - platform: noaa_tides
     station_id: 9413745
+    name: tides
+    type: tides
 
+  - platform: noaa_tides
+    station_id: 9413450
+    type: temp
+    name: water_temp
+    
   - platform: darksky
     api_key: !secret darksky_api_key
     monitored_conditions:
@@ -19,18 +18,3 @@ sensor:
       - uv_index
       - wind_speed
       - wind_gust
-
-  - platform: template
-    sensors:
-      surf_stars:
-        friendly_name: "Stars"
-        value_template: "{{ state_attr('sensor.current_surf_max', 'stars') }}"
-
-      surf_swell_direction:
-        friendly_name: "Swell Direction"
-        value_template: "{{ state_attr('sensor.current_surf_max', 'swell_direction') }}"
-
-      surf_swell_period:
-        friendly_name: "Swell Period"
-        value_template: "{{ state_attr('sensor.current_surf_max', 'swell_period') }}"
-

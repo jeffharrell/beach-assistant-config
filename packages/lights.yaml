@@ -52,7 +52,7 @@ automation:
         to: "on"
     condition:
       condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+      value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
     action:
       - service: homeassistant.turn_on
         entity_id:
@@ -66,7 +66,7 @@ automation:
         to: "on"
     condition:
       condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+      value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
     action:
       - service: homeassistant.turn_on
         entity_id:
@@ -78,11 +78,12 @@ automation:
       - platform: state
         entity_id:
           - switch.front_door
+          - switch.front_deck
           - switch.backyard_lights_left
           - switch.backyard_lights_right
         to: "on"
         for:
-          hours: 1
+          hours: 2
     action:
       - service: homeassistant.turn_off
         data_template:
@@ -91,9 +92,8 @@ automation:
   - alias: Lights - Turn off after sunrise
     initial_state: True
     trigger:
-      platform: sun
-      event: sunrise
-      offset: '+02:00:00'
+      platform: time
+      at: "08:00:00"
     condition:
       condition: state
       entity_id: group.lights
