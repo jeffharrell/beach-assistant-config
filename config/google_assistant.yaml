@@ -1,0 +1,60 @@
+project_id: !secret google_assistant_id
+service_account: !include ../google_assistant_key.json
+report_state: true
+expose_by_default: true
+exposed_domains:
+  - switch
+  - light
+  - script
+  - scene
+entity_config:
+  group.backyard_lights:
+    expose: true
+  switch.backyard_lights_right:
+    expose: false
+  switch.backyard_lights_left:
+    expose: false
+  light.living_room_1:
+    expose: false
+  light.living_room_2:
+    expose: false
+  light.master_reading_light_1:
+    expose: false
+  light.master_reading_light_2:
+    expose: false
+  scene.good_morning:
+    expose: false
+  script.welcome_home:
+    expose: false
+  script.goodbye:
+    expose: false
+  script.shade1up:
+    expose: false
+  script.shade1down:
+    expose: false
+  script.shade1stop:
+    expose: false
+  script.shade2up:
+    expose: false
+  script.shade2down:
+    expose: false
+  script.shade2stop:
+    expose: false
+  script.shade3up:
+    expose: false
+  script.shade3down:
+    expose: false
+  script.shade3stop:
+    expose: false
+  script.shade4up:
+    expose: false
+  script.shade4down:
+    expose: false
+  script.shade4stop:
+    expose: false
+  script.shade5up:
+    expose: false
+  script.shade5down:
+    expose: false
+  script.shade5stop:
+    expose: false

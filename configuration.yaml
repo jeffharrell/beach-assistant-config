@@ -2,8 +2,6 @@ config:
 
 api:
 
-alexa: !include config/alexa.yaml
-
 google_assistant: !include config/google_assistant.yaml
 
 http: !include config/http.yaml
