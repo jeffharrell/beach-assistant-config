@@ -94,6 +94,13 @@ views:
             title: "Status"
             cards:
               - type: markdown
+                entity_id:
+                  - calendar.beach_house
+                  - sensor.dark_sky_temperature
+                  - sensor.dark_sky_hourly_summary
+                  - sensor.tides
+                  - sensor.water_temp
+                  - alarm_control_panel.abode_alarm
                 content: >
                   {% if is_state('calendar.beach_house', 'on') %}
                     <ha-icon icon="mdi:account-multiple"></ha-icon> {{ state_attr('calendar.beach_house', 'message') }}
@@ -198,6 +205,10 @@ views:
                 name: "Temperature"
               - entity: climate.upstairs
                 name: "Mode"
+          - type: section
+          - entity: automation.climate_windows_open
+            state_color: false
+            name: Turn off when windows open
 
 
   - title: "Outside"

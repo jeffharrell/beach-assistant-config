@@ -16,6 +16,11 @@ sensor:
         friendly_name: "Upstairs Temperature"
         value_template: "{{ state_attr('climate.upstairs', 'current_temperature') }}"
         unit_of_measurement: "°F"
+        
+      hvac_on:
+        value_template: >
+          {% set modes = ["heat_cool", "heat", "dry", "fan_only", "cool"] %}
+          {% if states('climate.downstairs') in modes or states('climate.upstairs') in modes %}on{% else %}off{% endif %}
 
 
 automation:
@@ -23,8 +28,29 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: group.doors_and_windows
+        entity_id: 
+          - group.doors_and_windows
+          - sensor.hvac_on
         to: "on"
-        for: "00:05:00"
+        for: "00:30:00"
+    condition:
+      condition: state
+      entity_id: group.doors_and_windows
+      state: "on"
     action:
-      service: script.hvac_windows_open
+      - service: script.hvac_windows_open
+          
+  - alias: Climate - Error
+    initial_state: True
+    trigger:
+      # if not updated in a day
+      - platform: template
+        value_template: '{{ (as_timestamp(now()) - as_timestamp(states.climate.downstairs.last_updated)) / 86400 }}'
+      - platform: template
+        value_template: '{{ (as_timestamp(now()) - as_timestamp(states.climate.upstairs.last_updated)) / 86400 }}'
+    action:
+      - service: notify.jeffs_phone
+        data_template:
+          title: Beach House
+          message: 'HVAC lost contact and is unreachable'
+_

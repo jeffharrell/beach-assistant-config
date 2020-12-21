@@ -2,8 +2,6 @@ config:
 
 api:
 
-google_assistant: !include config/google_assistant.yaml
-
 http: !include config/http.yaml
 
 frontend: !include config/frontend.yaml
@@ -21,6 +19,8 @@ notify: !include config/notify.yaml
 zwave: !include config/zwave.yaml
 
 script: !include packages/scripts.yaml
+
+google_assistant: !include config/google_assistant.yaml
 
 system_health:
 

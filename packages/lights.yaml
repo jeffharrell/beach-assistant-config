@@ -44,7 +44,7 @@ group:
 
 
 automation:
-  - alias: Lights - Automatic front lights on
+  - alias: Lights - Automatic front lights
     initial_state: True
     trigger:
       - platform: state
@@ -72,7 +72,7 @@ automation:
         entity_id:
           - switch.backyard_lights_right
 
-  - alias: Lights - Automatic outside lights off if left on
+  - alias: Lights - Automatic outside lights off
     initial_state: True
     trigger:
       - platform: state
@@ -83,13 +83,13 @@ automation:
           - switch.backyard_lights_right
         to: "on"
         for:
-          hours: 2
+          hours: 1
     action:
       - service: homeassistant.turn_off
         data_template:
           entity_id: "{{ trigger.entity_id }}"
 
-  - alias: Lights - Turn off after sunrise
+  - alias: Lights - Off after sunrise
     initial_state: True
     trigger:
       platform: time
@@ -102,3 +102,14 @@ automation:
       - service: homeassistant.turn_off
         entity_id:
           - group.lights
+
+  - alias: Lights - Tree
+    trigger:
+      - platform: sun
+        event: sunset
+      - platform: time
+        at: "22:00:00"
+    action:
+      - service_template: >
+          switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
+        entity_id: switch.zooz_switch
