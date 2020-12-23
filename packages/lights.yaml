@@ -2,45 +2,44 @@ light:
   - platform: group
     name: Living Room
     entities:
-      - light.living_room_1
-      - light.living_room_2
-  - platform: group
-    name: Master Reading Lights
-    entities:
-      - light.master_reading_light_1
-      - light.master_reading_light_2
+      - light.livingroom_1
+      - light.livingroom_2
 
 
 group:
-  frontyard_lights:
-    - switch.front_door
-    - switch.front_deck
-  backyard_lights:
-    name: Backyard
+  downstairs_lights:
     entities:
-      - switch.backyard_lights_left
-      - switch.backyard_lights_right
-  lights:
       - light.living_room
-      - light.dining_lights
-      - light.mood_lights
-      - light.picture_lights
-      - switch.desk_light
-      - light.guest_bedroom
-      - light.sink
-      - light.cabinets
-      - light.kitchen
-      - light.hallway
-      - light.master
-      - light.master_reading_light_1
-      - light.master_reading_light_2
+      - light.dining_table
+      - light.mood
+      - light.picture
+      - light.guest_bed
+      - light.kitchen_sink
+      - light.kitchen_cabinets
+      - light.kitchen_lights
+      - switch.desk
+  upstairs_lights:
+      - light.hallway_chandelier
+      - light.bunk_bed
+      - light.master_bedroom
+      - light.master_reading_1
+      - light.master_reading_2
       - light.master_wall_lights
-      - light.bunk_bedroom
-      - group.frontyard_lights
-      - group.backyard_lights
-      - switch.twinkle_lights
-      - switch.backyard_stairs
-      - switch.upstairs_deck
+      - switch.master_wall_outlet
+  outside_lights:
+    entities:
+      - switch.front_door_lights
+      - switch.front_deck_lights
+      - switch.back_lights_left
+      - switch.back_lights_right
+      - switch.back_twinkle_lights
+      - switch.back_stairs_light
+      - switch.upstairs_deck_lights
+  lights:
+      - group.downstairs_lights
+      - group.upstairs_lights
+      - group.outside_lights
+
 
 
 automation:
@@ -56,7 +55,7 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - switch.front_door
+          - switch.front_door_lights
 
   - alias: Lights - Automatic back lights
     initial_state: True
@@ -70,24 +69,21 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - switch.backyard_lights_right
+          - switch.back_lights_right
 
   - alias: Lights - Automatic outside lights off
     initial_state: True
     trigger:
       - platform: state
         entity_id:
-          - switch.front_door
-          - switch.front_deck
-          - switch.backyard_lights_left
-          - switch.backyard_lights_right
+          - group.outside_lights
         to: "on"
         for:
           hours: 1
     action:
       - service: homeassistant.turn_off
         data_template:
-          entity_id: "{{ trigger.entity_id }}"
+          entity_id: group.outside_lights
 
   - alias: Lights - Off after sunrise
     initial_state: True
@@ -112,4 +108,4 @@ automation:
     action:
       - service_template: >
           switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
-        entity_id: switch.zooz_switch
+        entity_id: switch.zooz_plug

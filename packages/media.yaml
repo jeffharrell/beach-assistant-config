@@ -10,6 +10,3 @@ group:
     - script.shade4down
     - script.shade5up
     - script.shade5down
-
-tts:
-  - platform: google_translate

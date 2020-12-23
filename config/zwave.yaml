@@ -1,3 +1,0 @@
-usb_path: /dev/ttyUSB0
-autoheal: False
-polling_interval: 30000

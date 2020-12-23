@@ -24,8 +24,8 @@ welcome_home:
       value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
     - service: homeassistant.turn_on
       entity_id:
-        - light.kitchen
-        - switch.front_door
+        - light.kitchen_lights
+        - switch.front_door_lights
 
 goodbye:
   alias: "Goodbye"

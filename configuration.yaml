@@ -4,6 +4,8 @@ api:
 
 http: !include config/http.yaml
 
+mqtt: !include config/mqtt.yaml
+
 frontend: !include config/frontend.yaml
 
 lovelace: !include config/lovelace.yaml
@@ -15,8 +17,6 @@ influxdb: !include config/influxdb.yaml
 recorder: !include config/recorder.yaml
 
 notify: !include config/notify.yaml
-
-zwave: !include config/zwave.yaml
 
 script: !include packages/scripts.yaml
 

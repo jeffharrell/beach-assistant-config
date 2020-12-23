@@ -158,20 +158,18 @@ views:
         state_color: true
         entities:
           - entity: light.living_room
-          - entity: light.dining_lights
-          - entity: light.kitchen
-          - entity: light.cabinets
-          - entity: light.sink
-          - entity: switch.desk_light
-            icon: mdi:lightbulb
-          - entity: light.mood_lights
-          - entity: light.picture_lights
-          - entity: light.hallway
-          - entity: light.guest_bedroom
-          - entity: light.bunk_bedroom
-          - entity: light.master
-          - entity: light.master_reading_lights
-          - entity: light.master_wall_lights
+          - entity: light.dining_table
+          - entity: light.kitchen_lights
+          - entity: light.kitchen_cabinets
+          - entity: light.kitchen_sink
+          - entity: switch.desk
+          - entity: light.mood
+          - entity: light.picture
+          - entity: light.hallway_chandelier
+          - entity: light.guest_bed
+          - entity: light.bunk_bed
+          - entity: light.master_bedroom
+          - entity: light.master_wall
 
       - type: entities
         title: "Media"

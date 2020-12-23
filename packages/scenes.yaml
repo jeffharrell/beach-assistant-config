@@ -1,66 +1,52 @@
 scene:
   - name: Chill Time
     entities:
-      light.mood_lights:
+      light.mood:
         state: on
         brightness: 255
-      light.picture_lights:
+      light.picture:
         state: on
         brightness: 50
-      light.sink:
+      light.kitchen_sink:
         state: on
         brightness: 100
       light.living_room: off
-      light.dining_lights: off
-      light.guest_bedroom: off
-      light.kitchen: off
-      light.cabinets: off
-      light.hallway: off
+      light.dining_table: off
+      light.guest_bed: off
+      light.kitchen_lights: off
+      light.kitchen_cabinets: off
+      light.hallway_chandelier: off
 
 
   - name: Dinner Time
     entities:
-      light.dining_lights:
+      light.dining_table:
         state: on
         brightness: 100
-      light.kitchen:
+      light.kitchen_lights:
         state: on
         brightness: 130
       light.living_room: off
-      light.mood_lights: off
-      light.picture_lights: off
-      light.guest_bedroom: off
-      light.cabinets: off
-      light.hallway: off
+      light.mood: off
+      light.picture: off
+      light.guest_bed: off
+      light.kitchen_cabinets: off
+      light.hallway_chandelier: off
 
   - name: Good Morning
     entities:
-      light.cabinets:
+      light.kitchen_cabinets:
         state: on
         brightness: 255
-      switch.desk_light: off
-      light.hallway: off
+      switch.desk: off
+      light.hallway_chandelier: off
       light.living_room: off
-      light.dining_lights: off
-      light.mood_lights: off
-      light.picture_lights: off
-      light.kitchen: off
-      light.sink: off
+      light.dining_table: off
+      light.mood: off
+      light.picture: off
+      light.kitchen_lights: off
+      light.kitchen_sink: off
 
   - name: Lights Off
     entities:
-      light.living_room: off
-      light.dining_lights: off
-      light.mood_lights: off
-      light.picture_lights: off
-      light.kitchen: off
-      light.sink: off
-      light.cabinets: off
-      light.hallway: off
-      switch.desk_light: off
-      switch.front_deck: off
-      switch.backyard_lights_left: off
-      switch.backyard_lights_right: off
-      switch.backyard_stairs: off
-      switch.twinkle_lights: off
-      switch.upstairs_deck: off
+      group.lights: off

@@ -52,5 +52,4 @@ automation:
       - service: notify.jeffs_phone
         data_template:
           title: Beach House
-          message: 'HVAC lost contact and is unreachable'
-_
+          message: 'HVAC is offline'
