@@ -109,7 +109,7 @@ views:
                   <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}°. {{ states('sensor.dark_sky_hourly_summary') }}
 
 
-                  <ha-icon icon="mdi:waves"></ha-icon> {{ state_attr('sensor.tides', 'next_tide_type') }} tide at {{ state_attr('sensor.tides', 'next_tide_time') }}. Water is {{ states('sensor.water_temp') }} {{ state_attr('sensor.water_temp', 'unit_of_measurement') }}.
+                  <ha-icon icon="mdi:waves"></ha-icon> {{ state_attr('sensor.tides', 'next_tide_type') }} tide at {{ state_attr('sensor.tides', 'next_tide_time') }}. Water is {{ states('sensor.water_temp')|round(0) }} {{ state_attr('sensor.water_temp', 'unit_of_measurement') }}.
 
 
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
@@ -250,15 +250,15 @@ views:
         show_header_toggle: true
         state_color: true
         entities:
-          - entity: switch.front_door
+          - entity: switch.front_door_lights
             icon: mdi:lightbulb
-          - entity: switch.front_deck
+          - entity: switch.front_deck_lights
             icon: mdi:lightbulb
-          - entity: switch.twinkle_lights
+          - entity: switch.back_twinkle_lights
             icon: mdi:lightbulb
-          - entity: group.backyard_lights
+          - entity: switch.back_lights_right
             icon: mdi:lightbulb
-          - entity: switch.backyard_stairs
+          - entity: switch.back_stairs_light
             icon: mdi:lightbulb
-          - entity: switch.upstairs_deck
+          - entity: switch.upstairs_deck_lights
             icon: mdi:lightbulb

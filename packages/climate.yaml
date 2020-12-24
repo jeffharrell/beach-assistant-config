@@ -9,12 +9,12 @@ sensor:
     sensors:
       downstairs_temp:
         friendly_name: "Downstairs Temperature"
-        value_template: "{{ state_attr('climate.downstairs', 'current_temperature') }}"
+        value_template: "{{ states('sensor.downstairs_trisensor_temp')|round(0) }}"
         unit_of_measurement: "°F"
 
       upstairs_temp:
         friendly_name: "Upstairs Temperature"
-        value_template: "{{ state_attr('climate.upstairs', 'current_temperature') }}"
+        value_template: "{{ states('sensor.upstairs_trisensor_temp')|round(0) }}"
         unit_of_measurement: "°F"
         
       hvac_on:
