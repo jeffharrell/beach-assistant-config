@@ -8,25 +8,27 @@ exposed_domains:
   - script
   - scene
 entity_config:
-  group.backyard_lights:
+  group.back_lights:
     expose: true
-  switch.backyard_lights_right:
+  group.front_lights:
+    expose: true
+  switch.back_lights_right:
     expose: false
-  switch.backyard_lights_left:
+  switch.back_lights_left:
     expose: false
-  light.living_room_1:
+  light.livingroom_1:
     expose: false
-  light.living_room_2:
+  light.livingroom_2:
     expose: false
-  light.master_reading_light_1:
+  light.master_reading_1:
     expose: false
-  light.master_reading_light_2:
+  light.master_reading_2:
+    expose: false
+  switch.master_wall_outlet:
     expose: false
   scene.good_morning:
     expose: false
   script.welcome_home:
-    expose: false
-  script.goodbye:
     expose: false
   script.shade1up:
     expose: false

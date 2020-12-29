@@ -19,23 +19,33 @@ group:
       - light.kitchen_lights
       - switch.desk
   upstairs_lights:
+    entities:
       - light.hallway_chandelier
       - light.bunk_bed
       - light.master_bedroom
       - light.master_reading_1
       - light.master_reading_2
-      - light.master_wall_lights
+      - light.master_wall
       - switch.master_wall_outlet
   outside_lights:
     entities:
+      - group.front_lights
+      - group.back_lights
+      - switch.back_twinkle_lights
+      - switch.upstairs_deck_lights
+  front_lights:
+    name: Front Lights
+    entities:
       - switch.front_door_lights
       - switch.front_deck_lights
+  back_lights:
+    name: Back Lights
+    entities:
       - switch.back_lights_left
       - switch.back_lights_right
-      - switch.back_twinkle_lights
       - switch.back_stairs_light
-      - switch.upstairs_deck_lights
   lights:
+    entities:
       - group.downstairs_lights
       - group.upstairs_lights
       - group.outside_lights
@@ -43,49 +53,7 @@ group:
 
 
 automation:
-  - alias: Lights - Automatic front lights
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.front_door
-        to: "on"
-    condition:
-      condition: template
-      value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
-    action:
-      - service: homeassistant.turn_on
-        entity_id:
-          - switch.front_door_lights
-
-  - alias: Lights - Automatic back lights
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.kitchen_door
-        to: "on"
-    condition:
-      condition: template
-      value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
-    action:
-      - service: homeassistant.turn_on
-        entity_id:
-          - switch.back_lights_right
-
-  - alias: Lights - Automatic outside lights off
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id:
-          - group.outside_lights
-        to: "on"
-        for:
-          hours: 1
-    action:
-      - service: homeassistant.turn_off
-        data_template:
-          entity_id: group.outside_lights
-
-  - alias: Lights - Off after sunrise
+  - alias: Lights - House off after sunrise
     initial_state: True
     trigger:
       platform: time
@@ -99,13 +67,50 @@ automation:
         entity_id:
           - group.lights
 
-  - alias: Lights - Tree
+  - alias: Lights - Automatic front lights
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.front_door
+        to: "on"
+    condition:
+      condition: template
+      value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
+    action:
+      - service: homeassistant.turn_on
+        entity_id:
+          - group.front_lights
+
+  - alias: Lights - Automatic back lights
+    initial_state: True
     trigger:
       - platform: sun
         event: sunset
+        offset: "01:00:00"
       - platform: time
-        at: "22:00:00"
+        at: "10:00:00"
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.abode_alarm
+        state: "disarmed"
     action:
       - service_template: >
           switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
-        entity_id: switch.zooz_plug
+        entity_id: switch.back_twinkle_lights
+
+  - alias: Lights - Automatic outside lights off
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id:
+          - group.front_lights
+          - group.back_lights
+        to: "on"
+        for:
+          hours: _
+    action:
+      - service: homeassistant.turn_off
+        data_template:
+          entity_id: 
+            - group.front_lights
+            - group.back_lights

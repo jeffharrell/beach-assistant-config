@@ -1,5 +1,5 @@
 scene:
-  - name: Chill Time
+  - name: Mood Lights
     entities:
       light.mood:
         state: on
@@ -18,7 +18,7 @@ scene:
       light.hallway_chandelier: off
 
 
-  - name: Dinner Time
+  - name: Dinner Lights
     entities:
       light.dining_table:
         state: on
