@@ -1,12 +1,10 @@
-hvac_away:
+climate_away:
   sequence:
-    - service: climate.set_temperature
+    - service: climate.turn_off
       entity_id:
         - climate.downstairs
         - climate.upstairs
-      data:
-        temperature: 78
-        hvac_mode: "cool"
+        - climate.bathroom_floor
 
 hvac_windows_open:
   sequence:
@@ -20,6 +18,10 @@ welcome_home:
   sequence:
     - service: script.turn_on
       entity_id: script.shades_up
+    - service: climate.set_hvac_mode
+      entity_id: climate.bathroom_floor
+      data:
+        hvac_mode: heat
     - condition: template
       value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
     - service: homeassistant.turn_on

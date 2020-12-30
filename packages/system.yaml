@@ -6,10 +6,11 @@ binary_sensor:
   - platform: tod
     name: Morning
     after: "04:00"
-    before: "12:00"
+    before: "9:00"
+    
   - platform: tod
     name: Evening
-    after: "12:00"
+    after: "9:00"
     before: "04:00"
 
 automation:

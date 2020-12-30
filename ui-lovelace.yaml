@@ -169,7 +169,7 @@ views:
           - entity: light.kitchen_cabinets
           - entity: light.kitchen_sink
           - entity: switch.desk
-          - entity: light.mood
+          - entity: light.recessed
           - entity: light.picture
           - entity: light.hallway_chandelier
           - entity: light.guest_bed
@@ -208,6 +208,16 @@ views:
               - entity: sensor.upstairs_temp
                 name: "Temperature"
               - entity: climate.upstairs
+                name: "Mode"
+          - entity: climate.bathroom_floor
+            type: custom:multiple-entity-row
+            icon: mdi:radiator
+            show_state: false
+            state_color: false
+            entities:
+              - entity: sensor.bathroom_floor_temp
+                name: "Temperature"
+              - entity: climate.bathroom_floor
                 name: "Mode"
           - type: section
           - entity: automation.climate_windows_open

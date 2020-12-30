@@ -1,7 +1,7 @@
 scene:
   - name: Mood Lights
     entities:
-      light.mood:
+      light.recessed:
         state: on
         brightness: 255
       light.picture:
@@ -27,7 +27,7 @@ scene:
         state: on
         brightness: 130
       light.living_room: off
-      light.mood: off
+      light.recessed: off
       light.picture: off
       light.guest_bed: off
       light.kitchen_cabinets: off
@@ -42,7 +42,7 @@ scene:
       light.hallway_chandelier: off
       light.living_room: off
       light.dining_table: off
-      light.mood: off
+      light.recessed: off
       light.picture: off
       light.kitchen_lights: off
       light.kitchen_sink: off

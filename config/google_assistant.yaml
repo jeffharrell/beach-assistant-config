@@ -11,7 +11,7 @@ entity_config:
   group.back_lights:
     expose: true
   group.front_lights:
-    expose: true
+    expose: false
   switch.back_lights_right:
     expose: false
   switch.back_lights_left:
@@ -25,6 +25,8 @@ entity_config:
   light.master_reading_2:
     expose: false
   switch.master_wall_outlet:
+    expose: false
+  switch.zooz_plug:
     expose: false
   scene.good_morning:
     expose: false
