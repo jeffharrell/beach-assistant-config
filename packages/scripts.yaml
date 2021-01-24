@@ -6,38 +6,12 @@ climate_away:
         - climate.upstairs
         - climate.bathroom_floor
 
-hvac_windows_open:
+climate_windows_open:
   sequence:
     - service: climate.turn_off
       entity_id:
         - climate.downstairs
         - climate.upstairs
-
-welcome_home:
-  alias: "Welcome Home"
-  sequence:
-    - service: script.turn_on
-      entity_id: script.shades_up
-    - service: climate.set_hvac_mode
-      entity_id: climate.bathroom_floor
-      data:
-        hvac_mode: heat
-    - condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
-    - service: homeassistant.turn_on
-      entity_id:
-        - light.kitchen_lights
-        - switch.front_door_lights
-
-goodbye:
-  alias: "Goodbye"
-  sequence:
-    - service: homeassistant.turn_off
-      entity_id: group.lights
-    - service: script.turn_on
-      entity_id: script.shades_down
-    - service: script.hvac_away
-
 
 good_morning:
   alias: "Good Morning"
@@ -63,6 +37,31 @@ good_night:
     - service: script.turn_on
       entity_id: script.shades_down
 
+goodbye:
+  alias: "Goodbye"
+  sequence:
+    - service: homeassistant.turn_off
+      entity_id: group.lights
+    - service: script.turn_on
+      entity_id: script.shades_down
+    - service: script.climate_away
+
+welcome_home:
+  alias: "Welcome Home"
+  sequence:
+    - service: script.turn_on
+      entity_id: script.shades_up
+    - service: climate.set_hvac_mode
+      entity_id: climate.bathroom_floor
+      data:
+        hvac_mode: heat
+    - condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+    - service: homeassistant.turn_on
+      entity_id:
+        - light.kitchen_lights
+        - switch.front_door_lights
+
 movie_time:
   alias: "Movie Time"
   icon: "mdi:grid-large"
@@ -83,7 +82,7 @@ movie_time:
     - service: script.turn_on
       entity_id: script.shade1down
     - service: scene.turn_on
-      entity_id: scene.chill_time
+      entity_id: scene.mood_lights
 
 shade1up:
   alias: "Shade 1 - Up"

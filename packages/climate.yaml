@@ -16,12 +16,12 @@ sensor:
         friendly_name: "Upstairs Temperature"
         value_template: "{{ states('sensor.upstairs_trisensor_temp')|round(0) }}"
         unit_of_measurement: "°F"
-        
+
       bathroom_floor_temp:
         friendly_name: "Bathroom Floor Temperature"
         value_template: "{{ state_attr('climate.bathroom_floor', 'current_temperature')|round(0) }}"
         unit_of_measurement: "°F"
-        
+
       hvac_on:
         value_template: >
           {% set modes = ["heat_cool", "heat", "dry", "fan_only", "cool"] %}
@@ -33,7 +33,7 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: 
+        entity_id:
           - group.doors_and_windows
           - sensor.hvac_on
         to: "on"
@@ -43,18 +43,23 @@ automation:
       entity_id: group.doors_and_windows
       state: "on"
     action:
-      - service: script.hvac_windows_open
-          
-  - alias: Climate - Error
+      - service: script.climate_windows_open
+
+  - alias: Climate - Offline
     initial_state: True
     trigger:
-      # if not updated in a day
-      - platform: template
-        value_template: '{{ (as_timestamp(now()) - as_timestamp(states.climate.downstairs.last_updated)) / 86400 }}'
-      - platform: template
-        value_template: '{{ (as_timestamp(now()) - as_timestamp(states.climate.upstairs.last_updated)) / 86400 }}'
+      - platform: time
+        at: "09:00:00"
+    condition:
+      condition: or
+      conditions:
+        # if not updated in a day
+        - condition: template
+          value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.climate.downstairs.last_updated)) / 86400) > 1 }}"
+        - condition: template
+          value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.climate.upstairs.last_updated)) / 86400) > 1 }}"
     action:
       - service: notify.jeffs_phone
         data_template:
           title: Beach House
-          message: 'HVAC is offline'
+          message: "HVAC is offline"

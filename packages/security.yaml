@@ -20,6 +20,13 @@ camera:
     username: !secret beach_camera_user
     password: !secret beach_camera_pass
     authentication: basic
+    
+  - platform: mjpeg
+    mjpeg_url: !secret front_deck_camera_url
+    name: Front Deck
+    username: !secret front_deck_camera_user
+    password: !secret front_deck_camera_pass
+    authentication: basic
 
 
 automation:

@@ -35,9 +35,7 @@ scene:
 
   - name: Good Morning
     entities:
-      light.kitchen_cabinets:
-        state: on
-        brightness: 255
+      light.kitchen_cabinets: on
       switch.desk: off
       light.hallway_chandelier: off
       light.living_room: off

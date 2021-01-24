@@ -5,13 +5,20 @@ google:
 binary_sensor:
   - platform: tod
     name: Morning
-    after: "04:00"
-    before: "9:00"
+    after: "05:00"
+    before: "09:00"
     
   - platform: tod
-    name: Evening
-    after: "9:00"
-    before: "04:00"
+    name: Day
+    after: "09:00"
+    before: sunset
+    before_offset: "01:00"
+    
+  - platform: tod
+    name: Night
+    after: sunset
+    after_offset: "01:00"
+    before: "05:00"
 
 automation:
   - alias: System - UI home image
@@ -21,10 +28,10 @@ automation:
       minutes: "/2"
     action:
       - service: camera.snapshot
-        data:
+        data_template:
           entity_id:
-            - camera.beach
-          filename: /config/www/cameras/beach.png
+            - camera.{% if states('binary_sensor.night') == 'on' %}front_deck{% else %}beach{% endif %}
+          filename: /config/www/cameras/home.png
 
   - alias: System - UI theme change
     initial_state: True
@@ -35,6 +42,38 @@ automation:
       service: frontend.set_theme
       data_template:
         name: clear
+
+  - alias: System - Snapshot sunrise
+    initial_state: True
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: "-00:10:00"
+      - platform: sun
+        event: sunrise
+        offset: "00:10:00"
+    action:
+      - service: camera.snapshot
+        data:
+          entity_id:
+            - camera.beach
+          filename: /config/www/cameras/sunrise/{{ now().strftime("%Y%m%d-%H%M%S") }}.png
+
+  - alias: System - Snapshot sunset
+    initial_state: True
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "-00:10:00"
+      - platform: sun
+        event: sunset
+        offset: "00:10:00"
+    action:
+      - service: camera.snapshot
+        data:
+          entity_id:
+            - camera.beach
+          filename: /config/www/cameras/sunsets/{{ now().strftime("%Y%m%d-%H%M%S") }}.png
 
   - alias: System - Calendar alerts
     initial_state: True
@@ -52,26 +91,3 @@ automation:
           message: >
             REMINDER: {% if trigger and trigger.to_state == "on" %}Disarm{% else %}Arm{% endif %} the alarm.
             EVENT: {{ state_attr('calendar.beach_house', 'message') }}
-
-  - alias: System - Low battery check
-    initial_state: True
-    trigger:
-      platform: time
-      at: "00:00:00"
-    condition:
-      condition: template
-      value_template: >
-        {% for zwave in states.zwave if zwave.attributes.battery_level %}
-          {%- if zwave.attributes.battery_level|int < 20 -%}
-            {{ true }}
-          {%- endif -%}
-        {%- endfor -%}
-    action:
-      - service: notify.jeffs_phone
-        data_template:
-          message: >
-            {% for zwave in states.zwave if zwave.attributes.battery_level %}
-              {%- if zwave.attributes.battery_level|int < 20 -%}
-                {{ zwave.attributes.friendly_name }} needs new batteries.
-              {%- endif -%}
-            {%- endfor -%}

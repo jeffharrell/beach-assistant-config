@@ -20,7 +20,7 @@ views:
         cards:
           - type: 'custom:refreshable-picture-card'
             update_interval: 120
-            static_picture: /local/cameras/beach.png
+            static_picture: /local/cameras/home.png
             style: |
               .type-custom-refreshable-picture-card {
                   overflow: hidden;
@@ -55,13 +55,13 @@ views:
                     service_data:
                       entity_id: script.good_morning
 
-          # Actions - Evening
+          # Actions - Day and Evening
           - type: conditional
             conditions:
               - entity: alarm_control_panel.abode_alarm
                 state: "disarmed"
-              - entity: binary_sensor.evening
-                state: "on"
+              - entity: binary_sensor.morning
+                state: "off"
             card:
               type: horizontal-stack
               cards:
