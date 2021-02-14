@@ -16,14 +16,14 @@ group:
 camera:
   - platform: mjpeg
     mjpeg_url: !secret beach_camera_url
-    name: Beach
+    name: "Beach"
     username: !secret beach_camera_user
     password: !secret beach_camera_pass
     authentication: basic
     
   - platform: mjpeg
     mjpeg_url: !secret front_deck_camera_url
-    name: Front Deck
+    name: "Front Deck"
     username: !secret front_deck_camera_user
     password: !secret front_deck_camera_pass
     authentication: basic
@@ -91,7 +91,7 @@ automation:
     action:
       - service: notify.slack
         data:
-          message: "Alarm is going off!"
+          message: "The alarm is going off!"
       - service: homeassistant.turn_on
         entity_id: group.lights
       - service: script.turn_on

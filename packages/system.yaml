@@ -87,6 +87,7 @@ automation:
     action:
       - service: notify.slack
         data_template:
-          message: >
-            REMINDER: {% if trigger and trigger.to_state == "on" %}Disarm{% else %}Arm{% endif %} the alarm.
-            EVENT: {{ state_attr('calendar.beach_house', 'message') }}
+          message: "Reminder: {{ state_attr('calendar.beach_house', 'message') }}"
+      - service: notify.slack
+        data_template:
+          message: "{% if trigger and trigger.to_state == 'on' %}Disarm{% else %}Arm{% endif %} the alarm!"

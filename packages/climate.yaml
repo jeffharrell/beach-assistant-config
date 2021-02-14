@@ -61,4 +61,4 @@ automation:
     action:
       - service: notify.slack
         data:
-          message: "HVAC is offline"
+          message: "The HVAC is offline"
