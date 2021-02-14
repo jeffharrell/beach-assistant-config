@@ -67,16 +67,14 @@ automation:
       condition: template
       value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:
-      - service: notify.jeff_and_jillians_phone
+      - service: notify.slack
         data_template:
-          title: "Beach House"
           message: Alarm is {{ states("alarm_control_panel.abode_alarm")|replace("_", " ") }}
       - condition: state
         entity_id: group.doors_and_windows
         state: "on"
-      - service: notify.jeffs_phone
+      - service: notify.slack
         data_template:
-          title: "Beach House"
           message: >
             Warning! The following are open:
             {%- for entity in expand("group.doors_and_windows") -%}
@@ -91,9 +89,8 @@ automation:
       platform: event
       event_type: abode_alarm
     action:
-      - service: notify.jeffs_phone
-        data_template:
-          title: "Beach House"
+      - service: notify.slack
+        data:
           message: "Alarm is going off!"
       - service: homeassistant.turn_on
         entity_id: group.lights
@@ -108,7 +105,6 @@ automation:
       - platform: event
         event_type: abode_panel_restore
     action:
-      - service: notify.jeffs_phone
+      - service: notify.slack
         data_template:
-          title: "Beach House"
           message: "Alarm {{ trigger.event.data.event_name }}"

@@ -59,7 +59,6 @@ automation:
         - condition: template
           value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.climate.upstairs.last_updated)) / 86400) > 1 }}"
     action:
-      - service: notify.jeffs_phone
-        data_template:
-          title: Beach House
+      - service: notify.slack
+        data:
           message: "HVAC is offline"

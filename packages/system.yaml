@@ -41,17 +41,17 @@ automation:
     action:
       service: frontend.set_theme
       data_template:
-        name: clear
+        name: home
 
   - alias: System - Snapshot sunrise
     initial_state: True
     trigger:
       - platform: sun
         event: sunrise
-        offset: "-00:10:00"
+        offset: "-00:05:00"
       - platform: sun
         event: sunrise
-        offset: "00:10:00"
+        offset: "00:05:00"
     action:
       - service: camera.snapshot
         data:
@@ -64,10 +64,10 @@ automation:
     trigger:
       - platform: sun
         event: sunset
-        offset: "-00:10:00"
+        offset: "-00:05:00"
       - platform: sun
         event: sunset
-        offset: "00:10:00"
+        offset: "00:05:00"
     action:
       - service: camera.snapshot
         data:
@@ -85,9 +85,8 @@ automation:
         entity_id: calendar.beach_house
         to: "off"
     action:
-      - service: notify.jeff_and_jillians_phone
+      - service: notify.slack
         data_template:
-          title: Beach House
           message: >
             REMINDER: {% if trigger and trigger.to_state == "on" %}Disarm{% else %}Arm{% endif %} the alarm.
             EVENT: {{ state_attr('calendar.beach_house', 'message') }}
