@@ -15,7 +15,7 @@ scene:
       light.guest_bed: off
       light.kitchen_lights: off
       light.kitchen_cabinets: off
-      light.hallway_chandelier: off
+      light.hallway: off
 
 
   - name: Dinner Lights
@@ -31,13 +31,13 @@ scene:
       light.picture: off
       light.guest_bed: off
       light.kitchen_cabinets: off
-      light.hallway_chandelier: off
+      light.hallway: off
 
   - name: Good Morning
     entities:
       light.kitchen_cabinets: on
       switch.desk: off
-      light.hallway_chandelier: off
+      light.hallway: off
       light.living_room: off
       light.dining_table: off
       light.recessed: off

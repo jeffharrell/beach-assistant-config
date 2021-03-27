@@ -1,1 +1,2 @@
-db_url: sqlite:////tmp/home-assistant.db
+purge_keep_days: 2
+db_url: "sqlite:///:memory:"

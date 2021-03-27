@@ -1,7 +1,3 @@
-google:
-  client_id: !secret google_id
-  client_secret: !secret google_secret
-
 binary_sensor:
   - platform: tod
     name: Morning
@@ -74,20 +70,3 @@ automation:
           entity_id:
             - camera.beach
           filename: /config/www/cameras/sunsets/{{ now().strftime("%Y%m%d-%H%M%S") }}.png
-
-  - alias: System - Calendar alerts
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: calendar.beach_house
-        to: "on"
-      - platform: state
-        entity_id: calendar.beach_house
-        to: "off"
-    action:
-      - service: notify.slack
-        data_template:
-          message: "Reminder: {{ state_attr('calendar.beach_house', 'message') }}"
-      - service: notify.slack
-        data_template:
-          message: "{% if trigger and trigger.to_state == 'on' %}Disarm{% else %}Arm{% endif %} the alarm!"

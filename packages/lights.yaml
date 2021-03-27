@@ -31,7 +31,7 @@ group:
   upstairs_lights:
     entities:
       # node 19
-      - light.hallway_chandelier
+      - light.hallway
       # node 21
       - light.bunk_bed
       # node 25
@@ -132,3 +132,15 @@ automation:
           entity_id: 
             - group.front_lights
             - group.back_lights
+            
+  - alias: Lights - Double tap kitchen for twinkle lights
+    initial_state: True
+    trigger:
+      - platform: event
+        event_type: zwave_js_event
+        event_data:
+          node_id: 18
+    action:
+      - service_template: >
+          homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
+        entity_id: switch.back_twinkle_lights
