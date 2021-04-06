@@ -1,5 +1,4 @@
 secrets.yaml
-zwave_device_config.yaml
 google_calendars.yaml
 home-assistant.sublime-workspace
 bin/
@@ -23,4 +22,3 @@ __pycache__
 *.xml
 *.sqlite
 *.bak
-
