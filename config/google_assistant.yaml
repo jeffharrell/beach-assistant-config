@@ -28,8 +28,14 @@ entity_config:
     expose: false
   switch.zooz_plug:
     expose: false
+  scene.dinner_lights:
+    aliases:
+      - DINNER_TIME
   scene.good_morning:
     expose: false
+  script.movie_lights:
+    aliases:
+      - MOVIE_TIME
   script.welcome_home:
     expose: false
   script.shade1up:

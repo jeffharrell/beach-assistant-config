@@ -32,6 +32,7 @@ automation:
   - alias: Climate - Windows Open
     initial_state: True
     trigger:
+      # if a door is left open or HVAC was just turned on set a timer
       - platform: state
         entity_id:
           - group.doors_and_windows
@@ -39,9 +40,16 @@ automation:
         to: "on"
         for: "00:30:00"
     condition:
-      condition: state
-      entity_id: group.doors_and_windows
-      state: "on"
+      condition: and
+      conditions:
+        # if the door is STILL open
+        - condition: state
+          entity_id: group.doors_and_windows
+          state: "on"
+        # and the HVAC is STILL on
+        - condition: state
+          entity_id: sensor.hvac_on
+          state: "on"
     action:
       - service: script.climate_windows_open
 

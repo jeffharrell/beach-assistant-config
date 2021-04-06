@@ -52,39 +52,53 @@ views:
               - entity: binary_sensor.morning
                 state: "off"
             card:
-              type: horizontal-stack
+              type: vertical-stack
               cards:
-                - type: entity-button
-                  entity: scene.dinner_lights
-                  name: Dinner Lights
-                  icon: mdi:food-fork-drink
-                  icon_height: 2.25em
-                  tap_action:
-                    action: call-service
-                    service: scene.turn_on
-                    service_data:
-                      entity_id: scene.dinner_lights
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: scene.dinner_lights
+                      name: "Dinner Lights"
+                      icon: mdi:food-fork-drink
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: scene.turn_on
+                        service_data:
+                          entity_id: scene.dinner_lights
+                    - type: entity-button
+                      entity: script.movie_lights
+                      name: "Movie Time"
+                      icon: mdi:movie
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: script.turn_on
+                        service_data:
+                          entity_id: script.movie_lights
 
-                - type: entity-button
-                  entity: scene.mood_lights
-                  name: Mood Lights
-                  icon: mdi:movie
-                  icon_height: 2.25em
-                  tap_action:
-                    action: call-service
-                    service: scene.turn_on
-                    service_data:
-                      entity_id: scene.mood_lights
+                - type: horizontal-stack
+                  cards:
+                    - type: entity-button
+                      entity: scene.mood_lights
+                      name: Mood Lights
+                      icon: mdi:movie
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: scene.turn_on
+                        service_data:
+                          entity_id: scene.mood_lights
+                    - type: entity-button
+                      entity: script.good_night
+                      icon_height: 2.25em
+                      icon_height: 1.5em
+                      tap_action:
+                        action: call-service
+                        service: script.turn_on
+                        service_data:
+                          entity_id: script.good_night
 
-                - type: entity-button
-                  entity: script.good_night
-                  icon_height: 2.25em
-                  tap_action:
-                    action: call-service
-                    service: script.turn_on
-                    service_data:
-                      entity_id: script.good_night
-                      
           - type: vertical-stack
             title: "Status"
             cards:
