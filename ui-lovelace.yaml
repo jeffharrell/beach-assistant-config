@@ -91,7 +91,6 @@ views:
                           entity_id: scene.mood_lights
                     - type: entity-button
                       entity: script.good_night
-                      icon_height: 2.25em
                       icon_height: 1.5em
                       tap_action:
                         action: call-service

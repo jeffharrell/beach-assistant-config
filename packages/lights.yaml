@@ -139,7 +139,7 @@ automation:
     initial_state: True
     trigger:
       - platform: event
-        event_type: zwave_js_event
+        event_type: zwave_js_value_notification
         event_data:
           node_id: 18
     action:

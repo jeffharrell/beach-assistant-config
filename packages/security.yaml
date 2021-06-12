@@ -76,10 +76,11 @@ automation:
       - service: notify.slack
         data_template:
           message: >
-            Warning! The following are open:
+            Warning! The following are open: 
             {%- for entity in expand("group.doors_and_windows") -%}
               {%- if entity.state == "on" -%}
-                {{ entity.name }}{{ "," if not loop.last }}
+                {{ entity.name }}
+                {%- if not loop.last %}, {% endif -%}
               {%- endif -%}
             {%- endfor -%}
 
@@ -107,4 +108,4 @@ automation:
     action:
       - service: notify.slack
         data_template:
-          message: "Alarm {{ trigger.event.data.event_name }}"
+          message: "Alarm Fault: {{ trigger.event.data.event_name }}"

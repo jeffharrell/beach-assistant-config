@@ -82,8 +82,6 @@ movie_lights:
       entity_id: script.shade3down
     - service: script.turn_on
       entity_id: script.shade2down
-    - service: script.turn_on
-      entity_id: script.shade1down
     - service: scene.turn_on
       entity_id: scene.mood_lights
 

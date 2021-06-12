@@ -53,7 +53,7 @@ automation:
         data:
           entity_id:
             - camera.beach
-          filename: /config/www/cameras/sunrise/{{ now().strftime("%Y%m%d-%H%M%S") }}.png
+          filename: /config/www/cameras/sunrise/{{ now().strftime("%Y%m%d-%H%M%S") }}.jpg
 
   - alias: System - Snapshot sunset
     initial_state: True
@@ -69,4 +69,4 @@ automation:
         data:
           entity_id:
             - camera.beach
-          filename: /config/www/cameras/sunsets/{{ now().strftime("%Y%m%d-%H%M%S") }}.png
+          filename: /config/www/cameras/sunsets/{{ now().strftime("%Y%m%d-%H%M%S") }}.jpg
