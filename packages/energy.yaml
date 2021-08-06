@@ -1,0 +1,5 @@
+sensor:
+  - platform: rainforest_eagle
+    ip_address: !secret rainforest_ip
+    cloud_id: !secret rainforest_cloud_id
+    install_code: !secret rainforest_install_code
