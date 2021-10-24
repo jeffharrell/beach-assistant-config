@@ -22,6 +22,8 @@ script: !include packages/scripts.yaml
 
 google_assistant: !include config/google_assistant.yaml
 
+energy:
+
 system_health:
 
 sun:

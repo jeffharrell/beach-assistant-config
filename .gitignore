@@ -6,7 +6,7 @@ deps/
 src/
 www/community/
 www/cameras/
-custom_components/
+#custom_components/
 __pycache__
 .DS_Store
 .HA_VERSION
