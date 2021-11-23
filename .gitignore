@@ -1,9 +1,11 @@
 secrets.yaml
 google_calendars.yaml
 home-assistant.sublime-workspace
+home-assistant.log*
 bin/
 deps/
 src/
+blueprints/
 www/community/
 www/cameras/
 custom_components/
