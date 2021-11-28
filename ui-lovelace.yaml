@@ -30,7 +30,7 @@ views:
             conditions:
               - entity: alarm_control_panel.abode_alarm
                 state: "disarmed"
-              - entity: binary_sensor.morning
+              - entity: input_boolean.night_mode
                 state: "on"
             card:
               type: horizontal-stack
@@ -49,7 +49,7 @@ views:
             conditions:
               - entity: alarm_control_panel.abode_alarm
                 state: "disarmed"
-              - entity: binary_sensor.morning
+              - entity: input_boolean.night_mode
                 state: "off"
             card:
               type: vertical-stack

@@ -16,6 +16,10 @@ binary_sensor:
     after_offset: "01:00"
     before: "05:00"
 
+input_boolean:
+  night_mode:
+    initial: false
+
 automation:
   - alias: System - UI home image
     initial_state: True

@@ -23,6 +23,9 @@ good_morning:
     - condition: state
       entity_id: alarm_control_panel.abode_alarm
       state: "disarmed"
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.night_mode
     - service: scene.turn_on
       entity_id: scene.good_morning
     - service: script.turn_on
@@ -35,6 +38,9 @@ good_night:
     - condition: state
       entity_id: alarm_control_panel.abode_alarm
       state: "disarmed"
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.night_mode
     - service: scene.turn_on
       entity_id: scene.lights_off
     - service: script.turn_on
@@ -52,18 +58,25 @@ goodbye:
 welcome_home:
   alias: "Welcome Home"
   sequence:
-    - service: script.turn_on
-      entity_id: script.shades_up
+    - service: homeassistant.turn_on
+      data_template:
+        entity_id: >-
+          {% if state_attr("sun.sun", "elevation") < -4 %}
+          script.welcome_lights
+          {% else %}
+          script.shades_up
+          {% endif %}
     - service: climate.set_hvac_mode
       entity_id: climate.bathroom_floor
       data:
         hvac_mode: heat
-    - condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < -4 }}'
+
+welcome_lights:
+  sequence:
     - service: homeassistant.turn_on
       entity_id:
         - light.kitchen_lights
-        - switch.front_door_lights
+        - group.front_lights
 
 movie_lights:
   alias: "Movie Time"
@@ -77,15 +90,13 @@ movie_lights:
     - service: script.turn_on
       entity_id: script.shade4down
     - condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < 5 }}'
-    - service: scene.turn_on
-      entity_id: scene.mood_lights
-    - condition: template
       value_template: '{{ state_attr("sun.sun", "elevation") < 0 }}'
     - service: script.turn_on
       entity_id: script.shade3down
     - service: script.turn_on
       entity_id: script.shade2down
+    - service: scene.turn_on
+      entity_id: scene.mood_lights
 
 shade1up:
   alias: "Shade 1 - Up"
