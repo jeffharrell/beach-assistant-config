@@ -118,6 +118,16 @@ shade1down:
         num_repeats: 3
         command: !secret shade1_down
 
+shade1stop:
+  alias: "Shade 1 - Stop"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.broadlink
+        num_repeats: 3
+        command: !secret shade1_stop
+
 shade2up:
   alias: "Shade 2 - Up"
   icon: "mdi:grid-large"
@@ -137,6 +147,16 @@ shade2down:
         entity_id: remote.broadlink
         num_repeats: 3
         command: !secret shade2_down
+
+shade2stop:
+  alias: "Shade 2 - Stop"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.broadlink
+        num_repeats: 3
+        command: !secret shade2_stop
 
 shade3up:
   alias: "Shade 3 - Up"
@@ -158,6 +178,16 @@ shade3down:
         num_repeats: 3
         command: !secret shade3_down
 
+shade3stop:
+  alias: "Shade 3 - Stop"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.broadlink
+        num_repeats: 3
+        command: !secret shade3_stop
+
 shade4up:
   alias: "Shade 4 - Up"
   icon: "mdi:grid-large"
@@ -178,6 +208,16 @@ shade4down:
         num_repeats: 3
         command: !secret shade4_down
 
+shade4stop:
+  alias: "Shade 4 - Stop"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.broadlink
+        num_repeats: 3
+        command: !secret shade4_stop
+
 shade5up:
   alias: "Shade 5 - Up"
   icon: "mdi:grid-large"
@@ -197,6 +237,16 @@ shade5down:
         entity_id: remote.broadlink
         num_repeats: 3
         command: !secret shade5_down
+
+shade5stop:
+  alias: "Shade 5 - Stop"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.broadlink
+        num_repeats: 3
+        command: !secret shade5_stop
 
 shades_up:
   alias: "Shades Up"
@@ -238,3 +288,22 @@ shades_down:
     - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade1down
+
+shades_stop:
+  alias: "Shades Stop"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: script.turn_on
+      entity_id: script.shade5stop
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shade4stop
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shade3stop
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shade2stop
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shade1stop

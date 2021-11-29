@@ -248,15 +248,21 @@ views:
                   service: script.turn_on
                   service_data:
                     entity_id: script.shades_up
-              - icon: mdi:menu
+              - icon: mdi:stop
                 tap_action:
-                  action: more-info
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.shades_stop
               - icon: mdi:arrow-down
                 tap_action:
                   action: call-service
                   service: script.turn_on
                   service_data:
                     entity_id: script.shades_down
+              - icon: mdi:menu
+                tap_action:
+                  action: more-info
 
       - type: entities
         title: "Landscape"
