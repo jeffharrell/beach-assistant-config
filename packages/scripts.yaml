@@ -12,8 +12,9 @@ climate_windows_open:
       entity_id:
         - climate.downstairs
         - climate.upstairs
-    - service: notify.slack
+    - service: notify.phones
       data:
+        title: "Beach"
         message: "Turning HVAC off since windows were left open"
 
 good_morning:

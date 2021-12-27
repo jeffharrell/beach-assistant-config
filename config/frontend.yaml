@@ -1,25 +1,34 @@
+extra_module_url:
+  - /hacsfiles/lovelace-card-mod/card-mod.js
+
 themes:
   home:
     card-mod-theme: home
     header-height: 0;
     card-mod-root: |
-      app-header {
-        top: auto;
-        bottom: 0;
-        height: 90px;
-        transform: translate3d(0, 0, 0) !important;
-      }
-      app-toolbar {
-        transform: translate3d(0px, 0px, 0px) !important;
-      }
       ha-tabs {
         --paper-tabs-selection-bar-color: transparent !important;
       }
-      #view {
-        top: -90px;
+
+      app-toolbar ha-icon-button[slot="trigger"] {
+        display: none !important;
       }
-      mwc-icon-button[slot="trigger"] > ha-svg-icon {
-        display: none;
+
+      @media only screen and (hover: none) and (pointer: coarse) {
+        app-header {
+          top: auto;
+          bottom: 0;
+          height: 90px;
+          transform: translate3d(0, 0, 0) !important;
+        }
+
+        app-toolbar {
+          transform: translate3d(0, 0, 0) !important;
+        }
+
+        #view {
+          top: -90px;
+        }
       }
 
     # Colors

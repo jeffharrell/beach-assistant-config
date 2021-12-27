@@ -4,3 +4,9 @@
   default_channel: "#general"
   username: "Beach House"
   icon: ":beach_with_umbrella:"
+
+- name: phones
+  platform: group
+  services:
+    - service: mobile_app_jeffs_iphone
+    - service: mobile_app_jillians_iphone

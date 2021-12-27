@@ -67,14 +67,16 @@ automation:
       condition: template
       value_template: "{{ trigger.from_state.state != 'unavailable' }}"
     action:
-      - service: notify.slack
+      - service: notify.phones
         data_template:
-          message: Alarm is {{ states("alarm_control_panel.abode_alarm")|replace("_", " ") }}
+          title: "Beach"
+          message: "Alarm is {{ states('alarm_control_panel.abode_alarm')|replace('_', ' ') }}"
       - condition: state
         entity_id: group.doors_and_windows
         state: "on"
-      - service: notify.slack
+      - service: notify.phones
         data_template:
+          title: "Beach"
           message: >
             Warning! The following are open: 
             {%- for entity in expand("group.doors_and_windows") -%}
@@ -90,15 +92,25 @@ automation:
       platform: event
       event_type: abode_alarm
     action:
-      - service: notify.slack
+      - service: notify.phones
         data:
-          message: "The alarm is going off!"
+          title: "Beach"
+          message: "Alarm is going off!"
+          data:
+            #entity_id: camera.front_door
+            #url: "/lovelace-cameras/0"
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 1
+
       - service: homeassistant.turn_on
         entity_id: group.lights
       - service: script.turn_on
         entity_id: script.shades_up
 
-  - alias: "Alarm - Fault Notification"
+  - alias: "Alarm - Fault "
     initial_state: True
     trigger:
       - platform: event
@@ -106,6 +118,17 @@ automation:
       - platform: event
         event_type: abode_panel_restore
     action:
-      - service: notify.slack
+      - service: notify.phones
+        data:
+          title: "Beach"
+          message: "Alarm Fault! See logs."
+          data:
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 1
+      - service: system_log.write
         data_template:
-          message: "Alarm Fault: {{ trigger.event.data.event_name }}"
+          message: "Alarm Fault: {{ trigger.event.data|tojson }}"
+          level: error
