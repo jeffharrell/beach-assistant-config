@@ -42,35 +42,3 @@ automation:
       service: frontend.set_theme
       data_template:
         name: home
-
-  - alias: System - Snapshot sunrise
-    initial_state: True
-    trigger:
-      - platform: sun
-        event: sunrise
-        offset: "-00:05:00"
-      - platform: sun
-        event: sunrise
-        offset: "00:05:00"
-    action:
-      - service: camera.snapshot
-        data:
-          entity_id:
-            - camera.beach
-          filename: /config/www/cameras/sunrise/{{ now().strftime("%Y%m%d-%H%M%S") }}.jpg
-
-  - alias: System - Snapshot sunset
-    initial_state: True
-    trigger:
-      - platform: sun
-        event: sunset
-        offset: "-00:05:00"
-      - platform: sun
-        event: sunset
-        offset: "00:05:00"
-    action:
-      - service: camera.snapshot
-        data:
-          entity_id:
-            - camera.beach
-          filename: /config/www/cameras/sunsets/{{ now().strftime("%Y%m%d-%H%M%S") }}.jpg

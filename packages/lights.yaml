@@ -123,7 +123,7 @@ automation:
           homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
         entity_id: switch.back_twinkle_lights
 
-  - alias: Lights - Double tap master bedroom for wall lights
+  - alias: Lights - Double tap master bedroom light
     initial_state: True
     trigger:
       - platform: event
@@ -134,3 +134,16 @@ automation:
       - service_template: >
           homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
         entity_id: light.master_wall
+
+
+  - alias: Lights - Double tap front door light
+    initial_state: True
+    trigger:
+      - platform: event
+        event_type: zwave_js_value_notification
+        event_data:
+          node_id: 20
+    action:
+      - service_template: >
+          homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
+        entity_id: switch.front_deck_lights
