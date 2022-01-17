@@ -9,6 +9,7 @@ views:
           - type: 'custom:refreshable-picture-card'
             update_interval: 120
             static_picture: /local/cameras/home.png
+            navigate: /lovelace-cameras/0
             card_mod:
               style: |
                 .type-custom-refreshable-picture-card {
@@ -253,7 +254,7 @@ views:
                   action: call-service
                   service: script.turn_on
                   service_data:
-                    entity_id: script.shades_stop
+                    entity_id: script.shades_halfway
               - icon: mdi:arrow-down
                 tap_action:
                   action: call-service

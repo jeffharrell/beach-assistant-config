@@ -18,6 +18,8 @@ script: !include packages/scripts.yaml
 
 google_assistant: !include config/google_assistant.yaml
 
+panel_custom: !include config/panel_custom.yaml
+
 energy:
 
 ios:

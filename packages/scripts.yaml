@@ -308,3 +308,13 @@ shades_stop:
     - delay: "00:00:01"
     - service: script.turn_on
       entity_id: script.shade1stop
+
+shades_halfway:
+  alias: "Shades Halfway"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: script.turn_on
+      entity_id: script.shades_stop
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shades_stop
