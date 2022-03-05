@@ -2,28 +2,32 @@ title: Beach House
 
 views:
   - title: "Home"
+    path: "home"
     cards:
       - type: vertical-stack
         title: Beach House
         cards:
-          - type: 'custom:refreshable-picture-card'
-            update_interval: 120
-            static_picture: /local/cameras/home.png
-            navigate: /lovelace-cameras/0
+          # House Pic
+          - type: picture-entity
+            entity: camera.beach
+            show_name: false
+            show_state: false
+            tap_action: 
+              action: 'navigate'
+              navigation_path: '/lovelace/cameras'
             card_mod:
               style: |
-                .type-custom-refreshable-picture-card {
-                    overflow: hidden;
-                    min-height: 212px !important;
-                    max-height: 300px !important;
-                }
-                .type-custom-refreshable-picture-card p,
-                .type-custom-refreshable-picture-card br {
-                  display: none;
-                }
-                .type-custom-refreshable-picture-card .thePic {
-                  width: 100% !important;
+                .type-picture-entity {
+                  background-color: rgb(85, 85, 85);
                   border-radius: var(--ha-card-border-radius, 4px);
+                  min-height: 260px;
+                  max-height: 260px;
+                  transition: none;
+                }
+                @media only screen and (hover: none) and (pointer: coarse) {
+                  .type-picture-entity {
+                    min-height: 260px !important;
+                  }
                 }
 
           # Actions - Morning
@@ -153,8 +157,8 @@ views:
                   - entity: binary_sensor.master_slider
                     icon: mdi:door
 
-
   - title: "Inside"
+    path: "inside"
     cards:
       - type: entities
         title: "Lights"
@@ -222,8 +226,8 @@ views:
             state_color: false
             name: Turn off when windows open
 
-
   - title: "Outside"
+    path: "outside"
     cards:
       - type: glance
         title: "Weather"
@@ -277,3 +281,34 @@ views:
           - entity: switch.back_twinkle_lights
           - entity: switch.back_stairs_light
           - entity: switch.upstairs_deck_lights
+
+  - title: "Cameras"
+    path: "cameras"
+    visible: false
+    cards:
+      - type: grid
+        title: "Live Cameras"
+        square: false
+        columns: 1
+        cards:
+          - show_state: false
+            show_name: false
+            camera_view: auto
+            type: picture-entity
+            entity: camera.beach
+          - type: picture-entity
+            entity: camera.front_deck
+            show_name: false
+            show_state: false
+          - type: picture-entity
+            entity: camera.driveway
+            show_name: false
+            show_state: false
+          - type: picture-entity
+            entity: camera.backyard
+            show_name: false
+            show_state: false
+          - type: picture-entity
+            entity: camera.upstairs_deck
+            show_name: false
+            show_state: false

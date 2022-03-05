@@ -15,17 +15,38 @@ group:
 
 camera:
   - platform: mjpeg
-    mjpeg_url: !secret beach_camera_url
     name: "Beach"
+    mjpeg_url: !secret beach_camera_url
     username: !secret beach_camera_user
     password: !secret beach_camera_pass
     authentication: basic
-    
+
   - platform: mjpeg
-    mjpeg_url: !secret front_deck_camera_url
     name: "Front Deck"
+    mjpeg_url: !secret front_deck_camera_url
     username: !secret front_deck_camera_user
     password: !secret front_deck_camera_pass
+    authentication: basic
+
+  - platform: mjpeg
+    name: "Upstairs Deck"
+    mjpeg_url: !secret upstairs_deck_camera_url
+    username: !secret upstairs_deck_camera_user
+    password: !secret upstairs_deck_camera_pass
+    authentication: basic
+
+  - platform: mjpeg
+    name: "Driveway"
+    mjpeg_url: !secret driveway_camera_url
+    username: !secret driveway_camera_user
+    password: !secret driveway_camera_pass
+    authentication: basic
+
+  - platform: mjpeg
+    name: "Backyard"
+    mjpeg_url: !secret backyard_camera_url
+    username: !secret backyard_camera_user
+    password: !secret backyard_camera_pass
     authentication: basic
 
 
@@ -98,7 +119,7 @@ automation:
           message: "Alarm alert!"
           data:
             entity_id: camera.front_door
-            url: "/lovelace-cameras/0"
+            url: "/lovelace/cameras"
             push:
               sound:
                 name: "default"
