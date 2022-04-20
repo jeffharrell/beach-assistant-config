@@ -1,14 +1,8 @@
 sensor:
   - platform: noaa_tides
-    station_id: 9413745
-    name: tides
-    type: tides
+    name: Tides
+    station_id: !secret noaa_station
 
-  - platform: noaa_tides
-    station_id: 9413450
-    type: temp
-    name: water_temp
-    
   - platform: darksky
     api_key: !secret darksky_api_key
     monitored_conditions:

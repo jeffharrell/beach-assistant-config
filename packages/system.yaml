@@ -21,18 +21,6 @@ input_boolean:
     initial: false
 
 automation:
-#   - alias: System - UI home image
-#     initial_state: True
-#     trigger:
-#       platform: time_pattern
-#       minutes: "/2"
-#     action:
-#       - service: camera.snapshot
-#         data_template:
-#           entity_id:
-#             - camera.{% if states('binary_sensor.night') == 'on' %}front_deck{% else %}beach{% endif %}
-#           filename: /config/www/cameras/home.png
-
   - alias: System - UI theme change
     initial_state: True
     trigger:

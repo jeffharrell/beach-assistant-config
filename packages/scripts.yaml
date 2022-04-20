@@ -45,7 +45,7 @@ good_night:
     - service: scene.turn_on
       entity_id: scene.lights_off
     - service: script.turn_on
-      entity_id: script.shades_down
+      entity_id: script.shades_down_all
 
 goodbye:
   alias: "Goodbye"
@@ -53,7 +53,7 @@ goodbye:
     - service: homeassistant.turn_off
       entity_id: group.lights
     - service: script.turn_on
-      entity_id: script.shades_down
+      entity_id: script.shades_down_all
     - service: script.climate_away
 
 welcome_home:
@@ -272,6 +272,22 @@ shades_up:
       entity_id: script.shade1up
 
 shades_down:
+  alias: "Shades Down"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: script.turn_on
+      entity_id: script.shade5down
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shade4down
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shade3down
+    - delay: "00:00:01"
+    - service: script.turn_on
+      entity_id: script.shade2down
+
+shades_down_all:
   alias: "Shades Down"
   icon: "mdi:grid-large"
   sequence:

@@ -114,10 +114,13 @@ views:
                   - sensor.water_temp
                   - alarm_control_panel.abode_alarm
                 content: >
-                  <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}°. {{ states('sensor.dark_sky_hourly_summary') }}
+                  <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}° {{ states('sensor.dark_sky_hourly_summary')|lower }}
 
 
-                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }} of {{ (state_attr('sensor.tides', 'low_tide_level') or state_attr('sensor.tides', 'high_tide_level'))|round(1) }}'. Water is {{ states('sensor.water_temp')|round(0) }} {{ state_attr('sensor.water_temp', 'unit_of_measurement') }}.
+                  <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index of {{ states('sensor.dark_sky_uv_index') }}
+
+
+                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }} of {% if "High" in states('sensor.tides') %}{{ state_attr('sensor.tides', 'high_tide_height')|round(1) }}{% else %}{{ state_attr('sensor.tides', 'low_tide_height')|round(1) }}{% endif %}'
 
 
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
@@ -184,7 +187,7 @@ views:
         show_header_toggle: false
         state_color: true
         entities:
-          - entity: media_player.living_room_tv
+          - entity: media_player.downstairs_tv
           - entity: media_player.master_tv
           - entity: media_player.bunk_bedroom_tv
 

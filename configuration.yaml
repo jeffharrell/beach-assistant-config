@@ -32,14 +32,13 @@ sun:
 
 homeassistant:
   name: Beach House
-  latitude: 36.967572
-  longitude: -121.904895
-  elevation: 0
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
   unit_system: "Imperial"
   time_zone: "America/Los_Angeles"
   packages:
     climate: !include packages/climate.yaml
-    energy: !include packages/energy.yaml
     lights: !include packages/lights.yaml
     media: !include packages/media.yaml
     network: !include packages/network.yaml

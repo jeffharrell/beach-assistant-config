@@ -13,43 +13,6 @@ group:
       - binary_sensor.downstairs_front_window_right
 
 
-camera:
-  - platform: mjpeg
-    name: "Beach"
-    mjpeg_url: !secret beach_camera_url
-    username: !secret beach_camera_user
-    password: !secret beach_camera_pass
-    authentication: basic
-
-  - platform: mjpeg
-    name: "Front Deck"
-    mjpeg_url: !secret front_deck_camera_url
-    username: !secret front_deck_camera_user
-    password: !secret front_deck_camera_pass
-    authentication: basic
-
-  - platform: mjpeg
-    name: "Upstairs Deck"
-    mjpeg_url: !secret upstairs_deck_camera_url
-    username: !secret upstairs_deck_camera_user
-    password: !secret upstairs_deck_camera_pass
-    authentication: basic
-
-  - platform: mjpeg
-    name: "Driveway"
-    mjpeg_url: !secret driveway_camera_url
-    username: !secret driveway_camera_user
-    password: !secret driveway_camera_pass
-    authentication: basic
-
-  - platform: mjpeg
-    name: "Backyard"
-    mjpeg_url: !secret backyard_camera_url
-    username: !secret backyard_camera_user
-    password: !secret backyard_camera_pass
-    authentication: basic
-
-
 automation:
   - alias: "Alarm - Welcome Home"
     initial_state: True
@@ -131,7 +94,7 @@ automation:
       - service: script.turn_on
         entity_id: script.shades_up
 
-  - alias: "Alarm - Fault "
+  - alias: "Alarm - Fault"
     initial_state: True
     trigger:
       - platform: event
@@ -149,3 +112,19 @@ automation:
         data_template:
           message: "Alarm Fault: {{ trigger.event.data|tojson }}"
           level: error
+
+  - alias: "Alarm - Are you away"
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: group.doors_and_windows
+        to: "off"
+        for: "24:00:00"
+    condition:
+      condition: template
+      value_template: "{{ not is_state('alarm_control_panel.abode_alarm', 'armed_away') }}"
+    action:
+      - service: notify.phones
+        data:
+          title: "Beach"
+          message: "Alarm is off. Are you away?"
