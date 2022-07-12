@@ -1,18 +1,3 @@
-group:
-  doors_and_windows:
-    entities:
-      - binary_sensor.bathroom_window
-      - binary_sensor.driveway_window
-      - binary_sensor.kitchen_window
-      - binary_sensor.master_slider
-      - binary_sensor.front_door
-      - binary_sensor.kitchen_door
-      - binary_sensor.bay_window_left
-      - binary_sensor.bay_window_right
-      - binary_sensor.downstairs_front_window_left
-      - binary_sensor.downstairs_front_window_right
-
-
 automation:
   - alias: "Alarm - Welcome Home"
     initial_state: True

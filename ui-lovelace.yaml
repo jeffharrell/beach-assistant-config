@@ -116,9 +116,9 @@ views:
                 content: >
                   <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}° {{ states('sensor.dark_sky_hourly_summary')|lower }}
 
-
-                  <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index of {{ states('sensor.dark_sky_uv_index') }}
-
+                  {% if states('sensor.dark_sky_uv_index')|int > 3 %}
+                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index is {{ states('sensor.dark_sky_uv_index') }} so wear sunscreen!
+                  {% endif %}
 
                   <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }} of {% if "High" in states('sensor.tides') %}{{ state_attr('sensor.tides', 'high_tide_height')|round(1) }}{% else %}{{ state_attr('sensor.tides', 'low_tide_height')|round(1) }}{% endif %}'
 
@@ -290,28 +290,26 @@ views:
     visible: false
     cards:
       - type: grid
-        title: "Live Cameras"
         square: false
         columns: 1
+        title: "Live Cameras"
         cards:
-          - show_state: false
-            show_name: false
-            camera_view: auto
-            type: picture-entity
-            entity: camera.beach
-          - type: picture-entity
-            entity: camera.front_deck
-            show_name: false
-            show_state: false
-          - type: picture-entity
-            entity: camera.driveway
-            show_name: false
-            show_state: false
-          - type: picture-entity
-            entity: camera.backyard
-            show_name: false
-            show_state: false
-          - type: picture-entity
-            entity: camera.upstairs_deck
-            show_name: false
-            show_state: false
+          - type: picture-glance
+            camera_image: camera.beach
+            entities: []
+          - type: picture-glance
+            camera_image: camera.front_deck
+            entities:
+              - entity: switch.front_deck_lights
+          - type: picture-glance
+            camera_image: camera.driveway
+            entities:
+              - entity: switch.front_door_lights
+          - type: picture-glance
+            camera_image: camera.backyard
+            entities:
+              - entity: switch.back_twinkle_lights
+          - type: picture-glance
+            camera_image: camera.upstairs_deck
+            entities:
+              - entity: switch.upstairs_deck_lights

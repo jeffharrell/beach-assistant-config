@@ -1,3 +1,5 @@
+sun:
+
 sensor:
   - platform: noaa_tides
     name: Tides

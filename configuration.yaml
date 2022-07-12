@@ -1,24 +1,46 @@
+homeassistant:
+  name: Beach House
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: !secret units
+  time_zone: !secret time_zone
+  external_url: !secret external_url
+  packages: !include_dir_named packages/
+  allowlist_external_dirs:
+    - /tmp
+
+
+scene: !include scenes.yaml
+script: !include scripts.yaml
+
+
+# Configuration
+
 config:
 
-api:
-
-http: !include config/http.yaml
+backup:
 
 frontend: !include config/frontend.yaml
 
-lovelace: !include config/lovelace.yaml
+google_assistant: !include config/google_assistant.yaml
 
 history: !include config/history.yaml
 
-recorder: !include config/recorder.yaml
+http: !include config/http.yaml
+
+lovelace: !include config/lovelace.yaml
 
 notify: !include config/notify.yaml
 
-script: !include packages/scripts.yaml
-
-google_assistant: !include config/google_assistant.yaml
-
 panel_custom: !include config/panel_custom.yaml
+
+recorder: !include config/recorder.yaml
+
+
+# Add ons
+
+api:
 
 energy:
 
@@ -26,25 +48,3 @@ ios:
 
 mobile_app:
 
-system_health:
-
-sun:
-
-homeassistant:
-  name: Beach House
-  latitude: !secret latitude
-  longitude: !secret longitude
-  elevation: !secret elevation
-  unit_system: "Imperial"
-  time_zone: "America/Los_Angeles"
-  packages:
-    climate: !include packages/climate.yaml
-    lights: !include packages/lights.yaml
-    media: !include packages/media.yaml
-    network: !include packages/network.yaml
-    scenes: !include packages/scenes.yaml
-    security: !include packages/security.yaml
-    system: !include packages/system.yaml
-    weather: !include packages/weather.yaml
-  whitelist_external_dirs:
-    - /tmp

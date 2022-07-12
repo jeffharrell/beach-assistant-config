@@ -1,0 +1,48 @@
+- name: Mood Lights
+  entities:
+    light.recessed:
+      state: on
+      brightness: 255
+    light.picture:
+      state: on
+      brightness: 50
+    light.kitchen_sink:
+      state: on
+      brightness: 100
+    light.living_room: off
+    light.dining_table: off
+    light.guest_bed: off
+    light.kitchen_lights: off
+    light.kitchen_cabinets: off
+    light.hallway: off
+
+- name: Dinner Lights
+  entities:
+    light.dining_table:
+      state: on
+      brightness: 100
+    light.kitchen_lights:
+      state: on
+      brightness: 130
+    light.living_room: off
+    light.recessed: off
+    light.picture: off
+    light.guest_bed: off
+    light.kitchen_cabinets: off
+    light.hallway: off
+
+- name: Good Morning
+  entities:
+    light.kitchen_cabinets: on
+    switch.desk: off
+    light.hallway: off
+    light.living_room: off
+    light.dining_table: off
+    light.recessed: off
+    light.picture: off
+    light.kitchen_lights: off
+    light.kitchen_sink: off
+
+- name: Lights Off
+  entities:
+    group.lights: off
