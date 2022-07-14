@@ -34,7 +34,7 @@
 - name: Good Morning
   entities:
     light.kitchen_cabinets: on
-    switch.desk: off
+    light.desk: off
     light.hallway: off
     light.living_room: off
     light.dining_table: off
@@ -45,4 +45,4 @@
 
 - name: Lights Off
   entities:
-    group.lights: off
+    light.house: off

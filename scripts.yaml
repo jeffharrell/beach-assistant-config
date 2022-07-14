@@ -1,3 +1,31 @@
+movie_lights:
+  alias: "Movie Lights"
+  icon: "mdi:movie"
+  sequence:
+    - condition: state
+      entity_id: alarm_control_panel.abode_alarm
+      state: "disarmed"
+    - service: script.turn_on
+      entity_id: script.shade5down
+    - service: script.turn_on
+      entity_id: script.shade4down
+    - condition: template
+      value_template: '{{ state_attr("sun.sun", "elevation") < 0 }}'
+    - service: script.turn_on
+      entity_id: script.shade3down
+    - service: script.turn_on
+      entity_id: script.shade2down
+    - service: scene.turn_on
+      entity_id: scene.mood_lights
+
+mood_lights:
+  alias: "Mood Lights"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.mood_lights
+
 climate_away:
   sequence:
     - service: climate.turn_off
@@ -16,6 +44,14 @@ climate_windows_open:
       data:
         title: "Beach"
         message: "Turning HVAC off since windows were left open"
+
+dinner_lights:
+  alias: "Dinner Lights"
+  icon: "mdi:food-fork-drink"
+  sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.dinner_lights
 
 good_morning:
   alias: "Good Morning"
@@ -36,9 +72,6 @@ good_night:
   alias: "Good Night"
   icon: "mdi:brightness-2"
   sequence:
-    - condition: state
-      entity_id: alarm_control_panel.abode_alarm
-      state: "disarmed"
     - service: input_boolean.turn_on
       target:
         entity_id: input_boolean.night_mode
@@ -51,7 +84,7 @@ goodbye:
   alias: "Goodbye"
   sequence:
     - service: homeassistant.turn_off
-      entity_id: group.lights
+      entity_id: lights.house
     - service: script.turn_on
       entity_id: script.shades_down_all
     - service: script.climate_away
@@ -77,27 +110,7 @@ welcome_lights:
     - service: homeassistant.turn_on
       entity_id:
         - light.kitchen_lights
-        - group.front_lights
-
-movie_lights:
-  alias: "Movie Time"
-  icon: "mdi:grid-large"
-  sequence:
-    - condition: state
-      entity_id: alarm_control_panel.abode_alarm
-      state: "disarmed"
-    - service: script.turn_on
-      entity_id: script.shade5down
-    - service: script.turn_on
-      entity_id: script.shade4down
-    - condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < 0 }}'
-    - service: script.turn_on
-      entity_id: script.shade3down
-    - service: script.turn_on
-      entity_id: script.shade2down
-    - service: scene.turn_on
-      entity_id: scene.mood_lights
+        - light.front_yard
 
 shade1up:
   alias: "Shade 1 - Up"

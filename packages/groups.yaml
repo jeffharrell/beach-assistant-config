@@ -1,9 +1,120 @@
 light:
+  # Overrides
+  - platform: switch
+    name: "Desk"
+    entity_id: switch.desk
+
+  - platform: switch
+    name: "Front Door"
+    entity_id: switch.front_door_lights
+
+  - platform: switch
+    name: "Front Deck"
+    entity_id: switch.front_deck_lights
+
+  - platform: switch
+    name: "Twinkle Lights"
+    entity_id: switch.back_twinkle_lights
+
+  - platform: switch
+    name: "Back Stairs"
+    entity_id: switch.back_stairs_light
+
+  - platform: switch
+    name: "Back Yard Left"
+    entity_id: switch.back_lights_left
+
+  - platform: switch
+    name: "Back Yard Right"
+    entity_id: switch.back_lights_right
+
+  - platform: switch
+    name: "Upstairs Deck"
+    entity_id: switch.upstairs_deck_lights
+
+  
+  # Groups
   - platform: group
-    name: Living Room
+    name: "Living Room"
+    unique_id: living_room
     entities:
       - light.livingroom_1
       - light.livingroom_2
+
+  - platform: group
+    name: "Downstairs"
+    unique_id: downstairs
+    entities:
+      - light.living_room
+      - light.dining_table
+      - light.recessed
+      - light.picture
+      - light.guest_bed
+      - light.kitchen_sink
+      - light.kitchen_cabinets
+      - light.kitchen_lights
+      - light.desk
+
+  - platform: group
+    name: "Upstairs"
+    unique_id: upstairs
+    entities:
+      - light.hallway
+      - light.bunk_bed
+      - light.master_bedroom
+      - light.master_reading_1
+      - light.master_reading_2
+      - light.master_wall
+
+  - platform: group
+    name: "Front Yard"
+    unique_id: front_yard
+    entities:
+      - light.front_door
+      - light.front_deck
+
+  - platform: group
+    name: "Back Yard"
+    unique_id: back_yard
+    entities:
+      - light.back_yard_left
+      - light.back_yard_right
+
+  - platform: group
+    name: "Outside"
+    unique_id: outside
+    entities:
+      - light.front_yard
+      - light.back_yard
+      - light.twinkle_lights
+      - light.back_stairs
+      - light.upstairs_deck
+
+  - platform: group
+    name: "House"
+    unique_id: house
+    entities:
+      - light.downstairs
+      - light.upstairs
+      - light.outside
+
+
+binary_sensor:
+  # Groups
+  - platform: group
+    name: "Doors and Windows"
+    unique_id: doors_and_windows
+    entities:
+      - binary_sensor.bathroom_window
+      - binary_sensor.driveway_window
+      - binary_sensor.kitchen_window
+      - binary_sensor.master_slider
+      - binary_sensor.front_door
+      - binary_sensor.kitchen_door
+      - binary_sensor.bay_window_left
+      - binary_sensor.bay_window_right
+      - binary_sensor.downstairs_front_window_left
+      - binary_sensor.downstairs_front_window_right
 
 
 group:
@@ -25,59 +136,3 @@ group:
       - script.shade5up
       - script.shade5stop
       - script.shade5down  
-
-  doors_and_windows:
-    entities:
-      - binary_sensor.bathroom_window
-      - binary_sensor.driveway_window
-      - binary_sensor.kitchen_window
-      - binary_sensor.master_slider
-      - binary_sensor.front_door
-      - binary_sensor.kitchen_door
-      - binary_sensor.bay_window_left
-      - binary_sensor.bay_window_right
-      - binary_sensor.downstairs_front_window_left
-      - binary_sensor.downstairs_front_window_right
-
-  downstairs_lights:
-    entities:
-      - light.living_room
-      - light.dining_table
-      - light.recessed
-      - light.picture
-      - light.guest_bed
-      - light.kitchen_sink
-      - light.kitchen_cabinets
-      - light.kitchen_lights
-      - switch.desk
-  upstairs_lights:
-    entities:
-      - light.hallway
-      - light.bunk_bed
-      - light.master_bedroom
-      - light.master_reading_1
-      - light.master_reading_2
-      - light.master_wall
-      - switch.master_wall_outlet
-  outside_lights:
-    entities:
-      - group.front_lights
-      - group.back_lights
-      - switch.back_twinkle_lights
-      - switch.back_stairs_light
-      - switch.upstairs_deck_lights
-  front_lights:
-    name: Front Lights
-    entities:
-      - switch.front_door_lights
-      - switch.front_deck_lights
-  back_lights:
-    name: Back Lights
-    entities:
-      - switch.back_lights_left
-      - switch.back_lights_right
-  lights:
-    entities:
-      - group.downstairs_lights
-      - group.upstairs_lights
-      - group.outside_lights

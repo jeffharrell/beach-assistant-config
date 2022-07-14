@@ -31,18 +31,28 @@ automation:
       data_template:
         name: home
 
+  - alias: System - Night mode reset
+    initial_state: True
+    trigger:
+      platform: time
+      at: "09:00:00"
+    action:
+      service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.night_mode
+
   - alias: System - Trash reminder
     initial_state: True
     trigger:
       platform: time
-      at: '18:00:00'
+      at: "18:00:00"
     condition:
     - condition: time
       weekday:
         - thu
     - condition: state
       entity_id: alarm_control_panel.abode_alarm
-      state: 'disarmed'
+      state: "disarmed"
     action:
       - service: notify.phones
         data:

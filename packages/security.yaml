@@ -41,14 +41,14 @@ automation:
           title: "Beach"
           message: "Alarm is {{ states('alarm_control_panel.abode_alarm')|replace('_', ' ') }}"
       - condition: state
-        entity_id: group.doors_and_windows
+        entity_id: binary_sensor.doors_and_windows
         state: "on"
       - service: notify.phones
         data_template:
           title: "Beach"
           message: >
             Warning! The following are open: 
-            {%- for entity in expand("group.doors_and_windows") -%}
+            {%- for entity in expand("binary_sensor.doors_and_windows") -%}
               {%- if entity.state == "on" -%}
                 {{ entity.name }}
                 {%- if not loop.last %}, {% endif -%}
@@ -75,7 +75,7 @@ automation:
                 volume: 1
 
       - service: homeassistant.turn_on
-        entity_id: group.lights
+        entity_id: light.house
       - service: script.turn_on
         entity_id: script.shades_up
 
@@ -102,7 +102,7 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: group.doors_and_windows
+        entity_id: binary_sensor.doors_and_windows
         to: "off"
         for: "24:00:00"
     condition:

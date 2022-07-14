@@ -35,7 +35,7 @@ automation:
       # if a door is left open or HVAC was just turned on set a timer
       - platform: state
         entity_id:
-          - group.doors_and_windows
+          - binary_sensor.doors_and_windows
           - sensor.hvac_on
         to: "on"
         for: "00:30:00"
@@ -44,7 +44,7 @@ automation:
       conditions:
         # if the door is STILL open
         - condition: state
-          entity_id: group.doors_and_windows
+          entity_id: binary_sensor.doors_and_windows
           state: "on"
         # and the HVAC is STILL on
         - condition: state

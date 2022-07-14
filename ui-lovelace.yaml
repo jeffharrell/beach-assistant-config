@@ -5,7 +5,7 @@ views:
     path: "home"
     cards:
       - type: vertical-stack
-        title: Beach House
+        title: "Beach House"
         cards:
           # House Pic
           - type: picture-entity
@@ -61,20 +61,18 @@ views:
               cards:
                 - type: horizontal-stack
                   cards:
+                    # Dinner
                     - type: entity-button
-                      entity: scene.dinner_lights
-                      name: "Dinner Lights"
-                      icon: mdi:food-fork-drink
+                      entity: script.dinner_lights
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
-                        service: scene.turn_on
+                        service: script.turn_on
                         service_data:
-                          entity_id: scene.dinner_lights
+                          entity_id: script.dinner_lights
+                    # Movie
                     - type: entity-button
                       entity: script.movie_lights
-                      name: "Movie Time"
-                      icon: mdi:movie
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
@@ -84,16 +82,16 @@ views:
 
                 - type: horizontal-stack
                   cards:
+                    # Mood
                     - type: entity-button
-                      entity: scene.mood_lights
-                      name: Mood Lights
-                      icon: mdi:movie
+                      entity: script.mood_lights
                       icon_height: 1.5em
                       tap_action:
                         action: call-service
-                        service: scene.turn_on
+                        service: script.turn_on
                         service_data:
-                          entity_id: scene.mood_lights
+                          entity_id: script.mood_lights
+                    # Good Night
                     - type: entity-button
                       entity: script.good_night
                       icon_height: 1.5em
@@ -131,34 +129,17 @@ views:
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% endif %}
 
-              - type: entity-filter
+              - type: 'custom:auto-entities'
                 card:
                   type: entities
                   show_header_toggle: false
-                state_filter:
-                  - "on"
+                filter:
+                  include:
+                    - group: binary_sensor.doors_and_windows
+                  exclude:
+                    - state: "off"
+                    - state: "unavailable"
                 show_empty: false
-                entities:
-                  - entity: binary_sensor.front_door
-                    icon: mdi:door
-                  - entity: binary_sensor.kitchen_door
-                    icon: mdi:door
-                  - entity: binary_sensor.kitchen_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.bay_window_left
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.bay_window_right
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.bathroom_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.driveway_window
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.downstairs_front_window_left
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.downstairs_front_window_right
-                    icon: mdi:window-closed
-                  - entity: binary_sensor.master_slider
-                    icon: mdi:door
 
   - title: "Inside"
     path: "inside"
@@ -173,7 +154,7 @@ views:
           - entity: light.kitchen_lights
           - entity: light.kitchen_cabinets
           - entity: light.kitchen_sink
-          - entity: switch.desk
+          - entity: light.desk
           - entity: light.recessed
           - entity: light.picture
           - entity: light.hallway
@@ -277,13 +258,11 @@ views:
         show_header_toggle: true
         state_color: true
         entities:
-          - entity: switch.front_door_lights
-          - entity: switch.front_deck_lights
-          - entity: group.back_lights
-            icon: mdi:lightbulb
-          - entity: switch.back_twinkle_lights
-          - entity: switch.back_stairs_light
-          - entity: switch.upstairs_deck_lights
+          - entity: light.front_yard
+          - entity: light.back_yard
+          - entity: light.twinkle_lights
+          - entity: light.back_stairs
+          - entity: light.upstairs_deck
 
   - title: "Cameras"
     path: "cameras"
@@ -300,16 +279,16 @@ views:
           - type: picture-glance
             camera_image: camera.front_deck
             entities:
-              - entity: switch.front_deck_lights
+              - entity: light.front_deck
           - type: picture-glance
             camera_image: camera.driveway
             entities:
-              - entity: switch.front_door_lights
+              - entity: light.front_door
           - type: picture-glance
             camera_image: camera.backyard
             entities:
-              - entity: switch.back_twinkle_lights
+              - entity: light.twinkle_lights
           - type: picture-glance
             camera_image: camera.upstairs_deck
             entities:
-              - entity: switch.upstairs_deck_lights
+              - entity: light.upstairs_deck

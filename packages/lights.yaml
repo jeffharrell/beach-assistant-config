@@ -19,8 +19,7 @@ automation:
       value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
     action:
       - service: homeassistant.turn_on
-        entity_id:
-          - switch.front_door_lights
+        entity_id: light.front_door
 
   - alias: Lights - Automatic back lights
     initial_state: True
@@ -38,16 +37,16 @@ automation:
         state: "disarmed"
     action:
       - service_template: >
-          switch.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
-        entity_id: switch.back_twinkle_lights
+          homeassistant.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
+        entity_id: light.twinkle_lights
 
   - alias: Lights - Automatic outside lights off
     initial_state: True
     trigger:
       - platform: state
         entity_id:
-          - group.front_lights
-          - group.back_lights
+          - light.front_yard
+          - light.back_yard
         to: "on"
         for:
           hours: 1
@@ -55,8 +54,8 @@ automation:
       - service: homeassistant.turn_off
         data_template:
           entity_id: 
-            - group.front_lights
-            - group.back_lights
+            - light.front_yard
+            - light.back_yard
             
   - alias: Lights - Double tap kitchen for twinkle lights
     initial_state: True
@@ -68,7 +67,7 @@ automation:
     action:
       - service_template: >
           homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
-        entity_id: switch.back_twinkle_lights
+        entity_id: light.twinkle_lights
 
   - alias: Lights - Double tap master bedroom light
     initial_state: True
@@ -93,4 +92,4 @@ automation:
     action:
       - service_template: >
           homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
-        entity_id: switch.front_deck_lights
+        entity_id: light.front_deck

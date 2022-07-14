@@ -1,70 +1,70 @@
 project_id: !secret google_assistant_id
 service_account: !include ../google_assistant_key.json
 report_state: true
-expose_by_default: true
-exposed_domains:
-  - switch
-  - light
-  - script
-  - scene
+expose_by_default: false
+
 entity_config:
-  group.back_lights:
+  light.living_room:
     expose: true
-  group.front_lights:
-    expose: false
-  switch.back_lights_right:
-    expose: false
-  switch.back_lights_left:
-    expose: false
-  light.livingroom_1:
-    expose: false
-  light.livingroom_2:
-    expose: false
-  light.master_reading_1:
-    expose: false
-  light.master_reading_2:
-    expose: false
-  switch.master_wall_outlet:
-    expose: false
-  switch.zooz_plug:
-    expose: false
-  scene.dinner_lights:
+  light.dining_table:
+    expose: true
+  light.kitchen_lights:
+    expose: true
+  light.kitchen_cabinets:
+    expose: true
+  light.kitchen_sink:
+    expose: true
+  light.desk:
+    expose: true
+  light.recessed:
+    expose: true
+  light.picture:
+    expose: true
+  light.hallway:
+    expose: true
+  light.guest_bed:
+    expose: true
+  light.bunk_bed:
+    expose: true
+  light.master_bedroom:
+    expose: true
+  light.master_wall:
+    expose: true
+  light.front_yard:
+    expose: true
+  light.back_yard:
+    expose: true
+  light.twinkle_lights:
+    expose: true
+  light.back_stairs:
+    expose: true
+  light.upstairs_deck:
+    expose: true
+  script.dinner_lights:
+    expose: true
     aliases:
       - DINNER_TIME
-  scene.good_morning:
-    expose: false
+    room: house
+  script.good_morning:
+    expose: true
+    room: house
+  script.good_night:
+    expose: true
+    room: house
+  script.mood_lights:
+    expose: true
+    room: house
   script.movie_lights:
+    expose: true
     aliases:
       - MOVIE_TIME
-  script.welcome_home:
-    expose: false
-  script.shade1up:
-    expose: false
-  script.shade1down:
-    expose: false
-  script.shade1stop:
-    expose: false
-  script.shade2up:
-    expose: false
-  script.shade2down:
-    expose: false
-  script.shade2stop:
-    expose: false
-  script.shade3up:
-    expose: false
-  script.shade3down:
-    expose: false
-  script.shade3stop:
-    expose: false
-  script.shade4up:
-    expose: false
-  script.shade4down:
-    expose: false
-  script.shade4stop:
-    expose: false
-  script.shade5up:
-    expose: false
-  script.shade5down:
-    expose: false
-  script.shade5stop:
-    expose: false
+    room: house
+  script.shades_up:
+    expose: true
+    room: house
+  script.shades_down:
+    expose: true
+    room: house
+  script.shades_halfway:
+    expose: true
+    room: house
