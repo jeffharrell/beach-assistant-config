@@ -251,6 +251,13 @@ shade5down:
         entity_id: remote.broadlink
         num_repeats: 3
         command: !secret shade5_down
+    # If the windows are open don't shut all of the way
+    - condition: state
+      entity_id: binary_sensor.downstairs_front_windows
+      state: "on"
+    - delay: "00:00:16"
+    - service: script.turn_on
+      entity_id: script.shade5stop
 
 shade5stop:
   alias: "Shade 5 - Stop"
