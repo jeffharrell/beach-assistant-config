@@ -9,8 +9,9 @@ movie_lights:
       entity_id: script.shade5down
     - service: script.turn_on
       entity_id: script.shade4down
+    # if the sun is down then close all shades and put the lights on
     - condition: template
-      value_template: '{{ state_attr("sun.sun", "elevation") < 0 }}'
+      value_template: "{{ is_state('sun.sun', 'below_horizon') }}"
     - service: script.turn_on
       entity_id: script.shade3down
     - service: script.turn_on
@@ -57,6 +58,7 @@ good_morning:
   alias: "Good Morning"
   icon: "mdi:brightness-5"
   sequence:
+    # only run when the alarm is off to prevent accidental triggers
     - condition: state
       entity_id: alarm_control_panel.abode_alarm
       state: "disarmed"
@@ -349,6 +351,7 @@ shades_halfway:
   alias: "Shades Halfway"
   icon: "mdi:grid-large"
   sequence:
+    # Double stop toggles the preset
     - service: script.turn_on
       entity_id: script.shades_stop
     - delay: "00:00:01"

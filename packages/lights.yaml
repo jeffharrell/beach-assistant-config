@@ -19,7 +19,7 @@ automation:
       value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
     action:
       - service: homeassistant.turn_on
-        entity_id: light.front_door
+        entity_id: light.front_yard
 
   - alias: Lights - Automatic back lights
     initial_state: True
@@ -28,16 +28,20 @@ automation:
       - platform: sun
         event: sunset
         offset: "00:30:00"
+        variables:
+          action: "turn_on"
       # off
       - platform: time
         at: "22:00:00"
+        variables:
+          action: "turn_off"
     condition:
       - condition: state
         entity_id: alarm_control_panel.abode_alarm
         state: "disarmed"
     action:
       - service_template: >
-          homeassistant.turn_{% if trigger and trigger.event == "sunset" %}on{% else %}off{% endif %}
+          homeassistant.turn_{% if action == "turn_on" %}on{% else %}off{% endif %}
         entity_id: light.twinkle_lights
 
   - alias: Lights - Automatic outside lights off
@@ -57,39 +61,28 @@ automation:
             - light.front_yard
             - light.back_yard
             
-  - alias: Lights - Double tap kitchen for twinkle lights
+  - alias: Lights - Double tap 
     initial_state: True
     trigger:
       - platform: event
         event_type: zwave_js_value_notification
         event_data:
           node_id: 18
-    action:
-      - service_template: >
-          homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
-        entity_id: light.twinkle_lights
-
-  - alias: Lights - Double tap master bedroom light
-    initial_state: True
-    trigger:
-      - platform: event
-        event_type: zwave_js_value_notification
-        event_data:
-          node_id: 25
-    action:
-      - service_template: >
-          homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
-        entity_id: light.master_wall
-
-
-  - alias: Lights - Double tap front door light
-    initial_state: True
-    trigger:
+        variables:
+          entity: "twinkle_lights"
       - platform: event
         event_type: zwave_js_value_notification
         event_data:
           node_id: 20
+        variables:
+          entity: "front_deck"
+      - platform: event
+        event_type: zwave_js_value_notification
+        event_data:
+          node_id: 25
+        variables:
+          entity: "master_wall"
     action:
-      - service_template: >
-          homeassistant.turn_{% if trigger and trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}
-        entity_id: light.front_deck
+      - data_template:
+          entity_id: light.{{ entity }}
+        service_template: homeassistant.turn_{% if trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}   

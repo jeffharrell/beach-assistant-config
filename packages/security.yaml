@@ -73,7 +73,6 @@ automation:
                 name: "default"
                 critical: 1
                 volume: 1
-
       - service: homeassistant.turn_on
         entity_id: light.house
       - service: script.turn_on

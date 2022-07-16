@@ -87,7 +87,6 @@ light:
       - light.front_yard
       - light.back_yard
       - light.twinkle_lights
-      - light.back_stairs
       - light.upstairs_deck
 
   - platform: group
