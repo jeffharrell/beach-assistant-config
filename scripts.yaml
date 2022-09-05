@@ -81,12 +81,23 @@ good_night:
       entity_id: scene.lights_off
     - service: script.turn_on
       entity_id: script.shades_down_all
+    - service: notify.master_bedroom
+      data_template:
+        message: >
+          {%- if is_state("binary_sensor.doors_and_windows", "on") -%}
+            Warning – The following are open:
+            {%- for entity in expand("binary_sensor.doors_and_windows") -%}
+              {%- if entity.state == "on" -%}
+                ... {{ entity.name }}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
 
 goodbye:
   alias: "Goodbye"
   sequence:
     - service: homeassistant.turn_off
-      entity_id: lights.house
+      entity_id: light.house
     - service: script.turn_on
       entity_id: script.shades_down_all
     - service: script.climate_away
