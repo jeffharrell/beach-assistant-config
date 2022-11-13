@@ -115,7 +115,7 @@ views:
                   <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}° {{ states('sensor.dark_sky_hourly_summary')|lower }}
 
                   {% if states('sensor.dark_sky_uv_index')|int > 3 %}
-                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV index is {{ states('sensor.dark_sky_uv_index') }} so wear sunscreen!
+                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV is high so wear sunscreen
                   {% endif %}
 
                   <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }} of {% if "High" in states('sensor.tides') %}{{ state_attr('sensor.tides', 'high_tide_height')|round(1) }}{% else %}{{ state_attr('sensor.tides', 'low_tide_height')|round(1) }}{% endif %}'
@@ -248,7 +248,7 @@ views:
                   action: call-service
                   service: script.turn_on
                   service_data:
-                    entity_id: script.shades_down
+                    entity_id: script.shades_down_all
               - icon: mdi:menu
                 tap_action:
                   action: more-info

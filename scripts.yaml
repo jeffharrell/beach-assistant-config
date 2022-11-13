@@ -291,16 +291,16 @@ shades_up:
       state: "disarmed"
     - service: script.turn_on
       entity_id: script.shade5up
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade4up
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade3up
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade2up
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade1up
 
@@ -310,13 +310,13 @@ shades_down:
   sequence:
     - service: script.turn_on
       entity_id: script.shade5down
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade4down
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade3down
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade2down
 
@@ -326,16 +326,16 @@ shades_down_all:
   sequence:
     - service: script.turn_on
       entity_id: script.shade5down
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade4down
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade3down
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade2down
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade1down
 
@@ -345,16 +345,16 @@ shades_stop:
   sequence:
     - service: script.turn_on
       entity_id: script.shade5stop
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade4stop
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade3stop
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade2stop
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade1stop
 
@@ -365,6 +365,6 @@ shades_halfway:
     # Double stop toggles the preset
     - service: script.turn_on
       entity_id: script.shades_stop
-    - delay: "00:00:01"
+    - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shades_stop
