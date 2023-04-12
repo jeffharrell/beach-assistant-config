@@ -24,7 +24,9 @@
     light.kitchen_lights:
       state: on
       brightness: 130
-    light.living_room: off
+    light.living_room: # TODO: Should living room lights turn on in summer when it's brighter?
+      state: on
+      brightness: 130
     light.recessed: off
     light.picture: off
     light.guest_bed: off

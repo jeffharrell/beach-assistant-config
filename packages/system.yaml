@@ -20,7 +20,22 @@ input_boolean:
   night_mode:
     initial: false
 
+shell_command:
+  purge_backups: "find ./backups -maxdepth 1 -name '*.tar' -type f -mtime +365 -delete"
+
 automation:
+  - alias: System - Backup
+    initial_state: True
+    trigger:
+      platform: time
+      at: "01:00:00"
+    condition:
+      condition: template
+      value_template: "{{ now().day == 1 }}"
+    action:
+      - service: backup.create
+      - service: shell_command.purge_backups
+
   - alias: System - UI theme change
     initial_state: True
     trigger:
@@ -41,17 +56,17 @@ automation:
       target:
         entity_id: input_boolean.night_mode
 
-#   - alias: System - Reset speaker volumes
-#     initial_state: True
-#     trigger:
-#       platform: time
-#       at: "06:00:00"
-#     action:
-#       - service: media_player.volume_set
-#         target:
-#           entity_id: media_player.kitchen_display
-#         data:
-#           volume_level: 0.6
+  - alias: System - Reset speaker volumes
+    initial_state: True
+    trigger:
+      platform: time
+      at: "06:00:00"
+    action:
+      - service: media_player.volume_set
+        target:
+          entity_id: media_player.kitchen_display
+        data:
+          volume_level: 0.6
 
   - alias: System - Trash reminder
     initial_state: True

@@ -106,17 +106,13 @@ views:
             cards:
               - type: markdown
                 entity_id:
-                  - sensor.dark_sky_temperature
-                  - sensor.dark_sky_hourly_summary
+                  - sensor.outside_forecast
+                  - sensor.outside_temp
                   - sensor.tides
                   - sensor.water_temp
                   - alarm_control_panel.abode_alarm
                 content: >
-                  <ha-icon icon="mdi:weather-sunny"></ha-icon> Currently {{ states('sensor.dark_sky_temperature')|round(0) }}° {{ states('sensor.dark_sky_hourly_summary')|lower }}
-
-                  {% if states('sensor.dark_sky_uv_index')|int > 3 %}
-                    <ha-icon icon="mdi:sun-wireless-outline"></ha-icon> UV is high so wear sunscreen
-                  {% endif %}
+                  <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp') }} {{ states('sensor.outside_forecast') }}
 
                   <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }} of {% if "High" in states('sensor.tides') %}{{ state_attr('sensor.tides', 'high_tide_height')|round(1) }}{% else %}{{ state_attr('sensor.tides', 'low_tide_height')|round(1) }}{% endif %}'
 
@@ -217,10 +213,10 @@ views:
         title: "Weather"
         show_name: false
         entities:
-          - entity: sensor.dark_sky_temperature
-          - entity: sensor.dark_sky_humidity
-          - entity: sensor.dark_sky_wind_speed
-          - entity: sensor.dark_sky_uv_index
+          - entity: sensor.c9585_temperature
+          - entity: sensor.c9585_relative_humidity
+          - entity: sensor.c9585_wind_speed
+          - entity: sensor.c9585_visibility
 
       - type: entities
         title: "Windows"
@@ -287,7 +283,7 @@ views:
           - type: picture-glance
             camera_image: camera.backyard
             entities:
-              - entity: light.twinkle_lights
+              - entity: light.back_yard
           - type: picture-glance
             camera_image: camera.upstairs_deck
             entities:
