@@ -102,7 +102,7 @@ views:
                           entity_id: script.good_night
 
           - type: vertical-stack
-            title: "Status"
+            title: " "
             cards:
               - type: markdown
                 entity_id:
@@ -114,17 +114,15 @@ views:
                 content: >
                   <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp') }} {{ states('sensor.outside_forecast') }}
 
-                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }} of {% if "High" in states('sensor.tides') %}{{ state_attr('sensor.tides', 'high_tide_height')|round(1) }}{% else %}{{ state_attr('sensor.tides', 'low_tide_height')|round(1) }}{% endif %}'
-
-
                   {% if is_state('alarm_control_panel.abode_alarm', 'armed_home') %}
-
                     <ha-icon icon="mdi:shield-home-outline"></ha-icon> Alarm is armed home
                   {% elif is_state('alarm_control_panel.abode_alarm', 'armed_away') %}
-
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% endif %}
 
+                  {% if states('counter.camera_motion')|float(0) > 0 %}
+                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
+                  {% endif %}
               - type: 'custom:auto-entities'
                 card:
                   type: entities
@@ -281,7 +279,7 @@ views:
             entities:
               - entity: light.front_door
           - type: picture-glance
-            camera_image: camera.backyard
+            camera_image: camera.back_yard
             entities:
               - entity: light.back_yard
           - type: picture-glance

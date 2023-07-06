@@ -1,9 +1,9 @@
 sun:
 
 sensor:
-  - platform: noaa_tides
-    name: Tides
-    station_id: !secret noaa_station
+#   - platform: noaa_tides
+#     name: Tides
+#     station_id: !secret noaa_station
 
   - platform: template
     sensors:
@@ -13,9 +13,14 @@ sensor:
 
       outside_forecast:
         value_template: >
-          {{ state_attr('weather.c9585_daynight', 'forecast')[0].detailed_description.split('.')[0]|lower }}
+          {% set weather = state_attr('weather.c9585_daynight', 'forecast') %}
+          {% set today = weather[0] %}
+
+          {%- if today and today.detailed_description -%}
+            {{ today.detailed_description.split('.')[0]|lower }}
+          {%- endif %}
         icon_template: >
-          {% set weather = state_attr('weather.c9585_daynight', 'forecast')[0].condition %}
+          {% set condition = today and today.condition %}
           
           {%- if "cloud" in weather -%}
             mdi:weather-cloudy

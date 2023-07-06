@@ -1,0 +1,39 @@
+counter:
+  camera_motion:
+    name: "Camera Motion Counter"
+    icon: mdi:alert
+    initial: 0
+    restore: True
+
+
+automation:
+
+  - alias: Cameras - Motion webhook
+    initial_state: True
+    trigger:
+      - platform: webhook
+        webhook_id: "camera_driveway_motion"
+        local_only: True
+      - platform: webhook
+        webhook_id: "camera_front_deck_motion"
+        local_only: True
+      - platform: webhook
+        webhook_id: "camera_upstairs_deck_motion"
+        local_only: True
+      - platform: webhook
+        webhook_id: "camera_back_yard_motion"
+        local_only: True
+    action:
+      - service: counter.increment
+        target:
+          entity_id: counter.camera_motion
+          
+  - alias: Cameras - Reset motion counter
+    initial_state: True
+    trigger:
+      - platform: time
+        at: "00:00:00"
+    action:
+      - service: counter.reset
+        target:
+          entity_id: counter.camera_motion
