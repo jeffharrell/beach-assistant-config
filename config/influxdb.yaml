@@ -1,7 +1,0 @@
-host: !secret influxdb_host
-database: homeassistant
-include:
-  domains:
-    - sensor
-    - binary_sensor
-    - climate
