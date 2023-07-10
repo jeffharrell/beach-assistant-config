@@ -254,7 +254,6 @@ views:
         entities:
           - entity: light.front_yard
           - entity: light.back_yard
-          - entity: light.twinkle_lights
           - entity: light.back_stairs
           - entity: light.upstairs_deck
 

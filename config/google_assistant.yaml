@@ -34,8 +34,6 @@ entity_config:
     expose: true
   light.back_yard:
     expose: true
-  light.twinkle_lights:
-    expose: true
   light.upstairs_deck:
     expose: true
   script.dinner_lights:
