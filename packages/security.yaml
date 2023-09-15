@@ -3,7 +3,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       from: "armed_away"
       to: "disarmed"
     action:
@@ -14,7 +14,7 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       to: "armed_away"
     action:
       - service: script.turn_on
@@ -24,13 +24,13 @@ automation:
     initial_state: True
     trigger:
       - platform: state
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
         to: "armed_home"
       - platform: state
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
         to: "armed_away"
       - platform: state
-        entity_id: alarm_control_panel.abode_alarm
+        entity_id: alarm_control_panel.alarm
         to: "disarmed"
     condition:
       condition: template
@@ -39,7 +39,7 @@ automation:
       - service: notify.phones
         data_template:
           title: "Beach"
-          message: "Alarm is {{ states('alarm_control_panel.abode_alarm')|replace('_', ' ') }}"
+          message: "Alarm is {{ states('alarm_control_panel.alarm')|replace('_', ' ') }}"
       - condition: state
         entity_id: binary_sensor.doors_and_windows
         state: "on"
@@ -58,8 +58,9 @@ automation:
   - alias: "Alarm - Alert"
     initial_state: True
     trigger:
-      platform: event
-      event_type: abode_alarm
+      - platform: state
+        entity_id: alarm_control_panel.alarm
+        to: "triggered"
     action:
       - service: notify.phones
         data:
@@ -78,25 +79,6 @@ automation:
       - service: script.turn_on
         entity_id: script.shades_up
 
-  - alias: "Alarm - Fault"
-    initial_state: True
-    trigger:
-      - platform: event
-        event_type: abode_panel_fault
-      - platform: event
-        event_type: abode_panel_restore
-    action:
-      - service: notify.phones
-        data:
-          title: "Beach"
-          message: "Alarm Fault! See logs"
-          data:
-            url: "/config/logs"
-      - service: system_log.write
-        data_template:
-          message: "Alarm Fault: {{ trigger.event.data|tojson }}"
-          level: error
-
   - alias: "Alarm - Are you away"
     initial_state: True
     trigger:
@@ -106,7 +88,7 @@ automation:
         for: "16:00:00"
     condition:
       condition: template
-      value_template: "{{ is_state('alarm_control_panel.abode_alarm', 'disarmed') }}"
+      value_template: "{{ is_state('alarm_control_panel.alarm', 'disarmed') }}"
     action:
       - service: notify.phones
         data:

@@ -1,0 +1,19 @@
+default: warning
+
+logs:
+  homeassistant.setup: error
+  homeassistant.loader: error
+  homeassistant.helpers.entity: error
+  homeassistant.components.switch: error
+  homeassistant.components.sensor: error
+  homeassistant.components.scrape.sensor: error
+  homeassistant.components.binary_sensor: error
+  homeassistant.components.abode.config_flow: error
+  homeassistant.components.broadlink.remote: critical
+  homeassistant.components.broadlink.updater: critical
+  homeassistant.components.nws: critical
+  pychromecast.socket_client: critical
+  custom_components.hacs: critical
+  jaraco.abode.socketio: error
+  lomond: error
+  abodepy: error

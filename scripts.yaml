@@ -3,7 +3,7 @@ movie_lights:
   icon: "mdi:movie"
   sequence:
     - condition: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       state: "disarmed"
     - service: script.turn_on
       entity_id: script.shade5down
@@ -60,7 +60,7 @@ good_morning:
   sequence:
     # only run when the alarm is off to prevent accidental triggers
     - condition: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       state: "disarmed"
     - service: input_boolean.turn_off
       target:
@@ -287,7 +287,7 @@ shades_up:
   icon: "mdi:grid-large"
   sequence:
     - condition: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       state: "disarmed"
     - service: script.turn_on
       entity_id: script.shade5up

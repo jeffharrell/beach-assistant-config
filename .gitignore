@@ -3,6 +3,7 @@ google_calendars.yaml
 home-assistant.sublime-workspace
 home-assistant.log*
 bin/
+backups/
 deps/
 src/
 blueprints/

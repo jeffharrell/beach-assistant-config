@@ -23,11 +23,26 @@ automation:
       - platform: webhook
         webhook_id: "camera_back_yard_motion"
         local_only: True
+    #condition: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
     action:
       - service: counter.increment
         target:
           entity_id: counter.camera_motion
           
+  - alias: Cameras - Motion Alert
+    initial_state: True
+    trigger:
+      - platform: numeric_state
+        entity_id: counter.camera_motion
+        above: 10
+    action:
+      - service: notify.phones
+        data:
+          title: "Beach"
+          message: "Significant motion detected!"
+          data:
+            url: "/lovelace/cameras"
+
   - alias: Cameras - Reset motion counter
     initial_state: True
     trigger:

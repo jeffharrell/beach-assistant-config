@@ -53,7 +53,7 @@ automation:
     action:
       - service: script.climate_windows_open
 
-  - alias: Climate - Offline
+  - alias: Climate - Thermostat Offline
     initial_state: True
     trigger:
       - platform: time
@@ -71,3 +71,25 @@ automation:
         data:
           title: "Beach"
           message: "HVAC is offline!"
+
+
+  - alias: Climate - Bathroom Floor
+    initial_state: True
+    trigger:
+      - platform: time
+        at: "05:00:00"
+        variables: 
+          temp: 95
+      - platform: time
+        at: "09:00:00"
+        variables: 
+          temp: 90
+    condition:
+      condition: state
+      entity_id: alarm_control_panel.alarm
+      state: "disarmed"
+    action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.bathroom_floor
+          temperature: "{{ temp }}"

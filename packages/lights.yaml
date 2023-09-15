@@ -21,29 +21,6 @@ automation:
       - service: homeassistant.turn_on
         entity_id: light.front_yard
 
-#   - alias: Lights - Automatic back lights
-#     initial_state: True
-#     trigger:
-#       # on
-#       - platform: sun
-#         event: sunset
-#         offset: "00:30:00"
-#         variables:
-#           action: "turn_on"
-#       # off
-#       - platform: time
-#         at: "22:00:00"
-#         variables:
-#           action: "turn_off"
-#     condition:
-#       - condition: state
-#         entity_id: alarm_control_panel.abode_alarm
-#         state: "disarmed"
-#     action:
-#       - service_template: >
-#           homeassistant.turn_{% if action == "turn_on" %}on{% else %}off{% endif %}
-#         entity_id: light.twinkle_lights
-
   - alias: Lights - Automatic outside lights off
     initial_state: True
     trigger:

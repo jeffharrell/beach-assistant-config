@@ -56,18 +56,6 @@ automation:
       target:
         entity_id: input_boolean.night_mode
 
-  - alias: System - Reset speaker volumes
-    initial_state: True
-    trigger:
-      platform: time
-      at: "06:00:00"
-    action:
-      - service: media_player.volume_set
-        target:
-          entity_id: media_player.kitchen_display
-        data:
-          volume_level: 0.6
-
   - alias: System - Trash reminder
     initial_state: True
     trigger:
@@ -78,7 +66,7 @@ automation:
       weekday:
         - thu
     - condition: state
-      entity_id: alarm_control_panel.abode_alarm
+      entity_id: alarm_control_panel.alarm
       state: "disarmed"
     action:
       - service: notify.phones

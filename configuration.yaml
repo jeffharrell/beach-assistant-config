@@ -29,6 +29,8 @@ history: !include config/history.yaml
 
 http: !include config/http.yaml
 
+logger: !include config/logger.yaml
+
 lovelace: !include config/lovelace.yaml
 
 media_source:
