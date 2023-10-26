@@ -1,0 +1,12 @@
+automation:
+  - alias: Energy - UPS status change
+    initial_state: True
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: sensor.ups_status
+    action:
+      - service: notify.mobile_app_jeffs_iphone
+        data_template:
+          title: "Home"
+          message: "UPS status change: {{ states('sensor.ups_status') }} at {{ states('sensor.ups_battery_charge') }}%"

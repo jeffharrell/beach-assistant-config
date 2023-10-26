@@ -1,6 +1,9 @@
 sun:
 
 sensor:
+  - platform: noaa_tides
+    station_id: 9413616
+    
   - platform: template
     sensors:
       outside_temp: 
