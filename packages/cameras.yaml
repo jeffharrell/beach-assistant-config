@@ -1,6 +1,11 @@
 counter:
-  camera_motion:
-    name: "Camera Motion Counter"
+  camera_motion_front:
+    name: "Front Yard Camera Motion Counter"
+    icon: mdi:alert
+    initial: 0
+    restore: True
+  camera_motion_back:
+    name: "Back Yard Camera Motion Counter"
     icon: mdi:alert
     initial: 0
     restore: True
@@ -8,7 +13,7 @@ counter:
 
 automation:
 
-  - alias: Cameras - Motion webhook
+  - alias: Cameras - Front yard motion webhook
     initial_state: True
     trigger:
       - platform: webhook
@@ -17,29 +22,43 @@ automation:
       - platform: webhook
         webhook_id: "camera_front_deck_motion"
         local_only: True
+    action:
+      - service: counter.increment
+        target:
+          entity_id: counter.camera_motion_front
+
+  - alias: Cameras - Back yard motion webhook
+    initial_state: True
+    trigger:
       - platform: webhook
         webhook_id: "camera_upstairs_deck_motion"
         local_only: True
       - platform: webhook
         webhook_id: "camera_back_yard_motion"
         local_only: True
-    #condition: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
     action:
       - service: counter.increment
         target:
-          entity_id: counter.camera_motion
-          
+          entity_id: counter.camera_motion_back
+
   - alias: Cameras - Motion Alert
     initial_state: True
     trigger:
       - platform: numeric_state
-        entity_id: counter.camera_motion
-        above: 10
+        entity_id: counter.camera_motion_front
+        above: 20
+        variables:
+          location: "Front"
+      - platform: numeric_state
+        entity_id: counter.camera_motion_back
+        above: 2
+        variables:
+          location: "Back"
     action:
       - service: notify.phones
-        data:
+        data_template:
           title: "Beach"
-          message: "Significant motion detected!"
+          message: "{{ location }} motion detected!"
           data:
             url: "/lovelace/cameras"
 
@@ -51,4 +70,7 @@ automation:
     action:
       - service: counter.reset
         target:
-          entity_id: counter.camera_motion
+          entity_id: counter.camera_motion_front
+      - service: counter.reset
+        target:
+          entity_id: counter.camera_motion_back

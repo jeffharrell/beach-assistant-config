@@ -118,13 +118,20 @@ views:
                     <ha-icon icon="mdi:shield-lock-outline"></ha-icon> Alarm is armed away
                   {% endif %}
                   
-                  <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp') }} {{ states('sensor.outside_forecast') }}
-                  
-                  
-                  <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.noaa_tides') }}
-                  
-                  {% if states('counter.camera_motion')|float(0) > 0 %}
-                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today
+                  {% if states('sensor.outside_temp')|float(0) > 0 %}
+                    <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp') }} {{ states('sensor.outside_forecast') }}
+                  {% endif %}
+
+                  {% if states('sensor.noaa_tides') %}
+                    <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.noaa_tides') }}
+                  {% endif %}
+
+                  {% if states('counter.camera_motion_front')|float(0) > 0 %}
+                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion_front') }} motion alerts in the front today 
+                  {% endif %}
+
+                  {% if states('counter.camera_motion_back')|float(0) > 0 %}
+                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion_back') }} motion alerts in the back today
                   {% endif %}
               - type: 'custom:auto-entities'
                 card:
