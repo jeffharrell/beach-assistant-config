@@ -29,10 +29,13 @@ light:
     entity_id: switch.back_lights_right
 
   - platform: switch
+    name: "Back Landscape"
+    entity_id: switch.back_landscape
+
+  - platform: switch
     name: "Upstairs Deck"
     entity_id: switch.upstairs_deck_lights
 
-  
   # Groups
   - platform: group
     name: "Living Room"

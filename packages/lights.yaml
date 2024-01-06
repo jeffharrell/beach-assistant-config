@@ -58,3 +58,23 @@ automation:
       - data_template:
           entity_id: light.{{ entity }}
         service_template: homeassistant.turn_{% if trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}   
+
+  - alias: Lights - Landscape
+    initial_state: True
+    trigger:
+      # on
+      - platform: sun
+        event: sunset
+        offset: "00:15:00"
+        variables:
+          action: "turn_on"
+      # off
+      - platform: time
+        at: "23:00:00"
+        variables:
+          action: "turn_off"
+    action:
+      - service: >
+          switch.{{ action }}
+        entity_id:
+          - switch.back_landscape

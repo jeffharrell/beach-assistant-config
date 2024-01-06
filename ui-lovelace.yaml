@@ -119,11 +119,15 @@ views:
                   {% endif %}
                   
                   {% if states('sensor.outside_temp')|float(0) > 0 %}
-                    <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp') }} {{ states('sensor.outside_forecast') }}
+                    <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp') }}°F {{ states('sensor.outside_forecast') }}
                   {% endif %}
 
-                  {% if states('sensor.noaa_tides') %}
-                    <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.noaa_tides') }}
+                  {% if states('sensor.current_tide') %}
+                    <ha-icon icon="mdi:waves"></ha-icon> Current {{ states('sensor.current_tide') | lower }}
+                  {% endif %}
+                  
+                  {% if states('sensor.next_tide') %}
+                    <ha-icon icon="mdi:waves"></ha-icon> Next {{ states('sensor.next_tide') | lower }}
                   {% endif %}
 
                   {% if states('counter.camera_motion_front')|float(0) > 0 %}
@@ -221,10 +225,10 @@ views:
         title: "Weather"
         show_name: false
         entities:
-          - entity: sensor.c9585_temperature
-          - entity: sensor.c9585_relative_humidity
-          - entity: sensor.c9585_wind_speed
-          - entity: sensor.c9585_visibility
+          - entity: sensor.outside_temp
+          - entity: sensor.kmry_relative_humidity
+          - entity: sensor.kmry_wind_speed
+          - entity: sensor.kmry_visibility
 
       - type: entities
         title: "Windows"
@@ -265,6 +269,7 @@ views:
           - entity: light.front_yard
           - entity: light.back_yard
           - entity: light.back_stairs
+          - entity: light.back_landscape
           - entity: light.upstairs_deck
 
   - title: "Cameras"
