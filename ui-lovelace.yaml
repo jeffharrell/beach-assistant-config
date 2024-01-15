@@ -123,19 +123,15 @@ views:
                   {% endif %}
 
                   {% if states('sensor.current_tide') %}
-                    <ha-icon icon="mdi:waves"></ha-icon> Current {{ states('sensor.current_tide') | lower }}
+                    <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.current_tide') }}
                   {% endif %}
                   
                   {% if states('sensor.next_tide') %}
-                    <ha-icon icon="mdi:waves"></ha-icon> Next {{ states('sensor.next_tide') | lower }}
+                    <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.next_tide') }}
                   {% endif %}
 
-                  {% if states('counter.camera_motion_front')|float(0) > 0 %}
-                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion_front') }} motion alerts in the front today 
-                  {% endif %}
-
-                  {% if states('counter.camera_motion_back')|float(0) > 0 %}
-                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion_back') }} motion alerts in the back today
+                  {% if (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) > 0 %}
+                    <ha-icon icon="mdi:alert-outline"></ha-icon> {{ (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) }} motion alerts today 
                   {% endif %}
               - type: 'custom:auto-entities'
                 card:
@@ -269,8 +265,9 @@ views:
           - entity: light.front_yard
           - entity: light.back_yard
           - entity: light.back_stairs
-          - entity: light.back_landscape
           - entity: light.upstairs_deck
+          - type: divider
+          - entity: light.back_landscape
 
   - title: "Cameras"
     path: "cameras"

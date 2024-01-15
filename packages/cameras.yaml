@@ -22,6 +22,9 @@ automation:
       - platform: webhook
         webhook_id: "camera_front_deck_motion"
         local_only: True
+    condition:
+      condition: template
+      value_template: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
     action:
       - service: counter.increment
         target:
@@ -36,6 +39,9 @@ automation:
       - platform: webhook
         webhook_id: "camera_back_yard_motion"
         local_only: True
+    condition:
+      condition: template
+      value_template: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
     action:
       - service: counter.increment
         target:
@@ -54,11 +60,14 @@ automation:
         above: 2
         variables:
           location: "Back"
+    condition:
+      condition: template
+      value_template: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
     action:
       - service: notify.phones
         data_template:
           title: "Beach"
-          message: "{{ location }} motion detected!"
+          message: "Motion detected!"
           data:
             url: "/lovelace/cameras"
 

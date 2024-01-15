@@ -83,7 +83,7 @@ automation:
       - platform: time
         at: "09:00:00"
         variables: 
-          temp: 88
+          temp: 90
     condition:
       condition: state
       entity_id: alarm_control_panel.alarm

@@ -13,7 +13,7 @@ rest:
           {% for prediction in value_json.predictions | reverse %}
             {% if not tide.current %}
               {% if as_timestamp(prediction.t) < current %}
-                {% if prediction.type == 'H' %}High{% else %}Low{% endif %} tide {{ prediction.v | round(1) }}' at {{ as_timestamp(prediction.t) | timestamp_custom('%-I:%M %p') }}
+                Previous {% if prediction.type == 'H' %}high{% else %}low{% endif %} tide {{ prediction.v | round(1) }}' at {{ as_timestamp(prediction.t) | timestamp_custom('%-I:%M %p') }}
                 {% set tide.current = True %}
               {% endif %}
             {% endif %}
@@ -27,7 +27,7 @@ rest:
           {% for prediction in value_json.predictions %}
             {% if not tide.next %}
               {% if as_timestamp(prediction.t) > current %}
-                {% if prediction.type == 'H' %}High{% else %}Low{% endif %} tide {{ prediction.v | round(1) }}' at {{ as_timestamp(prediction.t) | timestamp_custom('%-I:%M %p') }}
+                Next {% if prediction.type == 'H' %}high{% else %}low{% endif %} tide {{ prediction.v | round(1) }}' at {{ as_timestamp(prediction.t) | timestamp_custom('%-I:%M %p') }}
                 {% set tide.next = True %}
               {% endif %}
             {% endif %}
