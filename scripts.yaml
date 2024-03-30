@@ -129,158 +129,121 @@ shade1up:
   alias: "Shade 1 - Up"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.open_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade1_up
+        entity_id: cover.window_shade_1
 
 shade1down:
   alias: "Shade 1 - Down"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.close_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade1_down
+        entity_id: cover.window_shade_1
 
 shade1stop:
   alias: "Shade 1 - Stop"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.stop_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade1_stop
+        entity_id: cover.window_shade_1
 
 shade2up:
   alias: "Shade 2 - Up"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.open_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade2_up
+        entity_id: cover.window_shade_2
 
 shade2down:
   alias: "Shade 2 - Down"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.close_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade2_down
+        entity_id: cover.window_shade_2
 
 shade2stop:
-  alias: "Shade 2 - Stop"
+  alias: "Shade2 - Stop"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.stop_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade2_stop
+        entity_id: cover.window_shade_2
 
 shade3up:
   alias: "Shade 3 - Up"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.open_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade3_up
+        entity_id: cover.window_shade_3
 
 shade3down:
   alias: "Shade 3 - Down"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.close_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade3_down
+        entity_id: cover.window_shade_3
 
 shade3stop:
   alias: "Shade 3 - Stop"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.stop_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade3_stop
+        entity_id: cover.window_shade_3
 
 shade4up:
   alias: "Shade 4 - Up"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.open_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade4_up
+        entity_id: cover.window_shade_4
 
 shade4down:
   alias: "Shade 4 - Down"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.close_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade4_down
+        entity_id: cover.window_shade_4
 
 shade4stop:
   alias: "Shade 4 - Stop"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.stop_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade4_stop
+        entity_id: cover.window_shade_4
 
 shade5up:
   alias: "Shade 5 - Up"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.open_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade5_up
+        entity_id: cover.window_shade_5
 
 shade5down:
   alias: "Shade 5 - Down"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.close_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade5_down
-    # If the windows are open don't shut all of the way
-    - condition: state
-      entity_id: binary_sensor.downstairs_front_windows
-      state: "on"
-    - delay: "00:00:16"
-    - service: script.turn_on
-      entity_id: script.shade5stop
+        entity_id: cover.window_shade_5
 
 shade5stop:
   alias: "Shade 5 - Stop"
   icon: "mdi:grid-large"
   sequence:
-    - service: remote.send_command
+    - service: cover.stop_cover
       data:
-        entity_id: remote.broadlink
-        num_repeats: 3
-        command: !secret shade5_stop
+        entity_id: cover.window_shade_5
 
 shades_up:
   alias: "Shades Up"
