@@ -1,0 +1,173 @@
+title: "Home"
+path: "home"
+cards:
+  - type: vertical-stack
+    cards:
+
+      # Header and alarm
+      - type: entity
+        name: "Home"
+        entity: alarm_control_panel.alarm_panel_ui
+        theme: nocard
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 15px 8px;
+              transition: none;
+            }
+
+            :host ha-card .header {
+              padding: 0 0 0 5px;
+            }
+
+            :host ha-card .name {
+              color: var(--primary-text-color);
+              font-size: 24px;
+              font-weight: 400;
+            }
+
+            :host ha-card .info {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+            }
+
+            :host ha-card .value {
+              color: var(--disabled-text-color);
+              font-size: 24px;
+              font-weight: 400;
+              text-transform: capitalize;
+            }
+
+
+      # House Pic
+      - type: picture-entity
+        entity: camera.beach
+        show_name: false
+        show_state: false
+        tap_action: 
+          action: 'navigate'
+          navigation_path: '/lovelace/cameras'
+        theme: nocard
+        card_mod:
+          style: |
+            :host ha-card { 
+              margin: 0 -8px 25px;
+              min-height: 285px;
+              background: var(--disabled-text-color);
+              transition: none;
+            }  
+
+            @media only screen and (hover: none) and (pointer: coarse) {
+              :host ha-card {
+                min-height: 218px !important;
+              }
+            }
+
+      # Buttons - Morning
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.alarm
+            state: "disarmed"
+          - entity: input_boolean.night_mode
+            state: "on"
+        card:
+          type: horizontal-stack
+          cards:
+            - type: entity-button
+              entity: script.good_morning
+              icon_height: 2.25em
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.good_morning
+
+      # Buttons - Day and Evening
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.alarm
+            state: "disarmed"
+          - entity: input_boolean.night_mode
+            state: "off"
+        card:
+          type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+                # Dinner
+                - type: entity-button
+                  entity: script.dinner_lights
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: script.turn_on
+                    service_data:
+                      entity_id: script.dinner_lights
+                # Movie
+                - type: entity-button
+                  entity: script.movie_lights
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: script.turn_on
+                    service_data:
+                      entity_id: script.movie_lights
+
+            - type: horizontal-stack
+              cards:
+                # Mood
+                - type: entity-button
+                  entity: script.mood_lights
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: script.turn_on
+                    service_data:
+                      entity_id: script.mood_lights
+                # Good Night
+                - type: entity-button
+                  entity: script.good_night
+                  icon_height: 1.5em
+                  tap_action:
+                    action: call-service
+                    service: script.turn_on
+                    service_data:
+                      entity_id: script.good_night
+
+      # Status  
+      - type: markdown
+        entity_id:
+          - sensor.outside_forecast
+          - sensor.outside_temp
+          - sensor.current_tide
+          - sensor.next_tide
+          - counter.camera_motion_front
+          - counter.camera_motion_back
+          - binary_sensor.doors_and_windows
+        content: |
+          {%- if states('sensor.outside_temp') -%}
+            <ha-icon icon="mdi:weather-rainy"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outside_forecast') }}
+          {%- endif -%}
+          {% if states('sensor.current_tide') %}
+            <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.current_tide') }}
+          {%- endif -%}
+          {% if states('sensor.next_tide') %}
+            <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.next_tide') }}
+          {%- endif -%}
+          {% if (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) > 0 %}
+            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) }} motion alerts today 
+          {%- endif -%}
+          {%- if is_state('binary_sensor.doors_and_windows', 'on') -%}
+            {% for entity in expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | list %}
+              <ha-icon icon="{{ entity.attributes.icon }}"></ha-icon> {{ entity.name }} is open 
+            {%- endfor -%}
+          {%- endif -%}
+        theme: nocard
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 20px 0 0 0;
+              line-height: 2.25em;
+              transition: none;
+            } 

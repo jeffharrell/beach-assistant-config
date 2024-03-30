@@ -1,0 +1,28 @@
+title: "Cameras"
+path: "cameras"
+visible: false
+cards:
+
+  # Live camera views
+  - type: vertical-stack
+    title: "Live Cameras"
+    cards:
+      - type: picture-glance
+        camera_image: camera.beach
+        entities: []
+      - type: picture-glance
+        camera_image: camera.front_deck
+        entities:
+          - entity: light.front_deck
+      - type: picture-glance
+        camera_image: camera.driveway
+        entities:
+          - entity: light.front_door
+      - type: picture-glance
+        camera_image: camera.back_yard
+        entities:
+          - entity: light.back_yard
+      - type: picture-glance
+        camera_image: camera.upstairs_deck
+        entities:
+          - entity: light.upstairs_deck

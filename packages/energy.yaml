@@ -6,7 +6,11 @@ automation:
       - platform: state
         entity_id: sensor.ups_status
     action:
-      - service: notify.mobile_app_jeffs_iphone
-        data_template:
-          title: "Beach"
-          message: "UPS changed from {{ trigger.from_state }} to {{ trigger.to_state }}! Battery at {{ states('sensor.ups_battery_charge') }}%"
+      - if:
+          condition: template
+          value_template: "{{ states('sensor.ups_status') is search('On Battery|Online') }}"
+        then:
+          service: notify.mobile_app_jeffs_iphone
+          data_template:
+            title: "Home"
+            message: "UPS changed from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%"

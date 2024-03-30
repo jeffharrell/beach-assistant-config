@@ -1,0 +1,24 @@
+title: "Settings"
+path: "settings"
+visible: false
+cards:
+  
+  # Disclaimer
+  - type: markdown
+    content: |
+      Settings reset daily
+    theme: nocard
+    card_mod:
+      style: |
+        :host ha-card {
+          margin: 20px 0 0 0;
+          transition: none;
+        }
+
+  # Automations
+  - type: entities
+    state_color: true
+    entities:
+      - entity: automation.climate_windows_open
+        state_color: false
+        name: Turn off when windows open

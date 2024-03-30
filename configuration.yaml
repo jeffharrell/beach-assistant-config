@@ -1,5 +1,5 @@
 homeassistant:
-  name: Beach House
+  name: "Beach House"
   latitude: !secret latitude
   longitude: !secret longitude
   elevation: !secret elevation
@@ -10,16 +10,19 @@ homeassistant:
   allowlist_external_dirs:
     - /tmp
 
-
 scene: !include scenes.yaml
 script: !include scripts.yaml
 
 
 # Configuration
 
+api:
+
 config:
 
 backup:
+
+energy:
 
 frontend: !include config/frontend.yaml
 
@@ -29,11 +32,15 @@ history: !include config/history.yaml
 
 http: !include config/http.yaml
 
+ios:
+
 logger: !include config/logger.yaml
 
 lovelace: !include config/lovelace.yaml
 
 media_source:
+
+mobile_app:
 
 notify: !include config/notify.yaml
 
@@ -42,14 +49,4 @@ panel_custom: !include config/panel_custom.yaml
 recorder: !include config/recorder.yaml
 
 tts: !include config/tts.yaml
-
-# Add ons
-
-api:
-
-energy:
-
-ios:
-
-mobile_app:
 

@@ -1,3 +1,25 @@
+# Template alarm panel to filter alarm states in UI
+alarm_control_panel:
+  - platform: template
+    panels:
+      alarm_panel_ui:
+        name: "Alarm"
+        value_template: "{{ states('alarm_control_panel.alarm') }}"
+        code_arm_required: false
+        code_format: "no_code"
+        arm_away:
+          service: alarm_control_panel.alarm_arm_away
+          target:
+            entity_id: alarm_control_panel.alarm
+        arm_home:
+          service: alarm_control_panel.alarm_arm_home
+          target:
+            entity_id: alarm_control_panel.alarm
+        disarm:
+          service: alarm_control_panel.alarm_disarm
+          target:
+            entity_id: alarm_control_panel.alarm
+
 automation:
   - alias: "Alarm - Welcome Home"
     initial_state: True

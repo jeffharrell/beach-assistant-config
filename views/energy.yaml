@@ -1,0 +1,30 @@
+title: "Energy"
+path: "energy"
+visible: false
+cards:
+
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: statistics-graph
+            title: "Usage"
+            days_to_show: 1
+            hide_legend: true
+            entities:
+              - entity: sensor.eagle_200_meter_power_demand
+                name: "Load"
+
+      - type: horizontal-stack
+        cards:
+          - type: statistic
+            name: "Home Total"
+            entity: sensor.eagle_200_total_meter_energy_delivered
+            period:
+              calendar:
+                period: day
+            stat_type: change
+
+          - type: sensor
+            name: "Now"
+            entity: sensor.eagle_200_meter_power_demand

@@ -1,0 +1,105 @@
+title: "Outside"
+path: "outside"
+cards:
+  - type: vertical-stack
+    cards:
+      
+    # Header
+    - type: entities
+      entities:
+        - entity: sensor.eagle_200_meter_power_demand
+          name: "Outside"
+          tap_action:
+            action: navigate
+            navigation_path: energy
+      card_mod:
+        style: 
+          .: |
+            #states {
+              padding: 0;
+            }
+
+            ha-card {
+              background: none;
+              border: 0;
+              margin: 25px 0;
+              transition: none;
+            }
+          hui-sensor-entity-row $:
+            hui-generic-entity-row $: |
+              state-badge {
+                position: absolute;
+                right: 0;
+              }
+
+              .info {
+                color: var(--primary-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
+
+              .value {
+                margin: 0 40px 0 0;
+                color: var(--disabled-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
+
+    # Windows
+    - type: entities
+      title: "Windows"
+      entities:
+        - entity: group.shades
+          type: custom:multiple-entity-row
+          name: Shades
+          icon: mdi:grid-large
+          show_state: false
+          entities:
+            - icon: mdi:arrow-up
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.shades_up
+            - icon: mdi:stop
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.shades_halfway
+            - icon: mdi:arrow-down
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.shades_down_all
+            - icon: mdi:menu
+              tap_action:
+                action: more-info
+
+    # Lights
+    - type: entities
+      state_color: false
+      show_header_toggle: false
+      entities:
+        - entity: light.front_yard
+        - entity: light.back_yard
+        - entity: light.back_stairs
+        - entity: light.upstairs_deck
+
+        - type: section
+        
+        - entity: light.back_landscape
+
+
+    # Settings  
+    - type: markdown
+      content: |
+        Automations can be disabled in <a href="./settings">Advanced Settings</a>
+      theme: nocard
+      card_mod:
+        style: |
+          :host ha-card {
+            margin: 40px 0 0 0;
+            transition: none;
+          }

@@ -1,0 +1,102 @@
+title: "Inside"
+path: "inside"
+cards:
+  - type: vertical-stack
+    cards:
+
+    # Header
+    - type: entities
+      entities:
+        - entity: sensor.downstairs_temp
+          name: "Inside"
+          tap_action:
+            action: navigate
+            navigation_path: climate
+      theme: nocard
+      card_mod:
+        style: 
+          .: |
+            #states {
+              padding: 0;
+            }
+
+            ha-card {
+              margin: 25px 0;
+              transition: none;
+            }
+          hui-sensor-entity-row $:
+            hui-generic-entity-row $: |
+              state-badge {
+                position: absolute;
+                right: 0;
+              }
+
+              .info {
+                color: var(--primary-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
+
+              .value {
+                margin: 0 40px 0 0;
+                color: var(--disabled-text-color);
+                font-size: 24px;
+                font-weight: 400;
+              }
+
+    # Rooms
+    - type: entities
+      state_color: true
+      entities:
+        # Downstairs
+        - type: custom:multiple-entity-row
+          entity: light.living_room
+          toggle: true
+          entities:
+            - entity: media_player.downstairs_tv
+              icon: mdi:television
+              name: false
+              state_color: true
+        - entity: light.dining_table
+        - entity: light.kitchen_lights
+        - entity: light.kitchen_cabinets
+        - entity: light.kitchen_sink
+        - entity: light.desk
+        - entity: light.recessed
+        - entity: light.picture
+        - entity: light.guest_bed
+
+        - type: section
+        - entity: light.hallway
+        - type: section
+
+        # Upstairs
+        - type: custom:multiple-entity-row
+          entity: light.master_bedroom
+          toggle: true
+          entities:
+            - entity: media_player.master_tv
+              icon: mdi:television
+              name: false
+              state_color: true
+        - entity: light.master_wall
+        - type: custom:multiple-entity-row
+          entity: light.bunk_bed
+          toggle: true
+          entities:
+            - entity: media_player.bunk_bedroom_tv
+              icon: mdi:television
+              name: false
+              state_color: true
+
+    # Settings  
+    - type: markdown
+      content: |
+        Automations can be disabled in <a href="./settings">Advanced Settings</a>
+      theme: nocard
+      card_mod:
+        style: |
+          :host ha-card {
+            margin: 40px 0 0 0;
+            transition: none;
+          }

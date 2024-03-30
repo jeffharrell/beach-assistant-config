@@ -73,3 +73,20 @@ automation:
         data:
           title: "Beach"
           message: "Put the trash cans out"
+
+  - alias: System - Entity health check
+    initial_state: True
+    trigger:
+      platform: time
+      at: "04:00:00"
+      variables:
+         unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
+    action:
+      - if:
+          condition: template
+          value_template: "{{ unhealthy | length > 0 }}"
+        then:
+          service: persistent_notification.create
+          data:
+            notification_id: unhealthy
+            message: "The following are unavailable: {{ unhealthy }}"

@@ -1,0 +1,50 @@
+path: "climate"
+visible: false
+cards:
+
+  - type: vertical-stack
+    cards:
+      - type: thermostat
+        entity: climate.downstairs
+        features:
+          - type: "climate-hvac-modes"
+            hvac_modes:
+              - heat
+              - cool
+              - "off"
+
+      - type: thermostat
+        entity: climate.upstairs
+        features:
+          - type: "climate-hvac-modes"
+            hvac_modes:
+              - heat
+              - cool
+              - "off"
+
+      - type: entities
+        state_color: true
+        show_header_toggle: false
+        entities:
+          - entity: climate.bathroom_floor
+            type: custom:multiple-entity-row
+            icon: mdi:radiator
+            show_state: false
+            state_color: false
+            entities:
+              - entity: sensor.bathroom_floor_temp
+                name: "Temperature"
+              - entity: climate.bathroom_floor
+                name: "Mode"
+
+      - type: entities
+        entities:
+          - sensor.downstairs_temp
+          - sensor.upstairs_temp
+        theme: nocard
+        card_mod:
+          style: |
+            :host ha-card {
+              margin: 0;
+              transition: none;
+            }
