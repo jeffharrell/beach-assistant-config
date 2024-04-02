@@ -73,6 +73,9 @@ automation:
         at: "23:00:00"
         variables:
           action: "turn_off"
+    condition:
+      condition: template
+      value_template: "{{ is_state('alarm_control_panel.alarm', 'disarmed') }}"
     action:
       - service: >
           switch.{{ action }}

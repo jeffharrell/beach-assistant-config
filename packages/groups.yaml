@@ -91,6 +91,7 @@ light:
       - light.back_yard
       - light.twinkle_lights
       - light.upstairs_deck
+      - light.back_landscape
 
   - platform: group
     name: "House"
@@ -130,18 +131,9 @@ group:
   shades:
     name: "Window Shades"
     entities:
-      - script.shade1up
-      - script.shade1stop
-      - script.shade1down
-      - script.shade2up
-      - script.shade2stop
-      - script.shade2down
-      - script.shade3up
-      - script.shade3stop
-      - script.shade3down
-      - script.shade4up
-      - script.shade4stop
-      - script.shade4down
-      - script.shade5up
-      - script.shade5stop
-      - script.shade5down  
+      - cover.window_shade_1
+      - cover.window_shade_2
+      - cover.window_shade_3
+      - cover.window_shade_4
+      - cover.window_shade_5
+      - cover.window_shade_6

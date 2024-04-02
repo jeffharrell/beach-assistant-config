@@ -6,7 +6,7 @@ cards:
 
       # Header and alarm
       - type: entity
-        name: "Home"
+        name: "Beach House"
         entity: alarm_control_panel.alarm_panel_ui
         theme: nocard
         card_mod:
@@ -41,28 +41,26 @@ cards:
 
 
       # House Pic
-      - type: picture-entity
-        entity: camera.beach
-        show_name: false
-        show_state: false
-        tap_action: 
-          action: 'navigate'
-          navigation_path: '/lovelace/cameras'
-        theme: nocard
-        card_mod:
-          style: |
-            :host ha-card { 
-              margin: 0 -8px 25px;
-              min-height: 285px;
-              background: var(--disabled-text-color);
-              transition: none;
-            }  
-
-            @media only screen and (hover: none) and (pointer: coarse) {
-              :host ha-card {
-                min-height: 218px !important;
+      - type: "custom:config-template-card"
+        entities: 
+          - binary_sensor.night
+        card:
+          type: picture-entity
+          entity: "${ states['binary_sensor.night'].state == 'on' ? 'camera.front_deck' : 'camera.beach' }"
+          show_name: false
+          show_state: false
+          tap_action: 
+            action: 'navigate'
+            navigation_path: '/lovelace/cameras'
+          theme: nocard
+          card_mod:
+            style: |
+              :host ha-card { 
+                margin: 0 -8px 25px;
+                max-height: 240px;
+                background: var(--disabled-text-color);
+                transition: none;
               }
-            }
 
       # Buttons - Morning
       - type: conditional

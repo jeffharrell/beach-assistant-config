@@ -47,7 +47,6 @@ cards:
 
     # Windows
     - type: entities
-      title: "Windows"
       entities:
         - entity: group.shades
           type: custom:multiple-entity-row
@@ -73,9 +72,6 @@ cards:
                 service: script.turn_on
                 service_data:
                   entity_id: script.shades_down_all
-            - icon: mdi:menu
-              tap_action:
-                action: more-info
 
     # Lights
     - type: entities

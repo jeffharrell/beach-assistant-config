@@ -7,16 +7,11 @@ climate:
 sensor:
   - platform: template
     sensors:
-      downstairs_temp:
-        friendly_name: "Downstairs Temperature"
-        value_template: "{{ states('sensor.downstairs_trisensor_temp')|round(0) }}"
+      house_temp:
+        unique_id: "house_temp"
+        friendly_name: "House Temperature"
+        value_template: "{{ (states('sensor.downstairs_trisensor_temp')|int + states('sensor.upstairs_trisensor_temp')|int) / 2 }}"
         unit_of_measurement: "°F"
-
-      upstairs_temp:
-        friendly_name: "Upstairs Temperature"
-        value_template: "{{ states('sensor.upstairs_trisensor_temp')|round(0) }}"
-        unit_of_measurement: "°F"
-
       bathroom_floor_temp:
         friendly_name: "Bathroom Floor Temperature"
         value_template: "{{ state_attr('climate.bathroom_floor', 'current_temperature')|round(0) }}"

@@ -284,7 +284,7 @@ shades_down:
       entity_id: script.shade2down
 
 shades_down_all:
-  alias: "Shades Down"
+  alias: "Shades Down All"
   icon: "mdi:grid-large"
   sequence:
     - service: script.turn_on
@@ -301,33 +301,16 @@ shades_down_all:
     - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade1down
-
-shades_stop:
-  alias: "Shades Stop"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: script.turn_on
-      entity_id: script.shade5stop
-    - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade4stop
-    - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade3stop
-    - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade2stop
-    - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade1stop
-
+      
 shades_halfway:
   alias: "Shades Halfway"
   icon: "mdi:grid-large"
   sequence:
-    # Double stop toggles the preset
-    - service: script.turn_on
-      entity_id: script.shades_stop
-    - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shades_stop
+    - service: cover.set_cover_position
+      entity_id: 
+        - cover.window_shade_5
+        - cover.window_shade_4
+        - cover.window_shade_3
+        - cover.window_shade_2
+      data:
+        position: 71

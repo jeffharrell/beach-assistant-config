@@ -7,7 +7,7 @@ cards:
     # Header
     - type: entities
       entities:
-        - entity: sensor.downstairs_temp
+        - entity: sensor.house_temp
           name: "Inside"
           tap_action:
             action: navigate
@@ -57,17 +57,30 @@ cards:
               icon: mdi:television
               name: false
               state_color: true
+            - entity: media_player.living_room_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
         - entity: light.dining_table
-        - entity: light.kitchen_lights
+
+        - type: custom:multiple-entity-row
+          entity: light.kitchen_lights
+          toggle: true
+          entities:
+            - entity: media_player.kitchen_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
         - entity: light.kitchen_cabinets
         - entity: light.kitchen_sink
+
+        - type: section
+
         - entity: light.desk
         - entity: light.recessed
         - entity: light.picture
         - entity: light.guest_bed
 
-        - type: section
-        - entity: light.hallway
         - type: section
 
         # Upstairs
@@ -79,7 +92,10 @@ cards:
               icon: mdi:television
               name: false
               state_color: true
-        - entity: light.master_wall
+            - entity: media_player.master_bedroom_speaker
+              icon: mdi:speaker
+              name: false
+              state_color: true
         - type: custom:multiple-entity-row
           entity: light.bunk_bed
           toggle: true
@@ -88,6 +104,11 @@ cards:
               icon: mdi:television
               name: false
               state_color: true
+            - entity: media_player.bunk_bedroom_wifi
+              icon: mdi:speaker
+              name: false
+              state_color: true
+        - entity: light.hallway
 
     # Settings  
     - type: markdown
