@@ -78,11 +78,31 @@ cards:
       state_color: false
       show_header_toggle: false
       entities:
-        - entity: light.front_yard
-        - entity: light.back_yard
+        - type: custom:multiple-entity-row
+          entity: light.front_yard
+          toggle: true
+          entities:
+            - entity: media_player.front_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
+        - type: custom:multiple-entity-row
+          entity: light.back_yard
+          toggle: true
+          entities:
+            - entity: media_player.back_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
         - entity: light.back_stairs
-        - entity: light.upstairs_deck
-
+        - type: custom:multiple-entity-row
+          entity: light.upstairs_deck
+          toggle: true
+          entities:
+            - entity: media_player.upstairs_deck_speakers
+              icon: mdi:speaker
+              name: false
+              state_color: true
         - type: section
         
         - entity: light.back_landscape

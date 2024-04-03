@@ -88,7 +88,7 @@ cards:
           entity: light.master_bedroom
           toggle: true
           entities:
-            - entity: media_player.master_tv
+            - entity: media_player.master_bedroom_tv
               icon: mdi:television
               name: false
               state_color: true
