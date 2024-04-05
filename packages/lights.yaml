@@ -39,12 +39,6 @@ automation:
       - platform: event
         event_type: zwave_js_value_notification
         event_data:
-          node_id: 18
-        variables:
-          entity: "twinkle_lights"
-      - platform: event
-        event_type: zwave_js_value_notification
-        event_data:
           node_id: 20
         variables:
           entity: "front_deck"

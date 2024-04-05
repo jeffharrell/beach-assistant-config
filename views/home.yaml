@@ -138,23 +138,19 @@ cards:
         entity_id:
           - sensor.outside_forecast
           - sensor.outside_temp
-          - sensor.current_tide
-          - sensor.next_tide
+          - sensor.tides
           - counter.camera_motion_front
           - counter.camera_motion_back
           - binary_sensor.doors_and_windows
-        content: |
+        content: >
           {%- if states('sensor.outside_temp') -%}
-            <ha-icon icon="mdi:weather-rainy"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outside_forecast') }}
+            <ha-icon icon="mdi:weather-rainy"></ha-icon> Currently {{ states('sensor.outside_temp') }}°F {{ states('sensor.outside_forecast') }}
           {%- endif -%}
-          {% if states('sensor.current_tide') %}
-            <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.current_tide') }}
-          {%- endif -%}
-          {% if states('sensor.next_tide') %}
-            <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.next_tide') }}
+          {% if states('sensor.tides') %}
+            <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }}
           {%- endif -%}
           {% if (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) > 0 %}
-            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) }} motion alerts today 
+            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) }} events today 
           {%- endif -%}
           {%- if is_state('binary_sensor.doors_and_windows', 'on') -%}
             {% for entity in expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | list %}

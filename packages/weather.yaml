@@ -5,39 +5,28 @@ rest:
     scan_interval: 3600
     resource_template: "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&station=9413616&datum=MLLW&time_zone=lst_ldt&units=english&interval=hilo&format=json&begin_date={{ now().strftime('%Y%m%d') }}&end_date={{ (as_timestamp(now())+ 86400) | timestamp_custom('%Y%m%d') }}"
     sensor:
-      - name: "Current Tide"
+      - name: "Tides"
         value_template: >
-          {% set current = as_timestamp(now()) %}
-          {% set tide = namespace(current=False) %}
+          {% set now = as_timestamp(now()) %}
+          {% set tide = namespace(current=False, next=False) %}
 
           {% for prediction in value_json.predictions | reverse %}
             {% if not tide.current %}
-              {% if as_timestamp(prediction.t) < current %}
-                Previous {% if prediction.type == 'H' %}high{% else %}low{% endif %} tide {{ prediction.v | round(1) }}' at {{ as_timestamp(prediction.t) | timestamp_custom('%-I:%M %p') }}
-                {% set tide.current = True %}
+              {% if as_timestamp(prediction.t) < now %}
+                {% set tide.current = prediction %}
               {% endif %}
             {% endif %}
           {% endfor %}
-
-      - name: "Next Tide"
-        value_template: >
-          {% set current = as_timestamp(now()) %}
-          {% set tide = namespace(next=False) %}
-
           {% for prediction in value_json.predictions %}
             {% if not tide.next %}
-              {% if as_timestamp(prediction.t) > current %}
-                Next {% if prediction.type == 'H' %}high{% else %}low{% endif %} tide {{ prediction.v | round(1) }}' at {{ as_timestamp(prediction.t) | timestamp_custom('%-I:%M %p') }}
-                {% set tide.next = True %}
+              {% if as_timestamp(prediction.t) > now %}
+                {% set tide.next = prediction %}
               {% endif %}
             {% endif %}
           {% endfor %}
 
-      - name: "Tides"
-        value_template: "OK"
-        json_attributes:
-          - "predictions"
-
+          {% if tide.current.type == 'H' %}High{% else %}Low{% endif %} of {{ tide.current.v | round(1) }}' at {{ as_timestamp(tide.current.t) | timestamp_custom('%-I %p') }}
+          and {% if tide.next.type == 'H' %}high{% else %}low{% endif %} of {{ tide.next.v | round(1) }}' at {{ as_timestamp(tide.next.t) | timestamp_custom('%-I %p') }}
 sensor:
   - platform: template
     sensors:
@@ -47,19 +36,13 @@ sensor:
           {% set forecast = state_attr('weather.kmry_daynight', 'forecast') %}
 
           {% if forecast %}
-            {{ forecast[0].temperature|round(0) }}
+            {% set value = forecast[0].temperature|round(0) %}
           {% endif %}
-
+          
+          {{ value|default(0) }}
       outside_forecast:
         value_template: >
-          {% set forecast = state_attr('weather.kmry_daynight', 'forecast') %}
-
-          {% if forecast %}
-            {% set description = forecast[0].detailed_description %}
-            {% set value = description.split('.')[0]|lower %}
-          {% endif %}
-
-          {{ value|default('') }}
+          {{ states('weather.kmry_daynight')|default('') }}
         icon_template: >
           {% set forecast = state_attr('weather.kmry_daynight', 'forecast') %}
 
