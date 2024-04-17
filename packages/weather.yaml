@@ -25,33 +25,21 @@ rest:
             {% endif %}
           {% endfor %}
 
-          {% if tide.current.type == 'H' %}High{% else %}Low{% endif %} of {{ tide.current.v | round(1) }}' at {{ as_timestamp(tide.current.t) | timestamp_custom('%-I %p') }}
-          and {% if tide.next.type == 'H' %}high{% else %}low{% endif %} of {{ tide.next.v | round(1) }}' at {{ as_timestamp(tide.next.t) | timestamp_custom('%-I %p') }}
+          {% if tide.current.type == "H" %}High{% else %}Low{% endif %} of {{ tide.current.v | round(1) }}' at {{ as_timestamp(tide.current.t) | timestamp_custom("%-I %p") }}
+          and {% if tide.next.type == "H" %}high{% else %}low{% endif %} of {{ tide.next.v | round(1) }}' at {{ as_timestamp(tide.next.t) | timestamp_custom("%-I %p") }}
 sensor:
   - platform: template
     sensors:
       outside_temp: 
         unit_of_measurement: "°F"
         value_template: >
-          {% set forecast = state_attr('weather.kmry_daynight', 'forecast') %}
-
-          {% if forecast %}
-            {% set value = forecast[0].temperature|round(0) %}
-          {% endif %}
-          
-          {{ value|default(0) }}
+          {{ state_attr("weather.kmry_daynight", "temperature")|default(0) }}
       outside_forecast:
         value_template: >
-          {{ states('weather.kmry_daynight')|default('') }}
+          {{ states("weather.kmry_daynight")|replace("-", " ")|default("") }}
         icon_template: >
-          {% set forecast = state_attr('weather.kmry_daynight', 'forecast') %}
+          {% set condition = states("weather.kmry_daynight") %}
 
-          {% if forecast %}
-            {% set condition = forecast[0].condition %}
-          {% else %}
-            {% set condition = '' %}
-          {% endif %}
-          
           {%- if "cloud" in condition -%}
             mdi:weather-cloudy
           {%- elif "fog" in condition -%}

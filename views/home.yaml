@@ -144,7 +144,7 @@ cards:
           - binary_sensor.doors_and_windows
         content: >
           {%- if states('sensor.outside_temp') -%}
-            <ha-icon icon="mdi:weather-rainy"></ha-icon> Currently {{ states('sensor.outside_temp') }}°F {{ states('sensor.outside_forecast') }}
+          <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp') }}°F {{ states('sensor.outside_forecast') }}
           {%- endif -%}
           {% if states('sensor.tides') %}
             <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }}
