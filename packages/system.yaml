@@ -78,7 +78,7 @@ automation:
     initial_state: True
     trigger:
       platform: time
-      at: "04:00:00"
+      at: "06:00:00"
       variables:
          unhealthy: "{{ states | selectattr('state', 'in', ['unavailable', 'unknown', 'dead', 'none']) | list | map(attribute='name') | join(', ') }}"
     action:

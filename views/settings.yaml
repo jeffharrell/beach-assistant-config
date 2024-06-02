@@ -3,10 +3,26 @@ path: "settings"
 visible: false
 cards:
   
-  # Disclaimer
+  # Automations
   - type: markdown
-    content: |
-      Settings reset daily
+    content: "Settings reset daily"
+    theme: nocard
+    card_mod:
+      style: |
+        :host ha-card {
+          margin: 20px 0 0 0;
+          transition: none;
+        }
+        
+  - type: entities
+    state_color: false
+    entities:
+      - entity: automation.climate_windows_open
+        name: "Turn off when windows open"
+
+  # Batteries
+  - type: markdown
+    content: "Battery levels"
     theme: nocard
     card_mod:
       style: |
@@ -15,10 +31,32 @@ cards:
           transition: none;
         }
 
-  # Automations
   - type: entities
-    state_color: true
     entities:
-      - entity: automation.climate_windows_open
-        state_color: false
-        name: Turn off when windows open
+      - entity: sensor.ups_battery_charge
+        name: "UPS"
+      - type: divider
+      - entity: sensor.downstairs_trisensor_battery_level
+        title: "Downstairs Trisensor"
+      - entity: sensor.upstairs_trisensor_battery_level
+        title: "Upstairs Trisensor"
+      - type: divider
+      - entity: sensor.window_shade_1_battery_level
+        title: "Window Shade 1"
+      - entity: sensor.window_shade_2_battery_level
+        title: "Window Shade 2"
+      - entity: sensor.window_shade_3_battery_level
+        title: "Window Shade 3"
+      - entity: sensor.window_shade_4_battery_level
+        title: "Window Shade 4"
+      - entity: sensor.window_shade_5_battery_level
+        title: "Window Shade 5"
+      - entity: sensor.window_shade_6_battery_level
+        title: "Window Shade 6"
+    theme: nocard
+    card_mod:
+      style: |
+        :host ha-card {
+          margin: 0;
+          transition: none;
+        }

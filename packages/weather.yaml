@@ -36,7 +36,7 @@ sensor:
           {{ state_attr("weather.kmry_daynight", "temperature")|default(0) }}
       outside_forecast:
         value_template: >
-          {{ states("weather.kmry_daynight")|replace("-", " ")|default("") }}
+          {{ states("weather.kmry_daynight")|replace("-", " ")|replace("partlycloudy", "partly cloudy")|default("") }}
         icon_template: >
           {% set condition = states("weather.kmry_daynight") %}
 
