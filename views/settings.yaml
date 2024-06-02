@@ -53,10 +53,3 @@ cards:
         title: "Window Shade 5"
       - entity: sensor.window_shade_6_battery_level
         title: "Window Shade 6"
-    theme: nocard
-    card_mod:
-      style: |
-        :host ha-card {
-          margin: 0;
-          transition: none;
-        }
