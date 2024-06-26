@@ -53,3 +53,5 @@ cards:
         title: "Window Shade 5"
       - entity: sensor.window_shade_6_battery_level
         title: "Window Shade 6"
+      - entity: sensor.window_shade_7_battery_level
+        title: "Window Shade 7"

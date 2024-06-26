@@ -1,5 +1,5 @@
 automation:
-  - alias: Lights - House off after sunrise
+  - alias: "Lights - House Off After Sunrise"
     initial_state: True
     trigger:
       platform: time
@@ -21,7 +21,7 @@ automation:
       - service: homeassistant.turn_on
         entity_id: light.front_yard
 
-  - alias: Lights - Automatic outside lights off
+  - alias: "Lights - Automatic Outside Lights Off"
     initial_state: True
     trigger:
       - platform: sun
@@ -33,7 +33,7 @@ automation:
             - light.front_yard
             - light.back_yard
             
-  - alias: Lights - Double tap 
+  - alias: "Lights - Double Tap" 
     initial_state: True
     trigger:
       - platform: event
@@ -53,7 +53,7 @@ automation:
           entity_id: light.{{ entity }}
         service_template: homeassistant.turn_{% if trigger.event.data["value"] == 255 %}on{% else %}off{% endif %}   
 
-  - alias: Lights - Landscape
+  - alias: "Lights - Landscape"
     initial_state: True
     trigger:
       # on

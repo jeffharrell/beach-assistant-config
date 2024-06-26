@@ -24,7 +24,7 @@ sensor:
 
 
 automation:
-  - alias: Climate - Windows Open
+  - alias: "Climate - Windows Open"
     initial_state: True
     trigger:
       # if a door is left open or HVAC was just turned on set a timer
@@ -48,7 +48,7 @@ automation:
     action:
       - service: script.climate_windows_open
 
-  - alias: Climate - Thermostat Offline
+  - alias: "Climate - Thermostat Offline"
     initial_state: True
     trigger:
       - platform: time
@@ -68,17 +68,17 @@ automation:
           message: "HVAC is offline!"
 
 
-  - alias: Climate - Bathroom Floor
+  - alias: "Climate - Bathroom Floor"
     initial_state: True
     trigger:
       - platform: time
         at: "05:00:00"
         variables: 
-          temp: 93
+          temp: 90
       - platform: time
         at: "09:00:00"
         variables: 
-          temp: 90
+          temp: 88
     condition:
       condition: state
       entity_id: alarm_control_panel.alarm

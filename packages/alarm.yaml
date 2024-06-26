@@ -89,7 +89,7 @@ automation:
           title: "Beach"
           message: "Alarm alert!"
           data:
-            entity_id: camera.front_door
+            entity_id: camera.driveway
             url: "/lovelace/cameras"
             push:
               sound:
