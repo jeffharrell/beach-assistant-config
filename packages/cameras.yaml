@@ -1,3 +1,8 @@
+camera:
+  - platform: local_file
+    name: Latest Motion
+    file_path: "/config/www/cameras/motion.jpg"
+
 counter:
   camera_motion:
     name: "Camera Motion Counter"
@@ -7,40 +12,33 @@ counter:
 
 
 automation:
-
   - alias: "Cameras - Motion Webhook"
     initial_state: True
     trigger:
       - platform: webhook
-        webhook_id: "camera_driveway_motion"
-        local_only: True
-      - platform: webhook
-        webhook_id: "camera_back_yard_motion"
+        webhook_id: "camera_motion"
         local_only: True
     condition:
       condition: template
       value_template: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
     action:
+      # take a picture
+      - service: camera.snapshot
+        data:
+          entity_id: "{{ trigger.json.camera }}"
+          filename: "/config/www/cameras/motion.jpg"
+      # send a notification
+      - service: notify.phones
+        data:
+          title: "Beach"
+          message: "{{ trigger.json.name }} motion!"
+          data:
+            entity_id: camera.latest_motion
+            url: "/lovelace/cameras"
+      # update the counter
       - service: counter.increment
         target:
           entity_id: counter.camera_motion
-
-  - alias: "Cameras - Motion Alert"
-    initial_state: True
-    trigger:
-      - platform: numeric_state
-        entity_id: counter.camera_motion
-        above: 2
-    condition:
-      condition: template
-      value_template: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
-    action:
-      - service: notify.phones
-        data_template:
-          title: "Beach"
-          message: "Motion detected!"
-          data:
-            url: "/lovelace/cameras"
 
   - alias: "Cameras - Reset Motion Counter"
     initial_state: True

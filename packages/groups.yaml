@@ -5,6 +5,10 @@ light:
     entity_id: switch.desk
 
   - platform: switch
+    name: "Master Reading 1"
+    entity_id: switch.master_reading_1
+
+  - platform: switch
     name: "Front Door"
     entity_id: switch.front_door_lights
 

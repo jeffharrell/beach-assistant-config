@@ -139,8 +139,7 @@ cards:
           - sensor.outside_forecast
           - sensor.outside_temp
           - sensor.tides
-          - counter.camera_motion_front
-          - counter.camera_motion_back
+          - counter.camera_motion
           - binary_sensor.doors_and_windows
         content: >
           {%- if states('sensor.outside_temp') -%}
@@ -149,12 +148,12 @@ cards:
           {% if states('sensor.tides') %}
             <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }}
           {%- endif -%}
-          {% if (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) > 0 %}
-            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ (states('counter.camera_motion_front')|int + states('counter.camera_motion_back')|int) }} events today 
+          {% if states('counter.camera_motion')|int(default=0) > 0 %}
+            <ha-icon icon="mdi:alert-outline"></ha-icon> {{ states('counter.camera_motion') }} events today 
           {%- endif -%}
           {%- if is_state('binary_sensor.doors_and_windows', 'on') -%}
             {% for entity in expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | list %}
-              <ha-icon icon="{{ entity.attributes.icon }}"></ha-icon> {{ entity.name }} is open 
+              <ha-icon icon="{{ entity.attributes.icon|default("mdi:help-circle-outline") }}"></ha-icon> {{ entity.name }} is open 
             {%- endfor -%}
           {%- endif -%}
         theme: nocard

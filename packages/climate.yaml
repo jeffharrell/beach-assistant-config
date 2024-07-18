@@ -74,11 +74,12 @@ automation:
       - platform: time
         at: "05:00:00"
         variables: 
-          temp: 90
+          # TODO: set to 93 in winter?
+          temp: 90 
       - platform: time
         at: "09:00:00"
         variables: 
-          temp: 88
+          temp: 90
     condition:
       condition: state
       entity_id: alarm_control_panel.alarm
