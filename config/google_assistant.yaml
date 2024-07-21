@@ -50,10 +50,10 @@ entity_config:
   script.mood_lights:
     expose: true
     room: house
-  script.movie_lights:
+  script.movie_time:
     expose: true
     aliases:
-      - MOVIE_TIME
+      - MOVIE_LIGHTS
     room: house
   script.shades_up:
     expose: true

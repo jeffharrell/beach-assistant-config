@@ -39,7 +39,6 @@ cards:
               text-transform: capitalize;
             }
 
-
       # House Pic
       - type: "custom:config-template-card"
         entities: 
@@ -62,78 +61,48 @@ cards:
                 transition: none;
               }
 
-      # Buttons - Morning
-      - type: conditional
-        conditions:
-          - entity: alarm_control_panel.alarm
-            state: "disarmed"
-          - entity: input_boolean.night_mode
-            state: "on"
-        card:
-          type: horizontal-stack
-          cards:
-            - type: entity-button
-              entity: script.good_morning
-              icon_height: 2.25em
+      # Buttons
+      - type: horizontal-stack
+        cards:
+          # Movie
+          - type: entity-button
+            entity: script.movie_time
+            icon_height: 1.5em
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.movie_time
+          # Dinner
+          - type: conditional
+            conditions:
+              - entity: sun.sun
+                state: "above_horizon"
+            card:
+              type: entity-button
+              entity: script.dinner_lights
+              icon_height: 1.5em
               tap_action:
                 action: call-service
                 service: script.turn_on
                 service_data:
-                  entity_id: script.good_morning
+                  entity_id: script.dinner_lights
+          # Mood
+          - type: conditional
+            conditions:
+              - entity: sun.sun
+                state: "below_horizon"
+            card:
+              type: entity-button
+              entity: script.mood_lights
+              icon_height: 1.5em
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.mood_lights
 
-      # Buttons - Day and Evening
-      - type: conditional
-        conditions:
-          - entity: alarm_control_panel.alarm
-            state: "disarmed"
-          - entity: input_boolean.night_mode
-            state: "off"
-        card:
-          type: vertical-stack
-          cards:
-            - type: horizontal-stack
-              cards:
-                # Dinner
-                - type: entity-button
-                  entity: script.dinner_lights
-                  icon_height: 1.5em
-                  tap_action:
-                    action: call-service
-                    service: script.turn_on
-                    service_data:
-                      entity_id: script.dinner_lights
-                # Movie
-                - type: entity-button
-                  entity: script.movie_lights
-                  icon_height: 1.5em
-                  tap_action:
-                    action: call-service
-                    service: script.turn_on
-                    service_data:
-                      entity_id: script.movie_lights
-
-            - type: horizontal-stack
-              cards:
-                # Mood
-                - type: entity-button
-                  entity: script.mood_lights
-                  icon_height: 1.5em
-                  tap_action:
-                    action: call-service
-                    service: script.turn_on
-                    service_data:
-                      entity_id: script.mood_lights
-                # Good Night
-                - type: entity-button
-                  entity: script.good_night
-                  icon_height: 1.5em
-                  tap_action:
-                    action: call-service
-                    service: script.turn_on
-                    service_data:
-                      entity_id: script.good_night
-
-      # Status  
+      # Status
       - type: markdown
         entity_id:
           - sensor.outside_forecast

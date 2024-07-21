@@ -124,6 +124,13 @@ binary_sensor:
     entities:
       - binary_sensor.downstairs_front_window_left
       - binary_sensor.downstairs_front_window_right
+      
+  - platform: group
+    name: "Bay Windows"
+    unique_id: bay_windows
+    entities:
+      - binary_sensor.bay_window_left
+      - binary_sensor.bay_window_right
 
 
 group:
