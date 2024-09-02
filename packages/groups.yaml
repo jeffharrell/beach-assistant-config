@@ -5,6 +5,10 @@ light:
     entity_id: switch.desk
 
   - platform: switch
+    name: "Hallway"
+    entity_id: switch.hallway_light
+
+  - platform: switch
     name: "Master Reading 1"
     entity_id: switch.master_reading_1
 

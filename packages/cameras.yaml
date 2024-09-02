@@ -20,7 +20,7 @@ automation:
         local_only: True
     condition:
       condition: template
-      value_template: "{{ is_state('alarm_control_panel.alarm', 'armed_away') }}"
+      value_template: "{{ not is_state('alarm_control_panel.alarm', 'disarmed') }}"
     action:
       # take a picture
       - service: camera.snapshot

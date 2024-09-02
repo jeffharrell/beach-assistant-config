@@ -8,7 +8,7 @@ automation:
       - service: scene.turn_on
         entity_id: scene.lights_off
 
-  - alias: Lights - Automatic front lights
+  - alias: "Lights - Automatic front lights"
     initial_state: True
     trigger:
       - platform: state
@@ -21,7 +21,7 @@ automation:
       - service: homeassistant.turn_on
         entity_id: light.front_yard
 
-  - alias: "Lights - Automatic Outside Lights Off"
+  - alias: "Lights - Outside Lights Off"
     initial_state: True
     trigger:
       - platform: sun

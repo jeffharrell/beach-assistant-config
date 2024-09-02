@@ -46,15 +46,36 @@ automation:
       data_template:
         name: home
 
-  - alias: "System - Night Mode Reset"
+  - alias: "System - Reset Settings"
     initial_state: True
     trigger:
       platform: time
-      at: "09:00:00"
+      at: "06:00:00"
     action:
       service: input_boolean.turn_off
       target:
         entity_id: input_boolean.night_mode
+
+  - alias: "System - Reset Speakers"
+    initial_state: True
+    trigger:
+      platform: time
+      at: "12:00:00"
+    action:
+      - service: media_player.volume_set
+        target:
+          entity_id: 
+            - media_player.kitchen_display
+        data:
+          volume_level: 0.6
+      # some speakers should be quieter
+      - service: media_player.volume_set
+        target:
+          entity_id: 
+            - media_player.master_bedroom_mini
+            - media_player.bunk_bedroom_wifi
+        data:
+          volume_level: 0.5
 
   - alias: "System - Trash Reminder"
     initial_state: True

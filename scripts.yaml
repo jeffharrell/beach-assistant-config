@@ -314,21 +314,3 @@ shades_halfway:
         - cover.window_shade_2
       data:
         position: 71
-
-shades_error:
-  alias: "Shades Error Window Open"
-  mode: queued
-  sequence:
-    repeat:
-      count: 2
-      sequence:
-        - service: cover.set_cover_position
-          data_template:
-            entity_id: "{{ entity }}"
-            position: 98
-        - delay: "00:00:02"
-        - service: cover.set_cover_position
-          data_template:
-            entity_id: "{{ entity }}"
-            position: 100
-        - delay: "00:00:02"

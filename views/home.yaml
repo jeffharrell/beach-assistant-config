@@ -61,46 +61,51 @@ cards:
                 transition: none;
               }
 
-      # Buttons
-      - type: horizontal-stack
-        cards:
-          # Movie
-          - type: entity-button
-            entity: script.movie_time
-            icon_height: 1.5em
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.movie_time
-          # Dinner
-          - type: conditional
-            conditions:
-              - entity: sun.sun
-                state: "above_horizon"
-            card:
-              type: entity-button
-              entity: script.dinner_lights
+      # Buttons - Alarm is off
+      - type: conditional
+        conditions:
+          - entity: alarm_control_panel.alarm
+            state: "disarmed"
+        card:
+          type: horizontal-stack
+          cards:
+            # Movie
+            - type: entity-button
+              entity: script.movie_time
               icon_height: 1.5em
               tap_action:
                 action: call-service
                 service: script.turn_on
                 service_data:
-                  entity_id: script.dinner_lights
-          # Mood
-          - type: conditional
-            conditions:
-              - entity: sun.sun
-                state: "below_horizon"
-            card:
-              type: entity-button
-              entity: script.mood_lights
-              icon_height: 1.5em
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.mood_lights
+                  entity_id: script.movie_time
+            # Dinner
+            - type: conditional
+              conditions:
+                - entity: sun.sun
+                  state: "above_horizon"
+              card:
+                type: entity-button
+                entity: script.dinner_lights
+                icon_height: 1.5em
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.dinner_lights
+            # Mood
+            - type: conditional
+              conditions:
+                - entity: sun.sun
+                  state: "below_horizon"
+              card:
+                type: entity-button
+                entity: script.mood_lights
+                icon_height: 1.5em
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.mood_lights
 
       # Status
       - type: markdown
