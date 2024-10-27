@@ -42,10 +42,10 @@ cards:
       # House Pic
       - type: "custom:config-template-card"
         entities: 
-          - binary_sensor.night
+          - sun.sun
         card:
           type: picture-entity
-          entity: "${ states['binary_sensor.night'].state == 'on' ? 'camera.front_deck' : 'camera.beach' }"
+          entity: "${ states['sun.sun'].attributes.elevation  < -7 ? 'camera.front_deck' : 'camera.beach' }"
           show_name: false
           show_state: false
           tap_action: 

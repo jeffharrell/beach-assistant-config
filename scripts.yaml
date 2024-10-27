@@ -228,6 +228,30 @@ shade5stop:
       data:
         entity_id: cover.window_shade_5
 
+shade6up:
+  alias: "Shade 6 - Up"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: cover.open_cover
+      data:
+        entity_id: cover.window_shade_6
+
+shade6down:
+  alias: "Shade 6 - Down"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: cover.close_cover
+      data:
+        entity_id: cover.window_shade_6
+
+shade6stop:
+  alias: "Shade 6 - Stop"
+  icon: "mdi:grid-large"
+  sequence:
+    - service: cover.stop_cover
+      data:
+        entity_id: cover.window_shade_6
+
 shades_up:
   alias: "Shades Up"
   icon: "mdi:grid-large"
@@ -249,6 +273,9 @@ shades_up:
     - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade1up
+    - delay: "00:00:02"
+    - service: script.turn_on
+      entity_id: script.shade6up
 
 shades_down:
   alias: "Shades Down"
@@ -284,7 +311,7 @@ shades_down_all:
     - delay: "00:00:02"
     - service: script.turn_on
       entity_id: script.shade1down
-      
+
 shades_halfway:
   alias: "Shades Halfway"
   icon: "mdi:grid-large"
