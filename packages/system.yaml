@@ -1,27 +1,5 @@
-binary_sensor:
-  - platform: tod
-    name: Morning
-    after: "05:00"
-    before: "09:00"
-    
-  - platform: tod
-    name: Day
-    after: "09:00"
-    before: sunset
-    before_offset: "01:00"
-    
-  - platform: tod
-    name: Night
-    after: sunset
-    after_offset: "01:00"
-    before: "05:00"
-
-input_boolean:
-  night_mode:
-    initial: false
-
 shell_command:
-  purge_backups: "find ./backups -maxdepth 1 -name '*.tar' -type f -mtime +365 -delete"
+  purge_backups: !secret purge_backups_cmd
 
 automation:
   - alias: "System - Backup"
@@ -45,16 +23,6 @@ automation:
       service: frontend.set_theme
       data_template:
         name: home
-
-  - alias: "System - Reset Settings"
-    initial_state: True
-    trigger:
-      platform: time
-      at: "06:00:00"
-    action:
-      service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.night_mode
 
   - alias: "System - Reset Speakers"
     initial_state: True

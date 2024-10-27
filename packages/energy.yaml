@@ -12,5 +12,5 @@ automation:
     action:
       service: notify.mobile_app_jeffs_iphone
       data_template:
-        title: "Home"
-        message: "UPS changed to {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%"
+        title: "Beach"
+        message: "UPS {{ trigger.to_state.state }}! Battery at {{ states('sensor.ups_battery_charge') }}%"
