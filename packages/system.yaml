@@ -1,19 +1,4 @@
-shell_command:
-  purge_backups: !secret purge_backups_cmd
-
 automation:
-  - alias: "System - Backup"
-    initial_state: True
-    trigger:
-      platform: time
-      at: "01:00:00"
-    condition:
-      condition: template
-      value_template: "{{ now().day == 1 }}"
-    action:
-      - service: backup.create
-      - service: shell_command.purge_backups
-
   - alias: "System - Theme"
     initial_state: True
     trigger:
@@ -23,6 +8,18 @@ automation:
       service: frontend.set_theme
       data_template:
         name: home
+
+  - alias: "System - Reset settings"
+    initial_state: True
+    trigger:
+      platform: time
+      at: "04:00:00"
+    action:
+      - service: homeassistant.turn_on
+        entity_id:
+          - automation.lights_automatic_outside_lights
+          - automation.climate_windows_open
+          - automation.cameras_motion
 
   - alias: "System - Reset Speakers"
     initial_state: True
@@ -40,7 +37,7 @@ automation:
       - service: media_player.volume_set
         target:
           entity_id: 
-            - media_player.master_bedroom_mini
+            - media_player.master_bedroom_wifi
             - media_player.bunk_bedroom_wifi
         data:
           volume_level: 0.5

@@ -138,6 +138,11 @@ binary_sensor:
 
 
 group:
+  shade_automation:
+    name: "Make It Less Bright"
+    entities:
+      - switch.vertical_toggle_control_downstairs_front_windows
+      - switch.vertical_toggle_control_downstairs_side_windows
   shades:
     name: "Window Shades"
     entities:

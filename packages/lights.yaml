@@ -8,18 +8,26 @@ automation:
       - service: scene.turn_on
         entity_id: scene.lights_off
 
-  - alias: "Lights - Automatic front lights"
+  - alias: "Lights - Automatic outside lights"
     initial_state: True
     trigger:
       - platform: state
         entity_id: binary_sensor.front_door
         to: "on"
+        variables:
+          entity: "front_yard"
+      - platform: state
+        entity_id: binary_sensor.back_door
+        to: "on"
+        variables:
+          entity: "back_yard"
     condition:
       condition: template
       value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
     action:
       - service: homeassistant.turn_on
-        entity_id: light.front_yard
+        data_template:
+          entity_id: light.{{ entity }}
 
   - alias: "Lights - Outside Lights Off"
     initial_state: True
@@ -28,11 +36,10 @@ automation:
         event: sunrise
     action:
       - service: homeassistant.turn_off
-        data_template:
-          entity_id: 
-            - light.front_yard
-            - light.back_yard
-            
+        entity_id: 
+          - light.front_yard
+          - light.back_yard
+
   - alias: "Lights - Double Tap" 
     initial_state: True
     trigger:

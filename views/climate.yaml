@@ -4,7 +4,7 @@ cards:
 
   - type: vertical-stack
     cards:
-
+      # thermostats
       - type: tile
         entity: climate.downstairs
         features:
@@ -13,7 +13,6 @@ cards:
               - heat
               - cool
               - "off"
-
       - type: tile
         entity: climate.upstairs
         features:
@@ -22,7 +21,7 @@ cards:
               - heat
               - cool
               - "off"
-
+      # temperatures
       - type: entities
         entities:
           - type: custom:multiple-entity-row

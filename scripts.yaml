@@ -5,6 +5,10 @@ movie_time:
     - condition: state
       entity_id: alarm_control_panel.alarm
       state: "disarmed"
+    # disable automatic shades if enabled
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
+    # put shades down
     - service: script.turn_on
       entity_id: script.shade5down
     - service: script.turn_on
@@ -44,7 +48,7 @@ climate_windows_open:
     - service: notify.phones
       data:
         title: "Beach"
-        message: "Turning HVAC off since windows were left open"
+        message: "Turning HVAC off since windows left open"
 
 dinner_lights:
   alias: "Dinner Lights"
@@ -259,6 +263,10 @@ shades_up:
     - condition: state
       entity_id: alarm_control_panel.alarm
       state: "disarmed"
+    # disable automatic shades if enabled
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
+    # raise each of the shades
     - service: script.turn_on
       entity_id: script.shade5up
     - delay: "00:00:02"
@@ -281,6 +289,10 @@ shades_down:
   alias: "Shades Down"
   icon: "mdi:grid-large"
   sequence:
+    # disable automatic shades if enabled
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
+    # lower the front shades
     - service: script.turn_on
       entity_id: script.shade5down
     - delay: "00:00:02"
@@ -297,6 +309,10 @@ shades_down_all:
   alias: "Shades Down All"
   icon: "mdi:grid-large"
   sequence:
+    # disable automatic shades if enabled
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
+    # lower all of the shades
     - service: script.turn_on
       entity_id: script.shade5down
     - delay: "00:00:02"
@@ -316,6 +332,10 @@ shades_halfway:
   alias: "Shades Halfway"
   icon: "mdi:grid-large"
   sequence:
+    # disable automatic shades if enabled
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
+    # set each of the shades to their midpoint
     - service: cover.set_cover_position
       entity_id: 
         - cover.window_shade_5

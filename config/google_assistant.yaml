@@ -4,6 +4,9 @@ report_state: true
 expose_by_default: false
 
 entity_config:
+  group.shade_automation:
+    expose: true
+    room: house
   light.living_room:
     expose: true
   light.dining_table:

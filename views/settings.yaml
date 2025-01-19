@@ -17,10 +17,12 @@ cards:
   - type: entities
     state_color: false
     entities:
-      - entity: automation.lights_automatic_front_lights
-        name: "Turn on front yard when door opens"
+      - entity: automation.lights_automatic_outside_lights
+        name: "Automatic outside lights"
       - entity: automation.climate_windows_open
-        name: "Turn HVAC off when windows left open"
+        name: "Turn HVAC off when windows open"
+      - entity: automation.cameras_motion
+        name: "Camera motion alerts"
 
 
   # Batteries

@@ -50,7 +50,6 @@ cards:
       entities:
         - entity: group.shades
           type: custom:multiple-entity-row
-          name: Shades
           icon: mdi:grid-large
           show_state: false
           entities:
@@ -72,6 +71,8 @@ cards:
                 service: script.turn_on
                 service_data:
                   entity_id: script.shades_down_all
+        - entity: group.shade_automation
+          icon: mdi:robot
 
     # Lights
     - type: entities
