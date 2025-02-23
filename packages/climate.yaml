@@ -10,13 +10,9 @@ sensor:
       house_temp:
         unique_id: "house_temp"
         friendly_name: "House Temperature"
-        value_template: "{{ (states('sensor.downstairs_trisensor_temp')|int + states('sensor.upstairs_trisensor_temp')|int) / 2 }}"
+        value_template: "{{ (states('sensor.downstairs_outlet_temperature')|int + states('sensor.master_bedroom_outlet_temperature')|int + states('sensor.bunk_bedroom_outlet_temperature')|int) / 3 }}"
         unit_of_measurement: "°F"
-      bathroom_floor_temp:
-        friendly_name: "Bathroom Floor Temperature"
-        value_template: "{{ state_attr('climate.bathroom_floor', 'current_temperature')|round(0) }}"
-        unit_of_measurement: "°F"
-
+        
       hvac_on:
         value_template: >
           {% set modes = ["heat_cool", "heat", "dry", "fan_only", "cool"] %}

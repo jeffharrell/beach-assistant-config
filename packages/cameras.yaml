@@ -24,11 +24,18 @@ automation:
         data:
           entity_id: "{{ trigger.json.camera }}"
           filename: "/config/www/cameras/{{ trigger.json.camera }}.jpg"
-      # send a notification
-      - service: notify.phones
+      # create a text response for that picture
+      - action: google_generative_ai_conversation.generate_content
         data:
-          title: "Beach"
-          message: "{{ trigger.json.name }} motion"
+          prompt: !secret prompt_describe_image
+          image_filename:
+            - "/config/www/cameras/{{ trigger.json.camera }}.jpg"
+        response_variable: generated_content
+      # send notification
+      - service: notify.phones
+        data_template:
+          title: "{{ trigger.json.name }}"
+          message: "{{ generated_content.text }}"
           data:
             image: "/local/cameras/{{ trigger.json.camera }}.jpg"
             url: "/lovelace/cameras"
