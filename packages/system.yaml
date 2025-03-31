@@ -19,7 +19,6 @@ automation:
         entity_id:
           - automation.lights_automatic_outside_lights
           - automation.climate_windows_open
-          - automation.cameras_motion
 
   - alias: "System - Reset Speakers"
     initial_state: True
@@ -61,7 +60,7 @@ automation:
           message: "Put the trash cans out"
 
   - alias: "System - Health Check"
-    initial_state: True
+    initial_state: False
     trigger:
       platform: time
       at: "04:00:00"

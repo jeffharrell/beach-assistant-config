@@ -1,3 +1,6 @@
+shell_command:
+  purge_camera_events: !secret purge_cameras_events_cmd
+
 counter:
   camera_motion:
     name: "Camera Motion Counter"
@@ -5,8 +8,10 @@ counter:
     initial: 0
     restore: True
 
-shell_command:
-  purge_camera_events: !secret purge_cameras_events_cmd
+input_boolean:
+  camera_motion_enabled:
+    name: "Camera Motion Alerts"
+    icon: "mdi:robot"
 
 automation:
   - alias: "Cameras - Motion"
@@ -17,7 +22,7 @@ automation:
         local_only: True
     condition:
       condition: template
-      value_template: "{{ not is_state('alarm_control_panel.alarm', 'disarmed') }}"
+      value_template: "{{ is_state('input_boolean.camera_motion_enabled', 'on') }}"
     action:
       # take a picture
       - service: camera.snapshot
@@ -28,7 +33,7 @@ automation:
       - action: google_generative_ai_conversation.generate_content
         data:
           prompt: !secret prompt_describe_image
-          image_filename:
+          filenames:
             - "/config/www/cameras/{{ trigger.json.camera }}.jpg"
         response_variable: generated_content
       # send notification

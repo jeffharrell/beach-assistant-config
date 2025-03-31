@@ -4,6 +4,32 @@ cards:
 
   - type: vertical-stack
     cards:
+      - type: custom:config-template-card
+        entities:
+          - sensor.house_temp
+        card:
+          type: custom:mini-graph-card
+          name: "Inside Temperature"
+          line_width: 3
+          points_per_hour: 2
+          decimals: 0
+          hours_to_show: >-
+            ${
+              var date = new Date();
+              var curHour = date.getHours() + date.getMinutes()/60.0;
+              curHour
+            }
+          entities:
+            - entity: sensor.house_temp
+              aggregate_func: last
+              show_legend: true
+              name: "Temperature"
+              color: orange
+          show:
+            graph: line
+            points: hover
+            labels: true
+
       # thermostats
       - type: tile
         entity: climate.downstairs
@@ -21,6 +47,7 @@ cards:
               - heat
               - cool
               - "off"
+
       # temperatures
       - type: entities
         entities:
@@ -56,19 +83,14 @@ cards:
                 name: "Humidity"
           - type: custom:multiple-entity-row
             entity: climate.bathroom_floor
-            name: "Master Bathroom"
+            name: "Master Bathroom Floor"
             show_state: false
             entities:
-              - entity: climate.bathroom_floor
-                name: "Mode"
-              - entity: climate.bathroom_floor
-                attribute: current_temperature
-                unit: "°F"
+              - attribute: current_temperature
                 name: "Temperature"
+                unit: "°F"
               - entity: climate.bathroom_floor
-                attribute: current_humidity
-                name: "Humidity"
-                unit: "%"
+                name: "Operation"
         theme: nocard
         card_mod:
           style: |

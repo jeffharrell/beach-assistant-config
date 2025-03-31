@@ -17,13 +17,12 @@ cards:
   - type: entities
     state_color: false
     entities:
+      - entity: input_boolean.camera_motion_enabled
+        name: "Camera Motion alerts"
       - entity: automation.lights_automatic_outside_lights
         name: "Automatic outside lights"
       - entity: automation.climate_windows_open
         name: "Turn HVAC off when windows open"
-      - entity: automation.cameras_motion
-        name: "Camera motion alerts"
-
 
   # Batteries
   - type: markdown
@@ -40,11 +39,6 @@ cards:
     entities:
       - entity: sensor.ups_battery_charge
         name: "UPS"
-      - type: divider
-      - entity: sensor.downstairs_trisensor_battery_level
-        title: "Downstairs Trisensor"
-      - entity: sensor.upstairs_trisensor_battery_level
-        title: "Upstairs Trisensor"
       - type: divider
       - entity: sensor.window_shade_1_battery_level
         title: "Window Shade 1"

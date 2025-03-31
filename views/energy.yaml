@@ -5,15 +5,30 @@ cards:
 
   - type: vertical-stack
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: statistics-graph
-            title: "Usage"
-            days_to_show: 1
-            hide_legend: true
-            entities:
-              - entity: sensor.eagle_200_meter_power_demand
-                name: "Load"
+      - type: custom:config-template-card
+        entities:
+          - sensor.eagle_200_meter_power_demand
+        card:
+          type: custom:mini-graph-card
+          line_width: 3
+          points_per_hour: 4
+          decimals: 1
+          hours_to_show: >-
+            ${
+              var date = new Date();
+              var curHour = date.getHours() + date.getMinutes()/60.0;
+              curHour
+            }
+          entities:
+            - entity: sensor.eagle_200_meter_power_demand
+              aggregate_func: last
+              show_legend: false
+              name: "Grid"
+              color: orange
+          show:
+            graph: line
+            points: hover
+            labels: true
 
       - type: horizontal-stack
         cards:
