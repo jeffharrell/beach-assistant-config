@@ -27,8 +27,7 @@ rest:
             {% endif %}
           {% endfor %}
 
-          {% if tide.current.type == "H" %}High{% else %}Low{% endif %} of {{ tide.current.v | round(1) }}' at {{ as_timestamp(tide.current.t) | timestamp_custom("%-I %p") }}
-          and {% if tide.next.type == "H" %}high{% else %}low{% endif %} of {{ tide.next.v | round(1) }}' at {{ as_timestamp(tide.next.t) | timestamp_custom("%-I %p") }}
+          {% if tide.next.type == "H" %}High{% else %}Low{% endif %} tide of {{ tide.next.v | round(1) }}' at {{ as_timestamp(tide.next.t) | timestamp_custom("%-I %p") }}
 sensor:
   - platform: template
     sensors:

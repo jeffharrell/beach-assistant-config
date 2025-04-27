@@ -83,7 +83,6 @@ cards:
 
         - type: section
 
-        # Upstairs
         - type: custom:multiple-entity-row
           entity: light.master_bedroom
           toggle: true

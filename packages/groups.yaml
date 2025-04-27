@@ -109,6 +109,7 @@ binary_sensor:
   # Groups
   - platform: group
     name: "Doors and Windows"
+    device_class: door
     unique_id: doors_and_windows
     entities:
       - binary_sensor.bathroom_window
@@ -136,13 +137,68 @@ binary_sensor:
       - binary_sensor.bay_window_left
       - binary_sensor.bay_window_right
 
-
 group:
+  # making these normal groups so that more-info shows the entities
+  lights_house:
+    name: "Lights"
+    entities: 
+      - light.living_room
+      - light.dining_table
+      - light.recessed
+      - light.picture
+      - light.guest_bed
+      - light.kitchen_sink
+      - light.kitchen_cabinets
+      - light.kitchen_lights
+      - light.desk
+      - light.hallway
+      - light.bunk_bed
+      - light.master_bedroom
+      - light.master_reading_1
+      - light.master_reading_2
+      - light.master_wall
+      - light.front_yard
+      - light.back_yard
+      - light.upstairs_deck
+      - light.back_landscape
+
+  media_player_speakers:
+    name: "Speakers"
+    entities:
+      - media_player.back_speakers
+      - media_player.front_speakers
+      - media_player.kitchen_speakers
+      - media_player.living_room_speakers
+      - media_player.master_bedroom_speakers
+      - media_player.upstairs_deck_speakers
+      - media_player.master_bedroom_wifi
+      - media_player.bunk_bedroom_wifi
+
+  media_player_tvs:
+    name: "TVs"
+    entities:
+      - media_player.downstairs_tv
+      - media_player.master_bedroom_tv
+      - media_player.bunk_bedroom_tv
+
+  media_player_speakers_and_tvs:
+    name: "Speakers and TVs"
+    entities:
+      - group.media_player_speakers
+      - group.media_player_tvs
+
+  climate:
+    name: "Climate"
+    entities:
+      - climate.downstairs
+      - climate.upstairs
+
   shade_automation:
     name: "Make It Less Bright"
     entities:
       - switch.vertical_toggle_control_downstairs_front_windows
       - switch.vertical_toggle_control_downstairs_side_windows
+
   shades:
     name: "Window Shades"
     entities:

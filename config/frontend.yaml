@@ -7,6 +7,78 @@ themes:
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
+  subview:
+    #primary-background-color: "#1f3943" 
+    #card-background-color: "#364d56"
+
+    primary-background-color: "#134657" 
+    card-background-color: "#17576b"
+
+
+  apptheme:
+    # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
+    
+    #primary-background-color: "#04222d" 
+    #card-background-color: "#1f3943" 
+
+    #primary-background-color: "#17576b"
+    primary-background-color: "radial-gradient(circle,rgba(47, 119, 143, 1) 0%, rgba(23, 87, 107, 1) 90%, rgba(23, 87, 107, 1) 100%)" 
+    card-background-color: "#134657" 
+    secondary-background-color: "#CCC"
+
+    primary-text-color: "#FFF"
+    secondary-text-color: "#FFF"
+
+    accent-color: "orange" # YES!
+
+    # Header
+    app-header-text-color: "var(--primary-text-color)"
+    app-header-background-color: "#17576b"
+    app-header-selection-bar-color: "transparent"
+    mdc-top-app-bar-fixed-box-shadow: "none"
+
+    # Cards
+    ha-card-border-width: "1px"
+    ha-card-border-radius: "8px"
+    divider-color: "rgba(0, 0, 0, 0.15)"
+
+    code-editor-background-color: "#000"
+
+    # Icons
+    state-icon-color: "#FFF"
+    state-active-color: "var(--accent-color)"
+    state-inactive-color: "var(--state-icon-color)"
+
+    state-light-active-color: "var(--state-active-color)"
+    state-binary_sensor-active-color: "var(--state-active-color)"
+    state-cover-active-color: "var(--state-active-color)"
+    state-media_player-active-color: "var(--state-active-color)"
+
+    # CSS Overrides
+    card-mod-theme: apptheme
+    card-mod-root: |
+      #view {
+        margin-top: -20px !important;
+      }
+
+      .header {
+        position: relative !important;
+        top: auto !important;
+        height: auto !important;
+        width: auto !important;
+      }
+
+      .header .main-title {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+
+      @media only screen and (hover: none) and (pointer: coarse) {
+        .header .main-title {
+          margin-left: 10px;
+        }
+      }
+
   home:
     # Colors
     # https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts

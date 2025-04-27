@@ -46,33 +46,60 @@ cards:
               }
 
     # Windows
-    - type: entities
-      entities:
-        - entity: group.shades
-          type: custom:multiple-entity-row
-          icon: mdi:grid-large
-          show_state: false
-          entities:
-            - icon: mdi:arrow-up
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.shades_up
-            - icon: mdi:stop
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.shades_halfway
-            - icon: mdi:arrow-down
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.shades_down_all
-        - entity: group.shade_automation
+    - type: horizontal-stack
+      cards:
+        - type: button
+          entity: group.shades
+          state_color: false
+          icon: mdi:window-closed-variant
+          icon_height: 1.5em
+          name: "Shades"
+          tap_action:
+            action: more-info
+
+        - type: button
+          entity: script.shades_halfway
+          icon_height: 1.5em
+          name: "Halfway"
+          tap_action:
+            action: call-service
+            service: script.turn_on
+            service_data:
+              entity_id: script.shades_halfway
+
+        - type: button
+          entity: group.shade_automation
           icon: mdi:robot
+          icon_height: 1.5em
+          name: "Auto"
+          
+#     - type: entities
+#       entities:
+#         - entity: group.shades
+#           type: custom:multiple-entity-row
+#           icon: mdi:grid-large
+#           show_state: false
+#           entities:
+#             - icon: mdi:arrow-up
+#               tap_action:
+#                 action: call-service
+#                 service: script.turn_on
+#                 service_data:
+#                   entity_id: script.shades_up
+#             - icon: mdi:stop
+#               tap_action:
+#                 action: call-service
+#                 service: script.turn_on
+#                 service_data:
+#                   entity_id: script.shades_halfway
+#             - icon: mdi:arrow-down
+#               tap_action:
+#                 action: call-service
+#                 service: script.turn_on
+#                 service_data:
+#                   entity_id: script.shades_down_all
+#         - entity: group.shade_automation
+#           icon: mdi:robot
 
     # Lights
     - type: entities
@@ -104,8 +131,6 @@ cards:
               icon: mdi:speaker
               name: false
               state_color: true
-        - type: section
-        
         - entity: light.back_landscape
 
 
