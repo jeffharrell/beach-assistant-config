@@ -7,6 +7,47 @@ cards:
 
   - type: vertical-stack
     cards:
+      # power
+      - type: vertical-stack
+        cards:
+          - type: custom:config-template-card
+            entities:
+              - sensor.eagle_200_meter_power_demand
+            card:
+              type: custom:mini-graph-card
+              line_width: 3
+              points_per_hour: 4
+              decimals: 1
+              hours_to_show: >-
+                ${
+                  var date = new Date();
+                  var curHour = date.getHours() + date.getMinutes()/60.0;
+                  curHour
+                }
+              entities:
+                - entity: sensor.eagle_200_meter_power_demand
+                  aggregate_func: last
+                  show_legend: false
+                  name: "Grid"
+                  color: orange
+              show:
+                graph: line
+                points: hover
+                labels: true
+
+          - type: horizontal-stack
+            cards:
+              - type: statistic
+                name: "Home Total"
+                entity: sensor.eagle_200_total_meter_energy_delivered
+                period:
+                  calendar:
+                    period: day
+                stat_type: change
+
+              - type: sensor
+                name: "Now"
+                entity: sensor.eagle_200_meter_power_demand
 
       # batteries
       - type: vertical-stack
@@ -21,13 +62,21 @@ cards:
 
               - type: divider
 
-              - entity: sensor.mailbox_battery_level
-                name: "Mailbox Sensor"
-              - entity: sensor.garage_side_door_battery_level
-                name: "Garage Side Door"
-              - entity: sensor.garage_temp_battery
-              - entity: sensor.outside_battery
-                name: "Weather Station Battery"
+              - entity: sensor.window_shade_1_battery_level
+                title: "Window Shade 1"
+              - entity: sensor.window_shade_2_battery_level
+                title: "Window Shade 2"
+              - entity: sensor.window_shade_3_battery_level
+                title: "Window Shade 3"
+              - entity: sensor.window_shade_4_battery_level
+                title: "Window Shade 4"
+              - entity: sensor.window_shade_5_battery_level
+                title: "Window Shade 5"
+              - entity: sensor.window_shade_6_battery_level
+                title: "Window Shade 6"
+              - entity: sensor.window_shade_7_battery_level
+                title: "Window Shade 7"
+
 
       # settings
       - type: entities

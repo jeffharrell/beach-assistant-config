@@ -14,10 +14,11 @@ cards:
         square: false
         cards:
           - type: custom:bubble-card
-            entity: switch.fountain
+            entity: group.shade_automation
+            name: "Auto"
             card_type: button
             card_layout: large
-            use_accent_color: false
+            use_accent_color: true
             tap_action:
               action: toggle
             icon_tap_action:
@@ -30,40 +31,29 @@ cards:
                 }
 
           - type: custom:bubble-card
-            entity: switch.garage_fan
+            entity: script.shades_halfway
             card_type: button
             card_layout: large
-            use_accent_color: true
+            use_accent_color: false
             tap_action:
               action: toggle
             icon_tap_action:
               action: toggle
             <<: *button_styles
-
+            
           - type: custom:bubble-card
-            entity: switch.house_fan
-            card_type: button
-            card_layout: large
-            use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: *button_styles
-
-          - type: custom:bubble-card
-            entity: group.garages
-            name: "Garages"
+            entity: group.shades
+            name: "Window Shades"
             card_type: button
             card_layout: large
             use_accent_color: true
             tap_action:
               action: navigate
-              navigation_path: "#popup-garages"
+              navigation_path: "#popup-shades"
             button_action:
               tap_action:
                 action: navigate
-                navigation_path: "#popup-garages"
+                navigation_path: "#popup-shades"
             <<: *button_styles
 
       # what's on
@@ -79,22 +69,16 @@ cards:
                 transition: none;
               }
         entities:
-          - cover.garage_door_1
-          - cover.garage_door_2
-          - cover.garage_door_3
-          - binary_sensor.front_door
-          - binary_sensor.family_room_doors
-          - binary_sensor.master_bedroom_doors
-          - binary_sensor.laundry_room_door
-          - binary_sensor.dining_room_window
-          - binary_sensor.living_room_window_left
-          - binary_sensor.living_room_window_right
+          - binary_sensor.bathroom_window
+          - binary_sensor.driveway_window
           - binary_sensor.kitchen_window
-          - binary_sensor.boys_window
-          - binary_sensor.playroom_window
-          - binary_sensor.guest_window
-          - binary_sensor.master_bedroom_window
-          - binary_sensor.garage_side_door
+          - binary_sensor.master_slider
+          - binary_sensor.front_door
+          - binary_sensor.kitchen_door
+          - binary_sensor.bay_window_left
+          - binary_sensor.bay_window_right
+          - binary_sensor.downstairs_front_window_left
+          - binary_sensor.downstairs_front_window_right
         conditions:
           - condition: or
             conditions:
@@ -114,12 +98,6 @@ cards:
           - entity: input_boolean.camera_motion_enabled
             icon: mdi:creation
             name: "Motion Alerts"
-          - entity: automation.cameras_doorbell
-            icon: mdi:creation
-            name: "Doorbell Alerts"
-          - entity: automation.cameras_mailbox_open
-            icon: mdi:creation
-            name: "Mailbox Alerts"
         card_mod:
           style: |
             ha-card {
@@ -138,47 +116,45 @@ cards:
           
           - type: custom:bubble-card
             card_type: pop-up
-            hash: "#popup-garages"
+            hash: "#popup-shades"
 
           - type: grid
             columns: 1
             square: false
             cards:
-              - type: entity-button
-                entity: cover.garage_door_1
-                show_name: true
-                show_state: true
-                icon_height: 80px
-                tap_action:
-                  action: call-service
-                  service: switch.turn_on
-                  data:
-                    entity_id: switch.garage_door_1
-                  confirmation:
-                    text: "Toggle garage door"
-
-              - type: entity-button
-                entity: cover.garage_door_2 
-                show_name: true
-                show_state: true
-                icon_height: 80px
-                tap_action:
-                  action: call-service
-                  service: switch.turn_on
-                  data:
-                    entity_id: switch.garage_door_2
-                  confirmation:
-                    text: "Toggle garage door"
-
-              - type: entity-button
-                entity: cover.garage_door_3
-                show_name: true
-                show_state: true
-                icon_height: 80px
-                tap_action:
-                  action: call-service
-                  service: switch.turn_on
-                  data:
-                    entity_id: switch.garage_door_3
-                  confirmation:
-                    text: "Toggle garage door"
+              - type: custom:bubble-card
+                entity: cover.window_shade_1
+                name: "Window 1"
+                card_type: button
+                button_type: slider
+                <<: *button_styles
+              - type: custom:bubble-card
+                entity: cover.window_shade_2
+                name: "Window 2"
+                card_type: button
+                button_type: slider
+                <<: *button_styles
+              - type: custom:bubble-card
+                entity: cover.window_shade_3
+                name: "Window 3"
+                card_type: button
+                button_type: slider
+                <<: *button_styles
+              - type: custom:bubble-card
+                entity: cover.window_shade_4
+                name: "Window 4"
+                card_type: button
+                button_type: slider
+                <<: *button_styles
+              - type: custom:bubble-card
+                entity: cover.window_shade_5
+                name: "Window 5"
+                card_type: button
+                button_type: slider
+                <<: *button_styles
+              - type: custom:bubble-card
+                entity: cover.window_shade_6
+                name: "Window 6"
+                card_type: button
+                button_type: slider
+                <<: *button_styles

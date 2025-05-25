@@ -14,8 +14,7 @@ cards:
         square: false
         cards:
           - type: custom:bubble-card
-            entity: input_boolean.play_kitchen_music
-            name: "Kitchen Music"
+            entity: script.movie_time
             card_type: button
             card_layout: large
             use_accent_color: true
@@ -29,19 +28,7 @@ cards:
                   font-size: 15px;
                   font-weight: 400;
                 }
-
-          - type: custom:bubble-card
-            entity: input_boolean.play_outside_music
-            name: "Outside Music"
-            card_type: button
-            card_layout: large
-            use_accent_color: true
-            tap_action:
-              action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: *button_styles
-
+                
           - type: custom:bubble-card
             entity: group.media_player_speakers_and_tvs
             name: "Devices"
@@ -56,7 +43,7 @@ cards:
                 action: navigate
                 navigation_path: "#popup-devices"
             <<: *button_styles
-              
+
       # currently playing
       - type: grid
         title: " "
@@ -65,19 +52,11 @@ cards:
         cards:
           # tvs
           - type: media-control
-            entity: media_player.family_room_apple_tv
-            name: "Family Room TV"
+            entity: media_player.downstairs_apple_tv
+            name: "Downstairs TV"
             visibility:
               - condition: state
-                entity: media_player.family_room_apple_tv
-                state: playing
-
-          - type: media-control
-            entity: media_player.living_room_apple_tv
-            name: "Living Room TV"
-            visibility:
-              - condition: state
-                entity: media_player.living_room_apple_tv
+                entity: media_player.downstairs_apple_tv
                 state: playing
 
           - type: media-control
@@ -88,13 +67,69 @@ cards:
                 entity: media_player.master_bedroom_apple_tv
                 state: playing
 
-          # speakers
           - type: media-control
-            entity: media_player.family_room_speakers
-            name: "Family Room Speakers"
+            entity: media_player.bunk_bedroom_apple_tv
+            name: "Bunk Bedroom TV"
             visibility:
               - condition: state
-                entity: media_player.family_room_speakers
+                entity: media_player.bunk_bedroom_apple_tv
+                state: playing
+
+          # speakers      
+          - type: media-control
+            entity: media_player.front_speakers
+            name: "Front Yard Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.front_speakers
+                state_not: "off"
+
+          - type: media-control
+            entity: media_player.back_speakers
+            name: "Back Yard Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.back_speakers
+                state_not: "off"
+
+          - type: media-control
+            entity: media_player.upstairs_deck_speakers
+            name: "Upstairs Deck Speaker"
+            visibility:
+              - condition: state
+                entity: media_player.upstairs_deck_speakers
+                state_not: "off"
+
+          - type: media-control
+            entity: media_player.master_bedroom_speakers
+            name: "Master Bedroom Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.master_bedroom_speakers
+                state_not: "off"
+
+          - type: media-control
+            entity: media_player.master_bedroom_wifi
+            name: "Master Bedroom Hub"
+            visibility:
+              - condition: state
+                entity: media_player.master_bedroom_wifi
+                state_not: "off"
+
+          - type: media-control
+            entity: media_player.bunk_bedroom_wifi
+            name: "Bunk Bedroom Hub"
+            visibility:
+              - condition: state
+                entity: media_player.bunk_bedroom_wifi
+                state_not: "off"
+
+          - type: media-control
+            entity: media_player.kitchen_speakers
+            name: "Kitchen Speakers"
+            visibility:
+              - condition: state
+                entity: media_player.kitchen_speakers
                 state_not: "off"
 
           - type: media-control
@@ -103,46 +138,6 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.living_room_speakers
-                state_not: "off"
-
-          - type: media-control
-            entity: media_player.kitchen_hub
-            name: "Kitchen Hub Speaker"
-            visibility:
-              - condition: state
-                entity: media_player.kitchen_hub
-                state_not: "off"
-
-          - type: media-control
-            entity: media_player.master_bedroom_speaker
-            name: "Master Bedroom Speakers"
-            visibility:
-              - condition: state
-                entity: media_player.master_bedroom_speaker
-                state_not: "off"
-
-          - type: media-control
-            entity: media_player.playroom_speakers
-            name: "Playroom Speakers"
-            visibility:
-              - condition: state
-                entity: media_player.playroom_speakers
-                state_not: "off"
-
-          - type: media-control
-            entity: media_player.garage_speakers
-            name: "Garage Speakers"
-            visibility:
-              - condition: state
-                entity: media_player.garage_speakers
-                state_not: "off"
-
-          - type: media-control
-            entity: media_player.outside_speakers
-            name: "Outside Speakers"
-            visibility:
-              - condition: state
-                entity: media_player.outside_speakers
                 state_not: "off"
 
       # pop ups
@@ -166,7 +161,7 @@ cards:
             columns: 1
             square: false
             cards:
-              - entity: media_player.family_room_apple_tv
+              - entity: media_player.downstairs_apple_tv
                 name: "Family Room"
                 <<: &tv_options
                   type: custom:bubble-card
@@ -182,12 +177,12 @@ cards:
                     previous_button: true
                 <<: *button_styles
 
-              - entity: media_player.living_room_apple_tv
+              - entity: media_player.master_bedroom_apple_tv
                 name: "Living Room"
                 <<: *tv_options
                 <<: *button_styles
 
-              - entity: media_player.master_bedroom_apple_tv
+              - entity: media_player.bunk_bedroom_apple_tv
                 name: "Master Bedroom"
                 <<: *tv_options
                 <<: *button_styles
@@ -199,8 +194,8 @@ cards:
             columns: 1
             square: false
             cards:
-              - entity: media_player.family_room_speakers
-                name: "Family Room"
+              - entity: media_player.front_speakers
+                name: "Front Yard"
                 <<: &speaker_options
                   type: custom:bubble-card
                   card_type: media-player
@@ -209,32 +204,37 @@ cards:
                   attribute: media_title
                 <<: *button_styles
 
-              - entity: media_player.living_room_speakers
-                name: "Living Room"
+              - entity: media_player.back_speakers
+                name: "Back Yard"
                 <<: *speaker_options
                 <<: *button_styles
 
-              - entity: media_player.kitchen_hub
-                name: "Kitchen Hub"
+              - entity: media_player.upstairs_deck_speakers
+                name: "Upstairs Deck"
                 <<: *speaker_options
                 <<: *button_styles
 
-              - entity: media_player.master_bedroom_speaker
+              - entity: media_player.master_bedroom_speakers
                 name: "Master Bedroom"
                 <<: *speaker_options
                 <<: *button_styles
 
-              - entity: media_player.playroom_speakers
-                name: "Playroom"
+              - entity: media_player.master_bedroom_wifi
+                name: "Master Bedroom Hub"
                 <<: *speaker_options
                 <<: *button_styles
 
-              - entity: media_player.garage_speakers
-                name: "Garage"
+              - entity: media_player.bunk_bedroom_wifi
+                name: "Bunk Bedroom"
                 <<: *speaker_options
                 <<: *button_styles
 
-              - entity: media_player.outside_speakers
-                name: "Outside"
+              - entity: media_player.kitchen_speakers
+                name: "Kitchen"
+                <<: *speaker_options
+                <<: *button_styles
+
+              - entity: media_player.living_room_speakers
+                name: "Living Room"
                 <<: *speaker_options
                 <<: *button_styles

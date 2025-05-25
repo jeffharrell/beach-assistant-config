@@ -1,4 +1,4 @@
-title: "Home"
+title: "Beach House"
 path: "home"
 theme: mainview
 cards:
@@ -10,23 +10,14 @@ cards:
       - type: markdown
         content: >-
           {% if states('sensor.outside_temp') -%}
-            <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F&nbsp;
-            {%- if states('sensor.outside_rain_daily')|float(0) -%}
-              with {{ states('sensor.outside_rain_daily') }}" of rain
-            {%- elif has_value('sensor.outside_forecast') -%}
-              {{ states('sensor.outside_forecast') }}
-            {%- endif -%}
+            <ha-icon icon="{{ state_attr('sensor.outside_forecast', 'icon') }}"></ha-icon> Currently {{ states('sensor.outside_temp')|round(0, default=0) }}°F {{ states('sensor.outside_forecast') }}
           {%- endif -%}
 
-          {% if has_value('sensor.air_pollution_level') and states('sensor.air_pollution_level') != 'good' %}
-            <ha-icon icon="mdi:weather-fog"></ha-icon> Air quality is {{ states('sensor.air_pollution_level') }}
-          {%- endif %}
+          {% if states('sensor.tides') %}
+            <ha-icon icon="mdi:waves"></ha-icon> {{ states('sensor.tides') }}
+          {%- endif -%}
 
-          {% set energy = (states('sensor.energy_import')|float - states('sensor.energy_export')|float)|round %}
-          <ha-icon icon="mdi:home-lightning-bolt-outline"></ha-icon> Powerwall is at {{ states('sensor.powerwall_charge_actual')|round }}% 
-          {%- if energy != 0 %} with {{ energy }} kWh grid use{%- endif -%}
-
-          {% set list = expand('binary_sensor.doors_and_windows_and_garages') | selectattr('state', 'eq', 'on') | list  %}
+          {% set list = expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | list  %}
           {% set len = list | count %}
           {% if len == 1 %} 
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
@@ -35,10 +26,6 @@ cards:
           {% elif len > 2 %}
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|capitalize }}, and more
           {%- endif %}
-
-          {% if is_state('input_boolean.guest_mode_enabled', 'on') -%}
-            <ha-icon icon="mdi:bed"></ha-icon> Guest mode enabled
-          {%- endif -%}
         text_only: true
         card_mod:
           style: |
@@ -55,7 +42,7 @@ cards:
           - counter.camera_motion
         card:
           type: picture-entity
-          entity: camera.front_patio
+          entity: "${ states['sun.sun'].attributes.elevation  < -7 ? 'camera.front_deck' : 'camera.beach' }"
           name: ${ states["counter.camera_motion"].state + " events"}
           show_name: ${ parseInt(states["counter.camera_motion"].state) > 0 }
           show_state: false
@@ -70,7 +57,7 @@ cards:
                 min-height: 225px;
                 max-height: 240px;
                 background: rgba(0, 0, 0, 0.1);
-                border: 2px solid rgba(0, 0, 0, 0.1);
+                border: 2px solid rgba(255, 255, 255, 0.1);
                 border-left: 0;
                 border-right: 0;
                 transition: none;
@@ -115,7 +102,7 @@ cards:
             show_state: false
 
           - type: button
-            entity: binary_sensor.doors_and_windows_and_garages
+            entity: binary_sensor.doors_and_windows
             name: "Outside"
             icon: mdi:door
             icon_height: 25px
@@ -128,7 +115,7 @@ cards:
             show_state: false
 
           - type: button
-            entity: climate.home
+            entity: group.climate
             name: "Climate"
             icon: mdi:home-thermometer-outline
             icon_height: 25px      
@@ -170,6 +157,23 @@ cards:
                   font-weight: 400;
                 }
 
+          # movie time
+          - type: custom:bubble-card
+            entity: script.movie_time
+            card_type: button
+            card_layout: large
+            use_accent_color: true
+            visibility:
+              - condition: state
+                entity: schedule.quick_actions_movie_time
+                state: "on"
+              - condition: and
+                conditions:
+                  - condition: state
+                    entity: alarm_control_panel.alarm
+                    state: "disarmed"
+            <<: *button_styles
+
           # dinner lights
           - type: custom:bubble-card
             entity: script.dinner_lights
@@ -202,40 +206,6 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-            <<: *button_styles
-            
-          # let dog out
-          - type: custom:bubble-card
-            entity: script.let_dog_out
-            card_type: button
-            card_layout: large
-            use_accent_color: true
-            visibility:
-              - condition: state
-                entity: alarm_control_panel.alarm
-                state: "armed_home"
-              - condition: and
-                conditions:
-                  - condition: state
-                    entity: script.let_dog_out
-                    state_not: "off"
-            <<: *button_styles
-
-          # wake up
-          - type: custom:bubble-card
-            entity: script.wake_up
-            card_type: button
-            card_layout: large
-            use_accent_color: true
-            visibility:
-              - condition: state
-                entity: schedule.quick_actions_wake_up
-                state: "on"
-              - condition: and
-                conditions:
-                  - condition: state
-                    entity: alarm_control_panel.alarm
-                    state: "armed_home"
             <<: *button_styles
 
           # alarm

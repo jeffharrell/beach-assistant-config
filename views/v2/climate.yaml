@@ -14,7 +14,7 @@ cards:
         square: false
         cards:
           - type: custom:bubble-card
-            entity: climate.home
+            entity: climate.upstairs
             card_type: button
             card_layout: large
             button_type: state
@@ -24,14 +24,24 @@ cards:
             state_color: true
             show_attribute: true
             attribute: current_temperature
-            sub_button:
-              - name: "HVAC modes"
-                select_attribute: hvac_modes
             styles: |
-              .bubble-sub-button-1 ha-select mwc-list-item:nth-child(4) {
-                display: none;
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
               }
-              
+
+          - type: custom:bubble-card
+            entity: climate.downstairs
+            card_type: button
+            card_layout: large
+            button_type: state
+            show_name: true
+            show_icon: true
+            show_state: true
+            state_color: true
+            show_attribute: true
+            attribute: current_temperature
+            styles: |
               .bubble-name {
                 font-size: 15px;
                 font-weight: 400;
@@ -41,63 +51,33 @@ cards:
       - type: entities
         entities:
           - type: custom:multiple-entity-row
-            entity: sensor.family_room_temperature
-            name: "Family Room"
+            entity: sensor.downstairs_outlet_temperature
+            name: "Downstairs"
             show_state: false
             entities:
-              - entity: sensor.family_room_temperature
+              - entity: sensor.downstairs_outlet_humidity
+                name: Humidity
+              - entity: sensor.downstairs_outlet_temperature
                 name: Temperature
                 format: precision0
           - type: custom:multiple-entity-row
-            entity: sensor.living_room_temperature
-            name: "Living Room"
+            entity: sensor.bunk_bedroom_outlet_temperature
+            name: "Bunk Bedroom"
             show_state: false
             entities:
-              - entity: sensor.living_room_temperature
+              - entity: sensor.bunk_bedroom_outlet_humidity
+                name: Humidity
+              - entity: sensor.bunk_bedroom_outlet_temperature
                 name: Temperature
                 format: precision0
           - type: custom:multiple-entity-row
-            entity: sensor.master_bedroom_temperature
+            entity: sensor.master_bedroom_outlet_temperature
             name: "Master Bedroom"
             show_state: false
             entities:
-              - entity: sensor.master_bedroom_temperature
-                name: Temperature
-                format: precision0
-          - type: custom:multiple-entity-row
-            entity: sensor.boys_bedroom_temperature
-            name: "Boys Bedroom"
-            show_state: false
-            entities:
-              - entity: sensor.boys_bedroom_temperature
-                name: Temperature
-                format: precision0
-          - type: custom:multiple-entity-row
-            entity: sensor.playroom_temperature
-            name: "Playroom"
-            show_state: false
-            entities:
-              - entity: sensor.playroom_temperature
-                name: Temperature
-                format: precision0
-          - type: custom:multiple-entity-row
-            entity: sensor.office_outlet_temperature
-            name: "Office"
-            show_state: false
-            entities:
-              - entity: sensor.office_outlet_humidity
+              - entity: sensor.master_bedroom_outlet_humidity
                 name: Humidity
-              - entity: sensor.office_outlet_temperature
-                name: Temperature
-                format: precision0
-          - type: custom:multiple-entity-row
-            entity: sensor.garage_temp
-            name: "Garage"
-            show_state: false
-            entities:
-              - entity: sensor.garage_humidity
-                name: Humidity
-              - entity: sensor.garage_temp
+              - entity: sensor.master_bedroom_outlet_temperature
                 name: Temperature
                 format: precision0
         card_mod:

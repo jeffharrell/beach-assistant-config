@@ -1,76 +1,18 @@
 extra_module_url:
   - /hacsfiles/lovelace-card-mod/card-mod.js
-
+  - /hacsfiles/Bubble-Card/bubble-card.js 
+  
 themes:
   nocard:
     ha-card-border-width: "0"
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
-#   subview:
-#     primary-background-color: "#213f49" 
-#     card-background-color: "#284e5a"
-
-#   apptheme:
-#     # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
-
-#     primary-background-color: "#284e5a" #17576b
-#     card-background-color: "#213f49" #134657 
-#     secondary-background-color: "#CCC"
-
-#     primary-text-color: "#FFF"
-#     secondary-text-color: "#FFF"
-
-#     #primary-color: "#FFF"
-#     accent-color: "orange"
-
-#     # Header
-#     app-header-text-color: "var(--primary-text-color)"
-#     app-header-background-color: "var(--primary-background-color)"
-#     app-header-selection-bar-color: "transparent"
-#     mdc-top-app-bar-fixed-box-shadow: "none"
-
-#     # Cards
-#     ha-card-border-width: "1px"
-#     ha-card-border-radius: "8px"
-#     divider-color: "rgba(0, 0, 0, 0.15)"
-
-#     code-editor-background-color: "#000"
-
-#     # Icons
-#     state-icon-color: "#FFF"
-#     state-active-color: "var(--accent-color)"
-#     state-inactive-color: "var(--state-icon-color)"
-
-#     state-light-active-color: "var(--state-active-color)"
-#     state-binary_sensor-active-color: "var(--state-active-color)"
-#     state-cover-active-color: "var(--state-active-color)"
-#     state-media_player-active-color: "var(--state-active-color)"
-
-#     # CSS Overrides
-#     card-mod-theme: apptheme
-#     card-mod-root-yaml: |
-#       .: |
-#         #view {
-#           margin-top: 40px !important;
-#         }
-
-#         .header .main-title {
-#           font-size: 1.3em;
-#           font-weight: bold;
-#         }
-
-#         @media only screen and (hover: none) and (pointer: coarse) {
-#           .header .main-title {
-#             margin-left: 10px;
-#           }
-#         }
-
   subview:
     card-mod-theme: subview 
 
-    primary-background-color: "#313131" 
-    card-background-color: "#3D3D3D"
+    primary-background-color: "#213f49" 
+    card-background-color: "#284e5a"
 
     bubble-button-main-background-color: "var(--card-background-color)"
     bubble-button-icon-background-color: "var(--primary-background-color)"
@@ -78,15 +20,15 @@ themes:
 
   apptheme_new:
     card-mod-theme: apptheme_new
-     
-    primary-background-color: "#3D3D3D"
-    card-background-color: "#313131"
+
+    primary-background-color: "#284e5a"
+    card-background-color: "#213f49" 
     secondary-background-color: "var(--primary-background-color)"
 
-    primary-text-color: "#E0E0E0"
-    secondary-text-color: "#E0E0E0"
+    primary-text-color: "#fff"
+    secondary-text-color: "#fff"
 
-    accent-color: "#F3BB00"
+    accent-color: "orange"
 
     # Header
     app-header-text-color: "var(--primary-text-color)"
@@ -181,8 +123,6 @@ themes:
 
     # Pin header on bottom of screen for mobile
     card-mod-theme: apptheme
-    card-mod-root: |
-    header-height: 0;
     card-mod-root: |
       .header .toolbar .action-items {
         display: none !important;

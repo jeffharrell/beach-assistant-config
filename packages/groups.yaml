@@ -138,9 +138,9 @@ binary_sensor:
       - binary_sensor.bay_window_right
 
 group:
-  # making these normal groups so that more-info shows the entities
   lights_house:
     name: "Lights"
+    icon: "mdi:ceiling-light"
     entities: 
       - light.living_room
       - light.dining_table
@@ -177,12 +177,13 @@ group:
   media_player_tvs:
     name: "TVs"
     entities:
-      - media_player.downstairs_tv
-      - media_player.master_bedroom_tv
-      - media_player.bunk_bedroom_tv
+      - media_player.downstairs_apple_tv
+      - media_player.master_bedroom_apple_tv
+      - media_player.bunk_bedroom_apple_tv
 
   media_player_speakers_and_tvs:
     name: "Speakers and TVs"
+    icon: "mdi:television"
     entities:
       - group.media_player_speakers
       - group.media_player_tvs
@@ -195,12 +196,14 @@ group:
 
   shade_automation:
     name: "Make It Less Bright"
+    icon: mdi:robot
     entities:
       - switch.vertical_toggle_control_downstairs_front_windows
       - switch.vertical_toggle_control_downstairs_side_windows
 
   shades:
     name: "Window Shades"
+    icon: mdi:window-closed-variant
     entities:
       - cover.window_shade_1
       - cover.window_shade_2
