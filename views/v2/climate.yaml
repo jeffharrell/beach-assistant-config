@@ -1,0 +1,131 @@
+title: "Climate"
+path: "climate"
+back_path: "/lovelace/home"
+subview: true
+theme: subview
+cards:
+
+  - type: vertical-stack
+    cards:
+
+      # tiles
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+          - type: custom:bubble-card
+            entity: climate.home
+            card_type: button
+            card_layout: large
+            button_type: state
+            show_name: true
+            show_icon: true
+            show_state: true
+            state_color: true
+            show_attribute: true
+            attribute: current_temperature
+            sub_button:
+              - name: "HVAC modes"
+                select_attribute: hvac_modes
+            styles: |
+              .bubble-sub-button-1 ha-select mwc-list-item:nth-child(4) {
+                display: none;
+              }
+              
+              .bubble-name {
+                font-size: 15px;
+                font-weight: 400;
+              }
+
+      # room temperatures
+      - type: entities
+        entities:
+          - type: custom:multiple-entity-row
+            entity: sensor.family_room_temperature
+            name: "Family Room"
+            show_state: false
+            entities:
+              - entity: sensor.family_room_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.living_room_temperature
+            name: "Living Room"
+            show_state: false
+            entities:
+              - entity: sensor.living_room_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.master_bedroom_temperature
+            name: "Master Bedroom"
+            show_state: false
+            entities:
+              - entity: sensor.master_bedroom_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.boys_bedroom_temperature
+            name: "Boys Bedroom"
+            show_state: false
+            entities:
+              - entity: sensor.boys_bedroom_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.playroom_temperature
+            name: "Playroom"
+            show_state: false
+            entities:
+              - entity: sensor.playroom_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.office_outlet_temperature
+            name: "Office"
+            show_state: false
+            entities:
+              - entity: sensor.office_outlet_humidity
+                name: Humidity
+              - entity: sensor.office_outlet_temperature
+                name: Temperature
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: sensor.garage_temp
+            name: "Garage"
+            show_state: false
+            entities:
+              - entity: sensor.garage_humidity
+                name: Humidity
+              - entity: sensor.garage_temp
+                name: Temperature
+                format: precision0
+        card_mod:
+          style: |
+            ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+      # settings
+      - type: entities
+        title: "Advanced"
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - type: divider
+          - entity: automation.climate_windows_open
+            name: "Turn climate off if windows open"
+            icon: mdi:creation
+        card_mod:
+          style: |
+            ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+            ha-card h1 {
+              padding: 5px 15px 10px;
+            }

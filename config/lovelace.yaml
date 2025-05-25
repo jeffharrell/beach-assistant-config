@@ -1,5 +1,15 @@
 mode: yaml
 
+dashboards:
+  lovelace-new:
+    mode: yaml
+    filename: ui-lovelace-new.yaml
+    title: "Overview (New)"
+    icon: mdi:view-dashboard
+    show_in_sidebar: true
+    require_admin: true
+
+
 resources:
   - url: /hacsfiles/kiosk-mode/kiosk-mode.js
     type: module
@@ -10,4 +20,6 @@ resources:
   - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js 
     type: module
   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js 
+    type: module
+  - url: /hacsfiles/hass-swipe-navigation/swipe-navigation.js
     type: module

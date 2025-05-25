@@ -7,60 +7,126 @@ themes:
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
+#   subview:
+#     primary-background-color: "#213f49" 
+#     card-background-color: "#284e5a"
+
+#   apptheme:
+#     # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
+
+#     primary-background-color: "#284e5a" #17576b
+#     card-background-color: "#213f49" #134657 
+#     secondary-background-color: "#CCC"
+
+#     primary-text-color: "#FFF"
+#     secondary-text-color: "#FFF"
+
+#     #primary-color: "#FFF"
+#     accent-color: "orange"
+
+#     # Header
+#     app-header-text-color: "var(--primary-text-color)"
+#     app-header-background-color: "var(--primary-background-color)"
+#     app-header-selection-bar-color: "transparent"
+#     mdc-top-app-bar-fixed-box-shadow: "none"
+
+#     # Cards
+#     ha-card-border-width: "1px"
+#     ha-card-border-radius: "8px"
+#     divider-color: "rgba(0, 0, 0, 0.15)"
+
+#     code-editor-background-color: "#000"
+
+#     # Icons
+#     state-icon-color: "#FFF"
+#     state-active-color: "var(--accent-color)"
+#     state-inactive-color: "var(--state-icon-color)"
+
+#     state-light-active-color: "var(--state-active-color)"
+#     state-binary_sensor-active-color: "var(--state-active-color)"
+#     state-cover-active-color: "var(--state-active-color)"
+#     state-media_player-active-color: "var(--state-active-color)"
+
+#     # CSS Overrides
+#     card-mod-theme: apptheme
+#     card-mod-root-yaml: |
+#       .: |
+#         #view {
+#           margin-top: 40px !important;
+#         }
+
+#         .header .main-title {
+#           font-size: 1.3em;
+#           font-weight: bold;
+#         }
+
+#         @media only screen and (hover: none) and (pointer: coarse) {
+#           .header .main-title {
+#             margin-left: 10px;
+#           }
+#         }
+
   subview:
-    #primary-background-color: "#1f3943" 
-    #card-background-color: "#364d56"
+    card-mod-theme: subview 
 
-    primary-background-color: "#134657" 
-    card-background-color: "#17576b"
+    primary-background-color: "#313131" 
+    card-background-color: "#3D3D3D"
 
+    bubble-button-main-background-color: "var(--card-background-color)"
+    bubble-button-icon-background-color: "var(--primary-background-color)"
+    bubble-main-background-color: "var(--card-background-color)"
 
-  apptheme:
-    # Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
-    
-    #primary-background-color: "#04222d" 
-    #card-background-color: "#1f3943" 
+  apptheme_new:
+    card-mod-theme: apptheme_new
+     
+    primary-background-color: "#3D3D3D"
+    card-background-color: "#313131"
+    secondary-background-color: "var(--primary-background-color)"
 
-    #primary-background-color: "#17576b"
-    primary-background-color: "radial-gradient(circle,rgba(47, 119, 143, 1) 0%, rgba(23, 87, 107, 1) 90%, rgba(23, 87, 107, 1) 100%)" 
-    card-background-color: "#134657" 
-    secondary-background-color: "#CCC"
+    primary-text-color: "#E0E0E0"
+    secondary-text-color: "#E0E0E0"
 
-    primary-text-color: "#FFF"
-    secondary-text-color: "#FFF"
-
-    accent-color: "orange" # YES!
+    accent-color: "#F3BB00"
 
     # Header
     app-header-text-color: "var(--primary-text-color)"
-    app-header-background-color: "#17576b"
+    app-header-background-color: "var(--primary-background-color)"
     app-header-selection-bar-color: "transparent"
     mdc-top-app-bar-fixed-box-shadow: "none"
 
     # Cards
     ha-card-border-width: "1px"
-    ha-card-border-radius: "8px"
-    divider-color: "rgba(0, 0, 0, 0.15)"
+    ha-card-border-radius: "12px"
+    ha-card-header-font-size: "15px"
 
+    bubble-border-radius: "28px"
+    bubble-light-color: "var(--accent-color)"
+
+    bubble-main-background-color: "var(--card-background-color)"
+    bubble-icon-background-color: "var(--primary-background-color)"
+    bubble-pop-up-main-background-color: "var(--card-background-color)"
+    bubble-button-main-background-color: "var(--card-background-color)"
+    bubble-button-icon-background-color: "var(--primary-background-color)"
+
+    divider-color: "rgba(0, 0, 0, 0.15)"
     code-editor-background-color: "#000"
 
     # Icons
-    state-icon-color: "#FFF"
+    state-icon-color: "#E0E0E0"
     state-active-color: "var(--accent-color)"
     state-inactive-color: "var(--state-icon-color)"
 
     state-light-active-color: "var(--state-active-color)"
     state-binary_sensor-active-color: "var(--state-active-color)"
-    state-cover-active-color: "var(--state-active-color)"
+    state-cover-open-color: "var(--state-active-color)"
     state-media_player-active-color: "var(--state-active-color)"
+    state-climate-auto-color: "var(--state-active-color)"
+    state-climate-cool-color: "var(--state-active-color)"
+    state-climate-heat-color: "var(--state-active-color)"
+    state-climate-fan_only-color: "var(--state-active-color)"
 
     # CSS Overrides
-    card-mod-theme: apptheme
     card-mod-root: |
-      #view {
-        margin-top: -20px !important;
-      }
-
       .header {
         position: relative !important;
         top: auto !important;
@@ -79,7 +145,8 @@ themes:
         }
       }
 
-  home:
+
+  apptheme:
     # Colors
     # https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
     primary-background-color: "#F7F8F9"
@@ -113,8 +180,18 @@ themes:
     ha-picture-card-background-color: "rgba(0, 0, 0, 0.4)"
 
     # Pin header on bottom of screen for mobile
-    card-mod-theme: home
+    card-mod-theme: apptheme
     card-mod-root: |
+    header-height: 0;
+    card-mod-root: |
+      .header .toolbar .action-items {
+        display: none !important;
+      }
+
+      ha-tabs {
+        --paper-tabs-selection-bar-color: transparent !important;
+      }
+
       @media only screen and (hover: none) and (pointer: coarse) {
         #view {
           margin-top: -50px !important;
@@ -126,5 +203,6 @@ themes:
           top: auto !important;
           bottom: 0;
           height: 80px;
+          text-transform: uppercase;
         }
       }

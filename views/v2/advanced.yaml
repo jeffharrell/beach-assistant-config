@@ -1,0 +1,68 @@
+title: "Advanced"
+path: "advanced"
+back_path: "/lovelace/home"
+subview: true
+theme: subview
+cards:
+
+  - type: vertical-stack
+    cards:
+
+      # batteries
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: "Batteries"
+            entities:
+              - type: divider
+
+              - entity: sensor.ups_battery_charge
+                name: "UPS"
+
+              - type: divider
+
+              - entity: sensor.mailbox_battery_level
+                name: "Mailbox Sensor"
+              - entity: sensor.garage_side_door_battery_level
+                name: "Garage Side Door"
+              - entity: sensor.garage_temp_battery
+              - entity: sensor.outside_battery
+                name: "Weather Station Battery"
+
+      # settings
+      - type: entities
+        title: "Settings"
+        state_color: false
+        show_header_toggle: false
+        entities:
+          - type: divider
+          - entity: input_text.camera_motion_prompt
+            icon: mdi:creation
+            name: "Camera Motion Prompt"
+        card_mod:
+          style: |
+            ha-card {
+              margin: 25px 0 0;
+              height: auto;
+              transition: none;
+            }
+
+            ha-card h1 {
+              padding: 5px 15px 10px;
+            }
+
+
+      # footer
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: |
+              Even more <a href="./?disable_km">advanced mode</a>
+            text_only: true
+            card_mod:
+              style: |
+                ha-card {
+                  margin: 25px 0 0;
+                  height: auto;
+                  transition: none;
+                }
