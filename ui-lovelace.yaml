@@ -2,15 +2,20 @@ kiosk_mode:
   hide_header: false
   hide_sidebar: false
   hide_menubutton: false
-  hide_overflow: true
-  admin_settings:
-    hide_overflow: false
-
+  hide_overflow: false
+  mobile_settings:
+    hide_sidebar: true
+    hide_overflow: true
+    
+swipe_nav:
+  wrap: false
+  animate: swipe
+  
 views:
-  - !include views/v1/home.yaml
-  - !include views/v1/inside.yaml
-  - !include views/v1/outside.yaml
-  - !include views/v1/cameras.yaml
-  - !include views/v1/energy.yaml
-  - !include views/v1/climate.yaml
-  - !include views/v1/settings.yaml
+  - !include views/v2/home.yaml
+  - !include views/v2/lights.yaml
+  - !include views/v2/media.yaml
+  - !include views/v2/outside.yaml
+  - !include views/v2/climate.yaml
+  - !include views/v2/cameras.yaml
+  - !include views/v2/advanced.yaml

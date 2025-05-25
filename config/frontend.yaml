@@ -18,8 +18,8 @@ themes:
     bubble-button-icon-background-color: "var(--primary-background-color)"
     bubble-main-background-color: "var(--card-background-color)"
 
-  apptheme_new:
-    card-mod-theme: apptheme_new
+  apptheme:
+    card-mod-theme: apptheme
 
     primary-background-color: "#284e5a"
     card-background-color: "#213f49" 
@@ -88,7 +88,7 @@ themes:
       }
 
 
-  apptheme:
+  apptheme_old:
     # Colors
     # https://github.com/home-assistant/frontend/blob/master/src/resources/ha-style.ts
     primary-background-color: "#F7F8F9"
@@ -122,7 +122,7 @@ themes:
     ha-picture-card-background-color: "rgba(0, 0, 0, 0.4)"
 
     # Pin header on bottom of screen for mobile
-    card-mod-theme: apptheme
+    card-mod-theme: apptheme_old
     card-mod-root: |
       .header .toolbar .action-items {
         display: none !important;
