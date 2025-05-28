@@ -8,46 +8,30 @@ cards:
   - type: vertical-stack
     cards:
       # power
-      - type: vertical-stack
+      - type: statistics-graph
+        title: ""
+        chart_type: line
+        days_to_show: 1
+        period: hour
+        stat_types: mean
+        hide_legend: true
+        entities:
+          - entity: sensor.eagle_200_meter_power_demand
+            name: "Grid"
+
+      - type: horizontal-stack
         cards:
-          - type: custom:config-template-card
-            entities:
-              - sensor.eagle_200_meter_power_demand
-            card:
-              type: custom:mini-graph-card
-              line_width: 3
-              points_per_hour: 4
-              decimals: 1
-              hours_to_show: >-
-                ${
-                  var date = new Date();
-                  var curHour = date.getHours() + date.getMinutes()/60.0;
-                  curHour
-                }
-              entities:
-                - entity: sensor.eagle_200_meter_power_demand
-                  aggregate_func: last
-                  show_legend: false
-                  name: "Grid"
-                  color: orange
-              show:
-                graph: line
-                points: hover
-                labels: true
+          - type: statistic
+            name: "Home Total"
+            entity: sensor.eagle_200_total_meter_energy_delivered
+            period:
+              calendar:
+                period: day
+            stat_type: change
 
-          - type: horizontal-stack
-            cards:
-              - type: statistic
-                name: "Home Total"
-                entity: sensor.eagle_200_total_meter_energy_delivered
-                period:
-                  calendar:
-                    period: day
-                stat_type: change
-
-              - type: sensor
-                name: "Now"
-                entity: sensor.eagle_200_meter_power_demand
+          - type: sensor
+            name: "Now"
+            entity: sensor.eagle_200_meter_power_demand
 
       # batteries
       - type: vertical-stack
