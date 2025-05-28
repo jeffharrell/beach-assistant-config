@@ -57,7 +57,7 @@ cards:
                 min-height: 225px;
                 max-height: 240px;
                 background: rgba(0, 0, 0, 0.1);
-                border: 2px solid rgba(255, 255, 255, 0.1);
+                border: 2px solid rgba(255, 255, 255, 0.25);
                 border-left: 0;
                 border-right: 0;
                 transition: none;
@@ -126,7 +126,6 @@ cards:
               action: none
             theme: nocard
             show_state: false
-            state_color: false
 
       # actions
       - type: vertical-stack
@@ -226,9 +225,12 @@ cards:
                     .toUpperCase() + word.slice(1))
                     .join(" ") 
                   }
-              button_action:
-                tap_action:
-                  action: more-info
-                icon_tap_action:
-                  action: more-info
-              <<: *button_styles
+              styles: |
+                .bubble-name {
+                  font-size: 15px;
+                  font-weight: 400;
+                }
+#                 .bubble-button-background {
+#                   opacity: 1 !important;
+#                   background-color: ${ state === "on" ? "blue" : "red"} !important;
+#                 }

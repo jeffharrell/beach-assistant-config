@@ -68,22 +68,24 @@ cards:
                 transition: none;
               }
         entities:
-          - light.family_room
-          - light.kitchen
-          - light.kitchen_cabinets
-          - light.island
           - light.living_room
-          - light.dining_room
-          - light.entryway
+          - light.dining_table
+          - light.recessed
+          - light.picture
+          - light.guest_bed
+          - light.kitchen_sink
+          - light.kitchen_cabinets
+          - light.kitchen_lights
+          - light.desk
           - light.hallway
+          - light.bunk_bed
           - light.master_bedroom
-          - light.boys_bedroom
-          - light.guest_bedroom
-          - light.play_room
-          - light.back_doors
-          - light.twinkle_lights
-          - light.garage
-          - light.pool
+          - light.master_reading_1
+          - light.master_reading_2
+          - light.master_wall
+          - light.front_yard
+          - light.back_yard
+          - light.upstairs_deck
         conditions:
           - condition: state
             state: "on"

@@ -1,25 +1,11 @@
 mode: yaml
 
-dashboards:
-  lovelace-new:
-    mode: yaml
-    filename: ui-lovelace-old.yaml
-    title: "Overview (Old)"
-    icon: mdi:view-dashboard
-    show_in_sidebar: true
-    require_admin: true
-
-
 resources:
   - url: /hacsfiles/kiosk-mode/kiosk-mode.js
     type: module
   - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
     type: module
   - url: /hacsfiles/config-template-card/config-template-card.js
-    type: module
-  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js 
-    type: module
-  - url: /hacsfiles/lovelace-auto-entities/auto-entities.js 
     type: module
   - url: /hacsfiles/hass-swipe-navigation/swipe-navigation.js
     type: module
