@@ -1,6 +1,5 @@
 title: "Beach House"
 path: "home"
-theme: mainview
 cards:
 
   - type: vertical-stack
@@ -21,10 +20,8 @@ cards:
           {% set len = list | count %}
           {% if len == 1 %} 
              <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
-          {% elif len == 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ list[1].name|capitalize }} are open
-          {% elif len > 2 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }}, {{ list[1].name|capitalize }}, and more
+          {% elif len > 1 %}
+             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ len - 1 }} more are open
           {%- endif %}
         text_only: true
         card_mod:
@@ -87,7 +84,7 @@ cards:
               action: navigate
               navigation_path: advanced
             theme: nocard
-            show_state: false
+            show_state: true
             
           - type: button
             entity: group.media_player_speakers_and_tvs
@@ -99,7 +96,7 @@ cards:
             hold_action:
               action: none
             theme: nocard
-            show_state: false
+            show_state: true
 
           - type: button
             entity: binary_sensor.doors_and_windows
@@ -112,7 +109,7 @@ cards:
             hold_action:
               action: none
             theme: nocard
-            show_state: false
+            show_state: true
 
           - type: button
             entity: group.climate
@@ -125,15 +122,12 @@ cards:
             hold_action:
               action: none
             theme: nocard
-            show_state: false
+            show_state: true
 
       # actions
       - type: vertical-stack
         title: " "
         cards:
-          - type: heading
-            heading: "Quick Actions"
-
           # mood lights
           - type: custom:bubble-card
             entity: script.mood_lights
@@ -213,14 +207,11 @@ cards:
             card_type: button
             card_layout: large
             use_accent_color: true
-            name: >-
-              ${
-                 states["alarm_control_panel.alarm_panel_ui"]
-                  .state.split("_")
-                  .map(word => word.charAt(0)
-                  .toUpperCase() + word.slice(1))
-                  .join(" ") 
-                }
+            button_action:
+              tap_action:
+                action: more-info
+              icon_tap_action:
+                action: more-info
             styles: |
               .bubble-name {
                 font-size: 15px;
@@ -228,7 +219,7 @@ cards:
               }
 
               .bubble-button-background {
-                opacity: 1 !important;
+                opacity: 0.8 !important;
                 background-color: ${ state !== 'disarmed' ? '#aa2e25' : 'transparent' } !important;
               }
 
@@ -239,3 +230,4 @@ cards:
                     .toUpperCase() + word.slice(1))
                     .join(" ") 
                 }
+            scrolling_effect: false

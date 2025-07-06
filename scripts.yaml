@@ -25,7 +25,7 @@ movie_time:
 
 mood_lights:
   alias: "Mood Lights"
-  icon: "mdi:grid-large"
+  icon: "mdi:lamps"
   sequence:
     - service: scene.turn_on
       data:

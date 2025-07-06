@@ -10,7 +10,7 @@ cards:
 
       # tiles
       - type: grid
-        columns: 1
+        columns: 2
         square: false
         cards:
           - type: custom:bubble-card

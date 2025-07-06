@@ -15,7 +15,8 @@ cards:
         cards:
           - type: custom:bubble-card
             entity: group.shade_automation
-            name: "Auto"
+            name: "Automatic"
+            icon: mdi:creation
             card_type: button
             card_layout: large
             use_accent_color: true
@@ -44,6 +45,7 @@ cards:
           - type: custom:bubble-card
             entity: group.shades
             name: "Window Shades"
+            icon: mdi:dots-horizontal
             card_type: button
             card_layout: large
             use_accent_color: true
@@ -97,7 +99,7 @@ cards:
           - type: divider
           - entity: input_boolean.camera_motion_enabled
             icon: mdi:creation
-            name: "Motion Alerts"
+            name: "Motion alerts"
         card_mod:
           style: |
             ha-card {
