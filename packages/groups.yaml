@@ -49,31 +49,6 @@ light:
       - light.livingroom_2
 
   - platform: group
-    name: "Downstairs"
-    unique_id: downstairs
-    entities:
-      - light.living_room
-      - light.dining_table
-      - light.recessed
-      - light.picture
-      - light.guest_bed
-      - light.kitchen_sink
-      - light.kitchen_cabinets
-      - light.kitchen_lights
-      - light.desk
-
-  - platform: group
-    name: "Upstairs"
-    unique_id: upstairs
-    entities:
-      - light.hallway
-      - light.bunk_bed
-      - light.master_bedroom
-      - light.master_reading_1
-      - light.master_reading_2
-      - light.master_wall
-
-  - platform: group
     name: "Front Yard"
     unique_id: front_yard
     entities:
@@ -88,22 +63,31 @@ light:
       - light.back_yard_right
 
   - platform: group
-    name: "Outside"
-    unique_id: outside
+    name: "House"
+    unique_id: house
     entities:
+      # downstairs
+      - light.living_room
+      - light.dining_table
+      - light.recessed
+      - light.picture
+      - light.guest_bed
+      - light.kitchen_sink
+      - light.kitchen_cabinets
+      - light.kitchen_lights
+      - light.desk
+      # upstairs
+      - light.hallway
+      - light.bunk_bed
+      - light.master_bedroom
+      - light.master_reading_1
+      - light.master_reading_2
+      - light.master_wall
+      # outside
       - light.front_yard
       - light.back_yard
       - light.upstairs_deck
       - light.back_landscape
-
-  - platform: group
-    name: "House"
-    unique_id: house
-    entities:
-      - light.downstairs
-      - light.upstairs
-      - light.outside
-
 
 binary_sensor:
   # Groups
@@ -162,9 +146,12 @@ group:
       - light.upstairs_deck
       - light.back_landscape
 
-  media_player_speakers:
-    name: "Speakers"
+
+  media_player_speakers_and_tvs:
+    name: "Speakers and TVs"
+    icon: "mdi:television"
     entities:
+      # speakers
       - media_player.back_speakers
       - media_player.front_speakers
       - media_player.kitchen_speakers
@@ -173,20 +160,10 @@ group:
       - media_player.upstairs_deck_speakers
       - media_player.master_bedroom_wifi
       - media_player.bunk_bedroom_wifi
-
-  media_player_tvs:
-    name: "TVs"
-    entities:
+      # tvs
       - media_player.downstairs_apple_tv
       - media_player.master_bedroom_apple_tv
       - media_player.bunk_bedroom_apple_tv
-
-  media_player_speakers_and_tvs:
-    name: "Speakers and TVs"
-    icon: "mdi:television"
-    entities:
-      - group.media_player_speakers
-      - group.media_player_tvs
 
   climate:
     name: "Climate"

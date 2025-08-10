@@ -13,50 +13,28 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: custom:bubble-card
+          - type: button
             entity: group.shade_automation
-            name: "Automatic"
+            name: "Automagical"
             icon: mdi:creation
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: roundbutton
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: &button_styles
-              styles: |
-                .bubble-name {
-                  font-size: 15px;
-                  font-weight: 400;
-                }
 
-          - type: custom:bubble-card
+          - type: button
             entity: script.shades_halfway
-            card_type: button
-            card_layout: large
-            use_accent_color: false
+            name: "Halfway"
+            theme: roundbutton
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: *button_styles
-            
-          - type: custom:bubble-card
+
+          - type: button
             entity: group.shades
-            name: "Window Shades"
+            name: "Shades"
             icon: mdi:dots-horizontal
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: roundbutton
             tap_action:
-              action: navigate
-              navigation_path: "#popup-shades"
-            button_action:
-              tap_action:
-                action: navigate
-                navigation_path: "#popup-shades"
-            <<: *button_styles
+              action: more-info
 
       # what's on
       - type: entity-filter
@@ -111,52 +89,3 @@ cards:
             ha-card h1 {
               padding: 5px 15px 10px;
             }
-
-      # pop ups
-      - type: vertical-stack
-        cards:
-          
-          - type: custom:bubble-card
-            card_type: pop-up
-            hash: "#popup-shades"
-
-          - type: grid
-            columns: 1
-            square: false
-            cards:
-              - type: custom:bubble-card
-                entity: cover.window_shade_1
-                name: "Window 1"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-              - type: custom:bubble-card
-                entity: cover.window_shade_2
-                name: "Window 2"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-              - type: custom:bubble-card
-                entity: cover.window_shade_3
-                name: "Window 3"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-              - type: custom:bubble-card
-                entity: cover.window_shade_4
-                name: "Window 4"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-              - type: custom:bubble-card
-                entity: cover.window_shade_5
-                name: "Window 5"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-              - type: custom:bubble-card
-                entity: cover.window_shade_6
-                name: "Window 6"
-                card_type: button
-                button_type: slider
-                <<: *button_styles

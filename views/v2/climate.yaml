@@ -13,40 +13,20 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: custom:bubble-card
+          - type: button
             entity: climate.upstairs
-            card_type: button
-            card_layout: large
-            button_type: state
-            show_name: true
-            show_icon: true
             show_state: true
-            state_color: true
-            show_attribute: true
-            attribute: current_temperature
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
+            theme: roundbutton
+            tap_action:
+              action: more-info
 
-          - type: custom:bubble-card
+          - type: button
             entity: climate.downstairs
-            card_type: button
-            card_layout: large
-            button_type: state
-            show_name: true
-            show_icon: true
             show_state: true
-            state_color: true
-            show_attribute: true
-            attribute: current_temperature
-            styles: |
-              .bubble-name {
-                font-size: 15px;
-                font-weight: 400;
-              }
-
+            theme: roundbutton
+            tap_action:
+              action: more-info
+              
       # room temperatures
       - type: entities
         entities:

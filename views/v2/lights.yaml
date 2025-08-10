@@ -13,48 +13,25 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: custom:bubble-card
+          - type: button
             entity: script.mood_lights
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: roundbutton
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: &button_styles
-              styles: |
-                .bubble-name {
-                  font-size: 15px;
-                  font-weight: 400;
-                }
 
-          - type: custom:bubble-card
+          - type: button
             entity: script.dinner_lights
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: roundbutton
             tap_action:
               action: toggle
-            icon_tap_action:
-              action: toggle
-            <<: *button_styles
 
-          - type: custom:bubble-card
+          - type: button
             entity: light.house
             name: "Lights"
             icon: mdi:dots-horizontal
-            card_type: button
-            card_layout: large
-            use_accent_color: true
+            theme: roundbutton
             tap_action:
-              action: navigate
-              navigation_path: "#popup-lights"
-            button_action:
-              tap_action:
-                action: navigate
-                navigation_path: "#popup-lights"
-            <<: *button_styles
+              action: more-info
 
       # what's on
       - type: entity-filter
@@ -115,157 +92,3 @@ cards:
             ha-card h1 {
               padding: 5px 15px 10px;
             }
-
-      # pop ups
-      - type: vertical-stack
-        cards:
-          - type: custom:bubble-card
-            card_type: pop-up
-            hash: "#popup-lights"
-            styles: |
-              .bubble-header-container { padding-bottom: 0; }
-
-          - heading: "Downstairs"
-            <<: &heading_styles
-              type: heading
-              card_mod:
-                style: |
-                  ha-card { margin: 5px 0 0; }
-
-          - type: grid
-            columns: 2
-            square: false
-            cards:
-              - type: custom:bubble-card
-                entity: light.living_room
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-                
-              - type: custom:bubble-card
-                entity: light.dining_table
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.recessed
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.picture
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.guest_bed
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.kitchen_lights
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.kitchen_sink
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.kitchen_cabinets
-                name: "Cabinets"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.desk
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-          - heading: "Upstairs"
-            <<: *heading_styles
-
-          - type: grid
-            columns: 2
-            square: false
-            cards:
-              - type: custom:bubble-card
-                entity: light.hallway
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.bunk_bed
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.master_bedroom
-                name: "Master"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.master_wall
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.master_reading_1
-                name: "Master Left"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.master_reading_2
-                name: "Master Right"
-                card_type: button
-                button_type: slider
-                <<: *button_styles
-
-          - heading: "Outside"
-            <<: *heading_styles
-
-          - type: grid
-            columns: 2
-            square: false
-            cards:
-              # Bedrooms
-              - type: custom:bubble-card
-                entity: light.front_yard
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.back_yard
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.upstairs_deck
-                card_type: button
-                button_type: switch
-                <<: *button_styles
-
-              - type: custom:bubble-card
-                entity: light.back_landscape
-                name: "Landscape"
-                card_type: button
-                button_type: switch
-                <<: *button_styles

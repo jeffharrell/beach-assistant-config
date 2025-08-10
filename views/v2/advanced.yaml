@@ -61,7 +61,6 @@ cards:
               - entity: sensor.window_shade_7_battery_level
                 title: "Window Shade 7"
 
-
       # settings
       - type: entities
         title: "Settings"
@@ -83,19 +82,3 @@ cards:
             ha-card h1 {
               padding: 5px 15px 10px;
             }
-
-
-      # footer
-      - type: vertical-stack
-        cards:
-          - type: markdown
-            content: |
-              Even more <a href="./?disable_km">advanced mode</a>
-            text_only: true
-            card_mod:
-              style: |
-                ha-card {
-                  margin: 25px 0 0;
-                  height: auto;
-                  transition: none;
-                }
