@@ -66,19 +66,9 @@ cards:
         title: "Settings"
         state_color: false
         show_header_toggle: false
+        theme: paddedcard
         entities:
           - type: divider
           - entity: input_text.camera_motion_prompt
             icon: mdi:creation
             name: "Camera Motion Prompt"
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }

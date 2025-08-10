@@ -12,8 +12,9 @@ automation:
   - alias: "System - Reset settings"
     initial_state: True
     trigger:
-      platform: time
-      at: "04:00:00"
+      platform: state
+      entity_id: alarm_control_panel.alarm
+      to: "armed_away"
     action:
       - service: homeassistant.turn_on
         entity_id:
@@ -23,8 +24,9 @@ automation:
   - alias: "System - Reset Speakers"
     initial_state: True
     trigger:
-      platform: time
-      at: "12:00:00"
+      platform: state
+      entity_id: alarm_control_panel.alarm
+      to: "armed_away"
     action:
       - service: media_player.volume_set
         target:

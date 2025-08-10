@@ -16,7 +16,6 @@ cards:
           - type: button
             entity: group.shade_automation
             name: "Automagical"
-            icon: mdi:creation
             theme: roundbutton
             tap_action:
               action: toggle
@@ -41,13 +40,7 @@ cards:
         card:
           state_color: true
           show_header_toggle: false
-          card_mod:
-            style: |
-              ha-card {
-                margin: 25px 0 0;
-                height: auto;
-                transition: none;
-              }
+          theme: paddedcard
         entities:
           - binary_sensor.bathroom_window
           - binary_sensor.driveway_window
@@ -73,19 +66,9 @@ cards:
         title: "Advanced"
         state_color: false
         show_header_toggle: false
+        theme: paddedcard
         entities:
           - type: divider
           - entity: input_boolean.camera_motion_enabled
             icon: mdi:creation
             name: "Motion alerts"
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }

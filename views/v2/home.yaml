@@ -74,7 +74,7 @@ cards:
         square: false
         cards:
           - type: button
-            entity: group.lights_house
+            entity: light.house
             name: "Lights"
             icon_height: 25px
             tap_action:
@@ -213,10 +213,10 @@ cards:
                 style: |
                   ha-card {
                     background:
-                      {% if is_state("alarm_control_panel.alarm_panel_ui", "disarmed") %}
-                        var(--card-background-color)
-                      {% else %}
+                      {% if "armed_" in states("alarm_control_panel.alarm_panel_ui") %}
                         #aa2e25
+                      {% else %}
+                        var(--card-background-color)
                       {% endif %}
                       ;
                   }

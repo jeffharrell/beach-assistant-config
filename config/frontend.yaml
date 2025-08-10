@@ -13,6 +13,24 @@ themes:
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
+  paddedcard:
+    card-mod-theme: paddedcard
+
+    primary-text-color: "#fff"
+    secondary-text-color: "#ccc"
+
+    card-mod-card-yaml: |
+      .: |
+        ha-card {
+          margin: 25px 0 0;
+          height: auto;
+          transition: none;
+        }
+
+        ha-card h1 {
+          padding: 5px 15px 10px;
+        }  
+
   roundbutton: 
     card-mod-theme: roundbutton
 

@@ -38,13 +38,7 @@ cards:
         card:
           state_color: true
           show_header_toggle: false
-          card_mod:
-            style: |
-              ha-card {
-                margin: 25px 0 0;
-                height: auto;
-                transition: none;
-              }
+          theme: paddedcard
         entities:
           - light.living_room
           - light.dining_table
@@ -68,27 +62,15 @@ cards:
           - condition: state
             state: "on"
         show_empty: false
-        grid_options:
-          columns: full
 
       # settings
       - type: entities
         title: "Advanced"
         state_color: false
         show_header_toggle: false
+        theme: paddedcard
         entities:
           - type: divider
           - entity: automation.lights_automatic_outside_lights
             name: "Opening doors turns on lights"
             icon: mdi:creation
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }

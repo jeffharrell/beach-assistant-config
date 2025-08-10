@@ -29,6 +29,7 @@ cards:
               
       # room temperatures
       - type: entities
+        theme: paddedcard
         entities:
           - type: custom:multiple-entity-row
             entity: sensor.downstairs_outlet_temperature
@@ -60,32 +61,15 @@ cards:
               - entity: sensor.master_bedroom_outlet_temperature
                 name: Temperature
                 format: precision0
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
 
       # settings
       - type: entities
         title: "Advanced"
         state_color: false
         show_header_toggle: false
+        theme: paddedcard
         entities:
           - type: divider
           - entity: automation.climate_windows_open
             name: "Turn climate off if windows open"
             icon: mdi:creation
-        card_mod:
-          style: |
-            ha-card {
-              margin: 25px 0 0;
-              height: auto;
-              transition: none;
-            }
-
-            ha-card h1 {
-              padding: 5px 15px 10px;
-            }

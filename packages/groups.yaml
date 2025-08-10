@@ -13,6 +13,10 @@ light:
     entity_id: switch.master_reading_1
 
   - platform: switch
+    name: "Master Reading 2"
+    entity_id: switch.master_reading_2
+
+  - platform: switch
     name: "Front Door"
     entity_id: switch.front_door_lights
 
@@ -70,12 +74,12 @@ light:
       - light.living_room
       - light.dining_table
       - light.recessed
-      - light.picture
-      - light.guest_bed
       - light.kitchen_sink
       - light.kitchen_cabinets
       - light.kitchen_lights
       - light.desk
+      - light.picture
+      - light.guest_bed
       # upstairs
       - light.hallway
       - light.bunk_bed
@@ -96,16 +100,16 @@ binary_sensor:
     device_class: door
     unique_id: doors_and_windows
     entities:
-      - binary_sensor.bathroom_window
-      - binary_sensor.driveway_window
-      - binary_sensor.kitchen_window
-      - binary_sensor.master_slider
       - binary_sensor.front_door
-      - binary_sensor.kitchen_door
       - binary_sensor.bay_window_left
       - binary_sensor.bay_window_right
       - binary_sensor.downstairs_front_window_left
       - binary_sensor.downstairs_front_window_right
+      - binary_sensor.driveway_window
+      - binary_sensor.bathroom_window
+      - binary_sensor.kitchen_window
+      - binary_sensor.kitchen_door
+      - binary_sensor.master_slider
 
   - platform: group
     name: "Downstairs Front Windows"
@@ -122,31 +126,6 @@ binary_sensor:
       - binary_sensor.bay_window_right
 
 group:
-  lights_house:
-    name: "Lights"
-    icon: "mdi:ceiling-light"
-    entities: 
-      - light.living_room
-      - light.dining_table
-      - light.recessed
-      - light.picture
-      - light.guest_bed
-      - light.kitchen_sink
-      - light.kitchen_cabinets
-      - light.kitchen_lights
-      - light.desk
-      - light.hallway
-      - light.bunk_bed
-      - light.master_bedroom
-      - light.master_reading_1
-      - light.master_reading_2
-      - light.master_wall
-      - light.front_yard
-      - light.back_yard
-      - light.upstairs_deck
-      - light.back_landscape
-
-
   media_player_speakers_and_tvs:
     name: "Speakers and TVs"
     icon: "mdi:television"
@@ -173,7 +152,7 @@ group:
 
   shade_automation:
     name: "Make It Less Bright"
-    icon: mdi:robot
+    icon: mdi:creation
     entities:
       - switch.vertical_toggle_control_downstairs_front_windows
       - switch.vertical_toggle_control_downstairs_side_windows
