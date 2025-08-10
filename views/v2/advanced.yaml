@@ -70,5 +70,7 @@ cards:
         entities:
           - type: divider
           - entity: input_text.camera_motion_prompt
-            icon: mdi:creation
             name: "Camera Motion Prompt"
+            icon: mdi:creation
+            tap_action:
+              action: none

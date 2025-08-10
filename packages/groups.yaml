@@ -142,7 +142,7 @@ group:
       # tvs
       - media_player.downstairs_apple_tv
       - media_player.master_bedroom_apple_tv
-      - media_player.bunk_bedroom_apple_tv
+      - media_player.bunk_bed_apple_tv
 
   climate:
     name: "Climate"

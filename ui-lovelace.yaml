@@ -6,6 +6,8 @@ kiosk_mode:
   mobile_settings:
     hide_sidebar: true
     hide_overflow: true
+    hide_dialog_header_action_items: true
+    hide_dialog_header_breadcrumb_navigation: true
     
 swipe_nav:
   wrap: false

@@ -51,11 +51,11 @@ cards:
                 state: playing
 
           - type: media-control
-            entity: media_player.bunk_bedroom_apple_tv
+            entity: media_player.bunk_bed_apple_tv
             name: "Bunk Bedroom TV"
             visibility:
               - condition: state
-                entity: media_player.bunk_bedroom_apple_tv
+                entity: media_player.bunk_bed_apple_tv
                 state: playing
 
           # speakers      
