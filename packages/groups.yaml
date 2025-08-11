@@ -130,7 +130,12 @@ group:
     name: "Speakers and TVs"
     icon: "mdi:television"
     entities:
-      # speakers
+      - group.media_player_speakers
+      - group.media_player_tvs
+
+  media_player_speakers:
+    name: "Speakers"
+    entities:
       - media_player.back_speakers
       - media_player.front_speakers
       - media_player.kitchen_speakers
@@ -139,7 +144,10 @@ group:
       - media_player.upstairs_deck_speakers
       - media_player.master_bedroom_wifi
       - media_player.bunk_bedroom_wifi
-      # tvs
+
+  media_player_tvs:
+    name: "TVs"
+    entities:
       - media_player.downstairs_apple_tv
       - media_player.master_bedroom_apple_tv
       - media_player.bunk_bed_apple_tv

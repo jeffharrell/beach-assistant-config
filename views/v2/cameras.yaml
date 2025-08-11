@@ -2,7 +2,7 @@ title: "Cameras"
 path: "cameras"
 back_path: "/lovelace/home"
 subview: true
-theme: subview
+theme: secondary_view
 cards:
 
   - type: vertical-stack

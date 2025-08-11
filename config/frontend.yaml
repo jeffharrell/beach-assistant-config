@@ -1,10 +1,11 @@
 extra_module_url:
   - /hacsfiles/lovelace-card-mod/card-mod.js
 
-# Colors - https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
+# Colors
+# https://github.com/home-assistant/frontend/blob/master/src/resources/theme/color.globals.ts
 themes:
-  nocard:
-    card-mod-theme: nocard
+  no_card:
+    card-mod-theme: no_card
 
     primary-text-color: "#fff"
     secondary-text-color: "#ccc"
@@ -13,8 +14,14 @@ themes:
     ha-card-border-radius: "0"
     card-background-color: "transparent"
 
-  paddedcard:
-    card-mod-theme: paddedcard
+    card-mod-card-yaml: |
+      .: |
+        .type-button ha-state-icon {
+          filter: none !important;
+        }
+
+  padded_card:
+    card-mod-theme: padded_card
 
     primary-text-color: "#fff"
     secondary-text-color: "#ccc"
@@ -31,8 +38,8 @@ themes:
           padding: 5px 15px 10px;
         }  
 
-  roundbutton: 
-    card-mod-theme: roundbutton
+  round_button: 
+    card-mod-theme: round_button
 
     primary-text-color: "#fff"
     secondary-text-color: "#ccc"
@@ -66,8 +73,8 @@ themes:
           white-space: pre;
         }
 
-  subview:
-    card-mod-theme: subview 
+  secondary_view:
+    card-mod-theme: secondary_view 
 
     primary-background-color: "#213f49" 
     card-background-color: "#284e5a"
@@ -75,8 +82,8 @@ themes:
     primary-text-color: "#fff"
     secondary-text-color: "#ccc"
 
-  apptheme:
-    card-mod-theme: apptheme
+  app_theme:
+    card-mod-theme: app_theme
 
     primary-background-color: "#284e5a"
     card-background-color: "#213f49" 

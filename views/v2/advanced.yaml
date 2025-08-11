@@ -2,7 +2,7 @@ title: "Advanced"
 path: "advanced"
 back_path: "/lovelace/home"
 subview: true
-theme: subview
+theme: secondary_view
 cards:
 
   - type: vertical-stack
@@ -66,7 +66,7 @@ cards:
         title: "Settings"
         state_color: false
         show_header_toggle: false
-        theme: paddedcard
+        theme: padded_card
         entities:
           - type: divider
           - entity: input_text.camera_motion_prompt

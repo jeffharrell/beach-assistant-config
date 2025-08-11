@@ -7,7 +7,7 @@ automation:
     action:
       service: frontend.set_theme
       data_template:
-        name: apptheme
+        name: app_theme
 
   - alias: "System - Reset settings"
     initial_state: True

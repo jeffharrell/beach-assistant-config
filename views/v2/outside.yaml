@@ -2,7 +2,7 @@ title: "Outside"
 path: "outside"
 back_path: "/lovelace/home"
 subview: true
-theme: subview
+theme: secondary_view
 cards:
 
   - type: vertical-stack
@@ -16,14 +16,14 @@ cards:
           - type: button
             entity: group.shade_automation
             name: "Automagical"
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: toggle
 
           - type: button
             entity: script.shades_halfway
             name: "Halfway"
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: toggle
 
@@ -31,7 +31,7 @@ cards:
             entity: group.shades
             name: "Shades"
             icon: mdi:dots-horizontal
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: more-info
 
@@ -40,7 +40,7 @@ cards:
         card:
           state_color: true
           show_header_toggle: false
-          theme: paddedcard
+          theme: padded_card
         entities:
           - binary_sensor.bathroom_window
           - binary_sensor.driveway_window
@@ -64,9 +64,8 @@ cards:
       # settings
       - type: entities
         title: "Advanced"
-        state_color: false
-        show_header_toggle: false
-        theme: paddedcard
+        state_color: true
+        theme: padded_card
         entities:
           - type: divider
           - entity: input_boolean.camera_motion_enabled

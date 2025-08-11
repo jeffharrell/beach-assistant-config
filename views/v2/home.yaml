@@ -40,13 +40,13 @@ cards:
         card:
           type: picture-entity
           entity: "${ states['sun.sun'].attributes.elevation  < -7 ? 'camera.front_deck' : 'camera.beach' }"
+          theme: no_card
           name: ${ states["counter.camera_motion"].state + " events" }
           show_name: ${ parseInt(states["counter.camera_motion"].state) > 0 }
           show_state: false
           tap_action:
             action: navigate
             navigation_path: cameras
-          theme: nocard
           card_mod:
             style: |
               ha-card { 
@@ -75,54 +75,54 @@ cards:
         cards:
           - type: button
             entity: light.house
+            theme: no_card
             name: "Lights"
             icon_height: 25px
+            show_state: true
             tap_action:
               action: navigate
               navigation_path: lights
             hold_action:
               action: navigate
               navigation_path: advanced?disable_km
-            theme: nocard
-            show_state: true
             
           - type: button
             entity: group.media_player_speakers_and_tvs
+            theme: no_card
             name: "Media"
             icon_height: 25px
+            show_state: true
             tap_action:
               action: navigate
               navigation_path: media
             hold_action:
               action: none
-            theme: nocard
-            show_state: true
 
           - type: button
             entity: binary_sensor.doors_and_windows
+            theme: no_card
             name: "Outside"
             icon: mdi:door
             icon_height: 25px
+            show_state: true
             tap_action:
               action: navigate
               navigation_path: outside
             hold_action:
               action: none
-            theme: nocard
-            show_state: true
 
           - type: button
             entity: group.climate
+            theme: no_card
             name: "Climate"
             icon: mdi:home-thermometer-outline
-            icon_height: 25px      
+            icon_height: 25px 
+            show_state: true     
             tap_action:
               action: navigate
               navigation_path: climate
             hold_action:
               action: none
-            theme: nocard
-            show_state: true
 
       # actions
       - type: vertical-stack
@@ -131,7 +131,8 @@ cards:
           # mood lights
           - type: button
             entity: script.mood_lights
-            theme: roundbutton
+            theme: round_button
+            icon_height: 24px
             tap_action:
               action: toggle
             visibility:
@@ -147,7 +148,8 @@ cards:
           # movie time
           - type: button
             entity: script.movie_time
-            theme: roundbutton
+            theme: round_button
+            icon_height: 24px
             tap_action:
               action: toggle
             visibility:
@@ -163,7 +165,8 @@ cards:
           # dinner lights
           - type: button
             entity: script.dinner_lights
-            theme: roundbutton
+            theme: round_button
+            icon_height: 24px
             tap_action:
               action: toggle
             visibility:
@@ -179,7 +182,8 @@ cards:
           # good night
           - type: button
             entity: script.good_night
-            theme: roundbutton
+            theme: round_button
+            icon_height: 24px
             tap_action:
               action: toggle
             visibility:
@@ -195,10 +199,12 @@ cards:
           # alarm
           - type: custom:config-template-card
             entities:
-              - counter.camera_motion
+              - alarm_control_panel.alarm_panel_ui
             card:
               type: button
               entity: alarm_control_panel.alarm_panel_ui
+              theme: round_button
+              icon_height: 24px
               name: ${ 
                 states["alarm_control_panel.alarm_panel_ui"]
                   .state.split("_")
@@ -206,7 +212,6 @@ cards:
                   .toUpperCase() + word.slice(1))
                   .join(" ") 
                 }
-              theme: roundbutton
               tap_action:
                 action: more-info
               card_mod:

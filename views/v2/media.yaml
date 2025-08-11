@@ -2,7 +2,7 @@ title: "Media"
 path: "media"
 back_path: "/lovelace/home"
 subview: true
-theme: subview
+theme: secondary_view
 cards:
   
   - type: vertical-stack
@@ -15,15 +15,23 @@ cards:
         cards:
           - type: button
             entity: script.movie_time
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: toggle
 
           - type: button
-            entity: group.media_player_speakers_and_tvs
-            name: "Devices"
+            entity: group.media_player_speakers
+            name: "Speakers"
             icon: mdi:dots-horizontal
-            theme: roundbutton
+            theme: round_button
+            tap_action:
+              action: more-info
+
+          - type: button
+            entity: group.media_player_tvs
+            name: "TVs"
+            icon: mdi:dots-horizontal
+            theme: round_button
             tap_action:
               action: more-info
 

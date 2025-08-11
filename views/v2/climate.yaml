@@ -2,7 +2,7 @@ title: "Climate"
 path: "climate"
 back_path: "/lovelace/home"
 subview: true
-theme: subview
+theme: secondary_view
 cards:
 
   - type: vertical-stack
@@ -16,20 +16,20 @@ cards:
           - type: button
             entity: climate.upstairs
             show_state: true
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: more-info
 
           - type: button
             entity: climate.downstairs
             show_state: true
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: more-info
               
       # room temperatures
       - type: entities
-        theme: paddedcard
+        theme: padded_card
         entities:
           - type: custom:multiple-entity-row
             entity: sensor.downstairs_outlet_temperature
@@ -65,9 +65,8 @@ cards:
       # settings
       - type: entities
         title: "Advanced"
-        state_color: false
-        show_header_toggle: false
-        theme: paddedcard
+        state_color: true
+        theme: padded_card
         entities:
           - type: divider
           - entity: automation.climate_windows_open

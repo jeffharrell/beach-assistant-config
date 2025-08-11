@@ -2,7 +2,7 @@ title: "Lights"
 path: "lights"
 back_path: "/lovelace/home"
 subview: true
-theme: subview
+theme: secondary_view
 cards:
 
   - type: vertical-stack
@@ -15,13 +15,13 @@ cards:
         cards:
           - type: button
             entity: script.mood_lights
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: toggle
 
           - type: button
             entity: script.dinner_lights
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: toggle
 
@@ -29,7 +29,7 @@ cards:
             entity: light.house
             name: "Lights"
             icon: mdi:dots-horizontal
-            theme: roundbutton
+            theme: round_button
             tap_action:
               action: more-info
 
@@ -38,7 +38,7 @@ cards:
         card:
           state_color: true
           show_header_toggle: false
-          theme: paddedcard
+          theme: padded_card
         entities:
           - light.living_room
           - light.dining_table
@@ -66,9 +66,8 @@ cards:
       # settings
       - type: entities
         title: "Advanced"
-        state_color: false
-        show_header_toggle: false
-        theme: paddedcard
+        state_color: true
+        theme: padded_card
         entities:
           - type: divider
           - entity: automation.lights_automatic_outside_lights
