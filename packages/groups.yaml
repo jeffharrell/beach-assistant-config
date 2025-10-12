@@ -165,8 +165,8 @@ group:
       - switch.vertical_toggle_control_downstairs_front_windows
       - switch.vertical_toggle_control_downstairs_side_windows
 
-  shades:
-    name: "Window Shades"
+  downstairs_shades:
+    name: "Downstairs Shades"
     icon: mdi:window-closed-variant
     entities:
       - cover.window_shade_1
@@ -175,3 +175,14 @@ group:
       - cover.window_shade_4
       - cover.window_shade_5
       - cover.window_shade_6
+
+  upstairs_shades:
+    name: "Upstairs Shades"
+    icon: mdi:window-closed-variant
+    entities:
+      - cover.master_shade_1
+      - cover.master_shade_2
+      - cover.master_shade_3
+      - cover.master_shade_4
+      - cover.master_shade_5
+      - cover.master_shade_6

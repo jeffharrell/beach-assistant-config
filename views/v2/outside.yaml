@@ -14,26 +14,27 @@ cards:
         square: false
         cards:
           - type: button
+            entity: group.downstairs_shades
+            name: "Downstairs"
+            icon: mdi:dots-horizontal
+            theme: round_button
+            tap_action:
+              action: more-info
+
+          - type: button
+            entity: group.upstairs_shades
+            name: "Upstairs"
+            icon: mdi:dots-horizontal
+            theme: round_button
+            tap_action:
+              action: more-info
+
+          - type: button
             entity: group.shade_automation
             name: "Automagical"
             theme: round_button
             tap_action:
               action: toggle
-
-          - type: button
-            entity: script.shades_halfway
-            name: "Halfway"
-            theme: round_button
-            tap_action:
-              action: toggle
-
-          - type: button
-            entity: group.shades
-            name: "Shades"
-            icon: mdi:dots-horizontal
-            theme: round_button
-            tap_action:
-              action: more-info
 
       # what's on
       - type: entity-filter

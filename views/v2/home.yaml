@@ -99,19 +99,6 @@ cards:
               action: none
 
           - type: button
-            entity: binary_sensor.doors_and_windows
-            theme: no_card
-            name: "Outside"
-            icon: mdi:door
-            icon_height: 25px
-            show_state: true
-            tap_action:
-              action: navigate
-              navigation_path: outside
-            hold_action:
-              action: none
-
-          - type: button
             entity: group.climate
             theme: no_card
             name: "Climate"
@@ -121,6 +108,19 @@ cards:
             tap_action:
               action: navigate
               navigation_path: climate
+            hold_action:
+              action: none
+
+          - type: button
+            entity: binary_sensor.doors_and_windows
+            theme: no_card
+            name: "Outside"
+            icon: mdi:door
+            icon_height: 25px
+            show_state: true
+            tap_action:
+              action: navigate
+              navigation_path: outside
             hold_action:
               action: none
 
@@ -197,31 +197,22 @@ cards:
                     state: "disarmed"
 
           # alarm
-          - type: custom:config-template-card
-            entities:
-              - alarm_control_panel.alarm_panel_ui
-            card:
-              type: button
-              entity: alarm_control_panel.alarm_panel_ui
-              theme: round_button
-              icon_height: 24px
-              name: ${ 
-                states["alarm_control_panel.alarm_panel_ui"]
-                  .state.split("_")
-                  .map(word => word.charAt(0)
-                  .toUpperCase() + word.slice(1))
-                  .join(" ") 
+          - type: button
+            entity: alarm_control_panel.alarm_panel_ui
+            theme: round_button
+            icon_height: 24px
+            tap_action:
+              action: more-info
+            card_mod:
+              style: |
+                ha-card {
+                  --card-mod-icon-color: white;
+                  
+                  background:
+                    {% if "armed_" in states("alarm_control_panel.alarm_panel_ui") %}
+                      #aa2e25
+                    {% else %}
+                      var(--card-background-color)
+                    {% endif %}
+                    ;
                 }
-              tap_action:
-                action: more-info
-              card_mod:
-                style: |
-                  ha-card {
-                    background:
-                      {% if "armed_" in states("alarm_control_panel.alarm_panel_ui") %}
-                        #aa2e25
-                      {% else %}
-                        var(--card-background-color)
-                      {% endif %}
-                      ;
-                  }

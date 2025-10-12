@@ -48,7 +48,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.downstairs_apple_tv
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.master_bedroom_apple_tv
@@ -56,7 +56,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.master_bedroom_apple_tv
-                state: playing
+                state_not: "off"
 
           - type: media-control
             entity: media_player.bunk_bed_apple_tv
@@ -64,7 +64,7 @@ cards:
             visibility:
               - condition: state
                 entity: media_player.bunk_bed_apple_tv
-                state: playing
+                state_not: "off"
 
           # speakers      
           - type: media-control

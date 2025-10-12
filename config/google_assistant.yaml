@@ -58,12 +58,27 @@ entity_config:
     aliases:
       - MOVIE_LIGHTS
     room: house
-  script.shades_up:
+  script.downstairs_shades_up:
+    expose: true
+    aliases:
+      - SHADES_UP
+    room: house
+  script.downstairs_shades_down:
+    expose: true
+    aliases:
+      - SHADES_DOWN
+    room: house
+  script.downstairs_shades_halfway:
+    expose: true
+    aliases:
+      - SHADES_HALFWAY
+    room: house
+  script.upstairs_shades_up:
     expose: true
     room: house
-  script.shades_down:
+  script.upstairs_shades_down:
     expose: true
     room: house
-  script.shades_halfway:
+  script.upstairs_shades_halfway:
     expose: true
     room: house

@@ -9,17 +9,17 @@ movie_time:
     - service: homeassistant.turn_off
       entity_id: group.shade_automation
     # put shades down
-    - service: script.turn_on
-      entity_id: script.shade5down
-    - service: script.turn_on
-      entity_id: script.shade4down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_5
+    - service: cover.close_cover
+      entity_id: cover.window_shade_4
     # if the sun is down then close all shades and put the lights on
     - condition: template
       value_template: "{{ is_state('sun.sun', 'below_horizon') }}"
-    - service: script.turn_on
-      entity_id: script.shade3down
-    - service: script.turn_on
-      entity_id: script.shade2down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_3
+    - service: cover.close_cover
+      entity_id: cover.window_shade_2
     - service: scene.turn_on
       entity_id: scene.mood_lights
 
@@ -69,7 +69,9 @@ good_morning:
     - service: scene.turn_on
       entity_id: scene.good_morning
     - service: script.turn_on
-      entity_id: script.shades_up
+      entity_id: script.upstairs_shades_up
+    - service: script.turn_on
+      entity_id: script.downstairs_shades_up
 
 good_night:
   alias: "Good Night"
@@ -78,7 +80,9 @@ good_night:
     - service: scene.turn_on
       entity_id: scene.lights_off
     - service: script.turn_on
-      entity_id: script.shades_down_all
+      entity_id: script.downstairs_shades_down_all
+    - service: script.turn_on
+      entity_id: script.upstairs_shades_down
 
 goodbye:
   alias: "Goodbye"
@@ -86,7 +90,9 @@ goodbye:
     - service: homeassistant.turn_off
       entity_id: light.house
     - service: script.turn_on
-      entity_id: script.shades_down_all
+      entity_id: script.downstairs_shades_down_all
+    - service: script.turn_on
+      entity_id: script.upstairs_shades_down
     - service: script.climate_away
 
 welcome_home:
@@ -98,7 +104,8 @@ welcome_home:
           {% if state_attr("sun.sun", "elevation") < -4 %}
           script.welcome_lights
           {% else %}
-          script.shades_up
+          - script.downstairs_shades_up
+          - script.upstairs_shades_up
           {% endif %}
     - service: climate.set_hvac_mode
       entity_id: climate.bathroom_floor
@@ -112,152 +119,8 @@ welcome_lights:
         - light.kitchen_lights
         - light.front_yard
 
-shade1up:
-  alias: "Shade 1 - Up"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.open_cover
-      data:
-        entity_id: cover.window_shade_1
-
-shade1down:
-  alias: "Shade 1 - Down"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.close_cover
-      data:
-        entity_id: cover.window_shade_1
-
-shade1stop:
-  alias: "Shade 1 - Stop"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.stop_cover
-      data:
-        entity_id: cover.window_shade_1
-
-shade2up:
-  alias: "Shade 2 - Up"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.open_cover
-      data:
-        entity_id: cover.window_shade_2
-
-shade2down:
-  alias: "Shade 2 - Down"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.close_cover
-      data:
-        entity_id: cover.window_shade_2
-
-shade2stop:
-  alias: "Shade2 - Stop"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.stop_cover
-      data:
-        entity_id: cover.window_shade_2
-
-shade3up:
-  alias: "Shade 3 - Up"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.open_cover
-      data:
-        entity_id: cover.window_shade_3
-
-shade3down:
-  alias: "Shade 3 - Down"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.close_cover
-      data:
-        entity_id: cover.window_shade_3
-
-shade3stop:
-  alias: "Shade 3 - Stop"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.stop_cover
-      data:
-        entity_id: cover.window_shade_3
-
-shade4up:
-  alias: "Shade 4 - Up"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.open_cover
-      data:
-        entity_id: cover.window_shade_4
-
-shade4down:
-  alias: "Shade 4 - Down"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.close_cover
-      data:
-        entity_id: cover.window_shade_4
-
-shade4stop:
-  alias: "Shade 4 - Stop"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.stop_cover
-      data:
-        entity_id: cover.window_shade_4
-
-shade5up:
-  alias: "Shade 5 - Up"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.open_cover
-      data:
-        entity_id: cover.window_shade_5
-
-shade5down:
-  alias: "Shade 5 - Down"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.close_cover
-      data:
-        entity_id: cover.window_shade_5
-
-shade5stop:
-  alias: "Shade 5 - Stop"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.stop_cover
-      data:
-        entity_id: cover.window_shade_5
-
-shade6up:
-  alias: "Shade 6 - Up"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.open_cover
-      data:
-        entity_id: cover.window_shade_6
-
-shade6down:
-  alias: "Shade 6 - Down"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.close_cover
-      data:
-        entity_id: cover.window_shade_6
-
-shade6stop:
-  alias: "Shade 6 - Stop"
-  icon: "mdi:grid-large"
-  sequence:
-    - service: cover.stop_cover
-      data:
-        entity_id: cover.window_shade_6
-
-shades_up:
-  alias: "Shades Up"
+downstairs_shades_up:
+  alias: "Downstairs Shades Up"
   icon: "mdi:grid-large"
   sequence:
     - condition: state
@@ -267,72 +130,72 @@ shades_up:
     - service: homeassistant.turn_off
       entity_id: group.shade_automation
     # raise each of the shades
-    - service: script.turn_on
-      entity_id: script.shade5up
+    - service: cover.open_cover
+      entity_id: cover.window_shade_5
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade4up
+    - service: cover.open_cover
+      entity_id: cover.window_shade_4
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade3up
+    - service: cover.open_cover
+      entity_id: cover.window_shade_3
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade2up
+    - service: cover.open_cover
+      entity_id: cover.window_shade_2
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade1up
+    - service: cover.open_cover
+      entity_id: cover.window_shade_1
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade6up
+    - service: cover.open_cover
+      entity_id: cover.window_shade_6
 
-shades_down:
-  alias: "Shades Down"
+downstairs_shades_down:
+  alias: "Downstairs Shades Down"
   icon: "mdi:grid-large"
   sequence:
     # disable automatic shades if enabled
     - service: homeassistant.turn_off
       entity_id: group.shade_automation
     # lower the front shades
-    - service: script.turn_on
-      entity_id: script.shade5down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_5
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade4down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_4
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade3down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_3
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade2down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_2
 
-shades_down_all:
-  alias: "Shades Down All"
+downstairs_shades_down_all:
+  alias: "Downstairs Shades Down All"
   icon: "mdi:grid-large"
   sequence:
     # disable automatic shades if enabled
     - service: homeassistant.turn_off
       entity_id: group.shade_automation
     # lower all of the shades
-    - service: script.turn_on
-      entity_id: script.shade5down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_5
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade4down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_4
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade3down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_3
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade2down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_2
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade1down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_1
     - delay: "00:00:02"
-    - service: script.turn_on
-      entity_id: script.shade6down
+    - service: cover.close_cover
+      entity_id: cover.window_shade_6
 
-shades_halfway:
-  alias: "Shades Halfway"
+downstairs_shades_halfway:
+  alias: "Downstairs Shades Halfway"
   icon: "mdi:grid-large"
   sequence:
     # disable automatic shades if enabled
@@ -345,5 +208,70 @@ shades_halfway:
         - cover.window_shade_4
         - cover.window_shade_3
         - cover.window_shade_2
+      data:
+        position: 71
+
+upstairs_shades_down:
+  alias: "Upstairs Shades Down"
+  icon: "mdi:grid-large"
+  sequence:
+    # disable automatic shades if enabled
+    #- service: homeassistant.turn_off
+    #  entity_id: group.shade_automation
+    # lower the front shades
+    - service: cover.close_cover
+      entity_id: cover.master_shade_6
+    - delay: "00:00:02"
+    - service: cover.close_cover
+      entity_id: cover.master_shade_5
+    - delay: "00:00:02"
+    - service: cover.close_cover
+      entity_id: cover.master_shade_4
+    - delay: "00:00:02"
+    - service: cover.close_cover
+      entity_id: cover.master_shade_3
+    - delay: "00:00:02"
+    - service: cover.close_cover
+      entity_id: cover.master_shade_2
+    - delay: "00:00:02"
+    - service: cover.close_cover
+      entity_id: cover.master_shade_1
+      
+upstairs_shades_up:
+  alias: "Upstairs Shades Up"
+  icon: "mdi:grid-large"
+  sequence:
+    # disable automatic shades if enabled
+    #- service: homeassistant.turn_off
+    #  entity_id: group.shade_automation
+    # lower the front shades
+    - service: cover.open_cover
+      entity_id: cover.master_shade_6
+    - delay: "00:00:02"
+    - service: cover.open_cover
+      entity_id: cover.master_shade_5
+    - delay: "00:00:02"
+    - service: cover.open_cover
+      entity_id: cover.master_shade_4
+    # if the sun is down then don't open
+    - condition: template
+      value_template: "{{ is_state('sun.sun', 'above_horizon') }}"
+    - delay: "00:00:02"
+    - service: cover.open_cover
+      entity_id: cover.master_shade_3
+
+upstairs_shades_halfway:
+  alias: "Upstairs Shades Halfway"
+  icon: "mdi:grid-large"
+  sequence:
+    # disable automatic shades if enabled
+    #- service: homeassistant.turn_off
+    #  entity_id: group.shade_automation
+    # set each of the shades to their midpoint
+    - service: cover.set_cover_position
+      entity_id: 
+        - cover.master_shade_6
+        - cover.master_shade_5
+        - cover.master_shade_4
       data:
         position: 71

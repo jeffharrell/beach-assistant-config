@@ -61,6 +61,21 @@ cards:
               - entity: sensor.window_shade_7_battery_level
                 title: "Window Shade 7"
 
+              - type: divider
+
+              - entity: sensor.master_shade_1_battery_level
+                title: "Master Shade 1"
+              - entity: sensor.master_shade_2_battery_level
+                title: "Master Shade 2"
+              - entity: sensor.master_shade_3_battery_level
+                title: "Master Shade 3"
+              - entity: sensor.master_shade_4_battery_level
+                title: "Master Shade 4"
+              - entity: sensor.master_shade_5_battery_level
+                title: "Master Shade 5"
+              - entity: sensor.master_shade_6_battery_level
+                title: "Master Shade 6"
+
       # settings
       - type: entities
         title: "Settings"
