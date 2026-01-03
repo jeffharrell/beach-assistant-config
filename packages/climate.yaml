@@ -3,15 +3,10 @@ climate:
     username: !secret intensis_user
     password: !secret intensis_pass
 
-
-sensor:
-  - platform: template
-    sensors:
-      hvac_on:
-        value_template: >
-          {% set modes = ["heat_cool", "heat", "dry", "fan_only", "cool"] %}
-          {% if states('climate.downstairs') in modes or states('climate.upstairs') in modes %}on{% else %}off{% endif %}
-
+template:
+  - sensor:
+    - name: "HVAC On"
+      state: '{% set modes = ["heat_cool", "heat", "dry", "fan_only", "cool"] %}{% if states("climate.downstairs") in modes or states("climate.upstairs") in modes %}on{% else %}off{% endif %}'
 
 automation:
   - alias: "Climate - Windows Open"

@@ -98,19 +98,24 @@ goodbye:
 welcome_home:
   alias: "Welcome Home"
   sequence:
-    - service: homeassistant.turn_on
-      data_template:
-        entity_id: >-
-          {% if state_attr("sun.sun", "elevation") < -4 %}
-          script.welcome_lights
-          {% else %}
-          - script.downstairs_shades_up
-          - script.upstairs_shades_up
-          {% endif %}
     - service: climate.set_hvac_mode
       entity_id: climate.bathroom_floor
       data:
         hvac_mode: heat
+    - if:
+        - condition: template
+          value_template: "{{ state_attr('sun.sun', 'elevation') < -4 }}"
+      then:
+        - service: homeassistant.turn_on
+          target:
+            entity_id: script.welcome_lights
+      else: 
+        - service: homeassistant.turn_on
+          target:
+            entity_id: script.downstairs_shades_up
+        - service: homeassistant.turn_on
+          target:
+            entity_id: script.upstairs_shades_up
 
 welcome_lights:
   sequence:
@@ -216,8 +221,8 @@ upstairs_shades_down:
   icon: "mdi:grid-large"
   sequence:
     # disable automatic shades if enabled
-    #- service: homeassistant.turn_off
-    #  entity_id: group.shade_automation
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
     # lower the front shades
     - service: cover.close_cover
       entity_id: cover.master_shade_6
@@ -242,8 +247,8 @@ upstairs_shades_up:
   icon: "mdi:grid-large"
   sequence:
     # disable automatic shades if enabled
-    #- service: homeassistant.turn_off
-    #  entity_id: group.shade_automation
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
     # lower the front shades
     - service: cover.open_cover
       entity_id: cover.master_shade_6
@@ -265,8 +270,8 @@ upstairs_shades_halfway:
   icon: "mdi:grid-large"
   sequence:
     # disable automatic shades if enabled
-    #- service: homeassistant.turn_off
-    #  entity_id: group.shade_automation
+    - service: homeassistant.turn_off
+      entity_id: group.shade_automation
     # set each of the shades to their midpoint
     - service: cover.set_cover_position
       entity_id: 

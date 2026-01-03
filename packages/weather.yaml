@@ -2,7 +2,6 @@ sun:
 
 rest:
   # current tide https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?date=latest&station=9413450&product=ofs_water_level&datum=MLLW&time_zone=lst_ldt&units=english&format=json
-
   - authentication: basic
     scan_interval: 3600
     resource_template: "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&station=9413450&datum=MLLW&time_zone=lst_ldt&units=english&interval=hilo&format=json&begin_date={{ now().strftime('%Y%m%d') }}&end_date={{ (as_timestamp(now())+ 86400) | timestamp_custom('%Y%m%d') }}"
@@ -28,27 +27,31 @@ rest:
           {% endfor %}
 
           {% if tide.next.type == "H" %}High{% else %}Low{% endif %} tide of {{ tide.next.v | round(1) }}' at {{ as_timestamp(tide.next.t) | timestamp_custom("%-I %p") }}
-sensor:
-  - platform: template
-    sensors:
-      outside_temp: 
-        unit_of_measurement: "°F"
-        value_template: >
-          {{ state_attr("weather.kmry_daynight", "temperature")|default(0) }}
-      outside_forecast:
-        value_template: >
-          {{ states("weather.kmry_daynight")|replace("-", " ")|replace("partlycloudy", "partly cloudy")|default("") }}
-        icon_template: >
-          {% set condition = states("weather.kmry_daynight") %}
 
-          {%- if "cloud" in condition -%}
-            mdi:weather-cloudy
-          {%- elif "fog" in condition -%}
-            mdi:weather-fog
-          {%- elif "rain" in condition -%}
-            mdi:umbrella-outline
-          {%- elif "wind" in condition -%}
-            mdi:weather-windy
-          {%- else -%}
-            mdi:weather-sunny
-          {%- endif %}
+template:
+  - sensor:
+    - name: outside_temp
+      default_entity_id: sensor.outside_temp  
+      state: '{{ state_attr("weather.kmry_daynight", "temperature")|default(0) }}'
+      unit_of_measurement: "°F"
+
+  - sensor:
+    - name: outside_forecast
+      default_entity_id: sensor.outside_forecast
+      icon: >
+        {% set condition = states("weather.kmry_daynight") %}
+
+        {%- if "cloud" in condition -%}
+          mdi:weather-cloudy
+        {%- elif "fog" in condition -%}
+          mdi:weather-fog
+        {%- elif "rain" in condition -%}
+          mdi:umbrella-outline
+        {%- elif "wind" in condition -%}
+          mdi:weather-windy
+        {%- else -%}
+          mdi:weather-sunny
+        {%- endif %}
+      state: >
+        {{ states("weather.kmry_daynight")|replace("-", " ")|replace("partlycloudy", "partly cloudy")|default("") }}
+      

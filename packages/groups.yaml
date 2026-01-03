@@ -162,8 +162,9 @@ group:
     name: "Make It Less Bright"
     icon: mdi:creation
     entities:
-      - switch.vertical_toggle_control_downstairs_front_windows
-      - switch.vertical_toggle_control_downstairs_side_windows
+      - switch.downstairs_front_shades_toggle_control
+      - switch.downstairs_side_shades_toggle_control
+      - switch.master_shades_automatic_toggle_control
 
   downstairs_shades:
     name: "Downstairs Shades"

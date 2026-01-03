@@ -62,6 +62,12 @@ cards:
               state: "on"
         show_empty: false
 
+      # tides
+      - type: history-graph
+        theme: padded_card
+        entities:
+          - sensor.tides
+
       # settings
       - type: entities
         title: "Advanced"
