@@ -28,7 +28,7 @@ cards:
           - type: button
             entity: light.house
             name: "Lights"
-            icon: mdi:dots-horizontal
+            icon: mdi:lightbulb-group
             theme: round_button
             tap_action:
               action: more-info

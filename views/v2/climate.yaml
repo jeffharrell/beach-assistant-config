@@ -37,9 +37,9 @@ cards:
             show_state: false
             entities:
               - entity: sensor.downstairs_outlet_humidity
-                name: Humidity
+                name: "Humidity"
               - entity: sensor.downstairs_outlet_temperature
-                name: Temperature
+                name: "Temperature"
                 format: precision0
           - type: custom:multiple-entity-row
             entity: sensor.bunk_bedroom_outlet_temperature
@@ -47,9 +47,9 @@ cards:
             show_state: false
             entities:
               - entity: sensor.bunk_bedroom_outlet_humidity
-                name: Humidity
+                name: "Humidity"
               - entity: sensor.bunk_bedroom_outlet_temperature
-                name: Temperature
+                name: "Temperature"
                 format: precision0
           - type: custom:multiple-entity-row
             entity: sensor.master_bedroom_outlet_temperature
@@ -57,9 +57,22 @@ cards:
             show_state: false
             entities:
               - entity: sensor.master_bedroom_outlet_humidity
-                name: Humidity
+                name: "Humidity"
               - entity: sensor.master_bedroom_outlet_temperature
-                name: Temperature
+                name: "Temperature"
+                format: precision0
+          - type: custom:multiple-entity-row
+            entity: climate.bathroom_floor
+            name: "Bathroom Floor"
+            show_state: false
+            state_color: true
+            entities:
+              - attribute: current_humidity
+                name: "Humidity"
+                unit: " %"
+              - attribute: current_temperature
+                name: "Temperature"
+                unit: " °F"
                 format: precision0
 
       # settings

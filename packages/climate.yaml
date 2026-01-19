@@ -69,7 +69,13 @@ automation:
         - condition: template
           value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.climate.upstairs.last_updated)) / 86400) > 1 }}"
     action:
+      - action: homeassistant.reload_config_entry
+        target:
+          entity_id: climate.upstairs
+      - action: homeassistant.reload_config_entry
+        target:
+          entity_id: climate.downstairs
       - service: notify.phones
         data:
           title: "Beach"
-          message: "HVAC is offline!"
+          message: "HVAC is offline! Attempting to fix."

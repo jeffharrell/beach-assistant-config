@@ -16,7 +16,7 @@ cards:
           - type: button
             entity: group.downstairs_shades
             name: "Downstairs"
-            icon: mdi:dots-horizontal
+            icon: mdi:window-shutter
             theme: round_button
             tap_action:
               action: more-info
@@ -24,7 +24,7 @@ cards:
           - type: button
             entity: group.upstairs_shades
             name: "Upstairs"
-            icon: mdi:dots-horizontal
+            icon: mdi:window-shutter
             theme: round_button
             tap_action:
               action: more-info
@@ -63,10 +63,14 @@ cards:
         show_empty: false
 
       # tides
-      - type: history-graph
-        theme: padded_card
-        entities:
-          - sensor.tides
+      - type: vertical-stack
+        title: "Tide"
+        cards:
+          - type: history-graph
+            theme: padded_card
+            show_names: false
+            entities:
+              - sensor.tides
 
       # settings
       - type: entities

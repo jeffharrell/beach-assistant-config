@@ -22,7 +22,7 @@ cards:
           - type: button
             entity: group.media_player_speakers
             name: "Speakers"
-            icon: mdi:dots-horizontal
+            icon: mdi:speaker-multiple
             theme: round_button
             tap_action:
               action: more-info
@@ -30,7 +30,7 @@ cards:
           - type: button
             entity: group.media_player_tvs
             name: "TVs"
-            icon: mdi:dots-horizontal
+            icon: mdi:television
             theme: round_button
             tap_action:
               action: more-info

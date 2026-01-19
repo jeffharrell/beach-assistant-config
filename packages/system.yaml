@@ -43,6 +43,27 @@ automation:
         data:
           volume_level: 0.5
 
+  - alias: "System - Refresh Apple TVs"
+    initial_state: True
+    mode: parallel
+    trigger:
+      platform: state
+      entity_id: 
+        - media_player.downstairs_apple_tv
+        - media_player.bunk_bed_apple_tv
+        - media_player.master_bedroom_apple_tv
+      to: "unavailable"
+      for:
+        minutes: 1
+    actions:
+      - action: homeassistant.reload_config_entry
+        target:
+          entity_id: "{{ trigger.entity_id }}"
+      - action: notify.mobile_app_jeffs_iphone
+        data:
+          message: "Resetting {{ trigger.entity_id }}"
+
+
   - alias: "System - Trash Reminder"
     initial_state: True
     trigger:
