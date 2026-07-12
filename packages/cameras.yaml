@@ -31,25 +31,12 @@ automation:
       value_template: "{{ is_state('input_boolean.camera_motion_enabled', 'on') }}"
     action:
       # take a picture
-      - service: camera.snapshot
+      - action: script.camera_snapshot_notify
         data:
-          entity_id: "{{ trigger.json.camera }}"
-          filename: "/config/www/cameras/{{ trigger.json.camera }}.jpg"
-      # create a text response for that picture
-      - action: google_generative_ai_conversation.generate_content
-        data:
-          prompt: "{{ states('input_text.camera_motion_prompt') }}"
-          filenames:
-            - "/config/www/cameras/{{ trigger.json.camera }}.jpg"
-        response_variable: generated_content
-      # send notification
-      - service: notify.phones
-        data_template:
+          camera_entity: "{{ trigger.json.camera }}"
+          filename: "{{ trigger.json.camera }}.jpg"
           title: "{{ trigger.json.name }}"
-          message: "{{ generated_content.text }}"
-          data:
-            image: "/local/cameras/{{ trigger.json.camera }}.jpg"
-            url: "/lovelace/cameras"
+          media_content_id: "media-source://camera/{{ trigger.json.camera }}"
       # update the counter
       - service: counter.increment
         target:

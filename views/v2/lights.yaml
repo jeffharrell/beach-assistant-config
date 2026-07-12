@@ -13,63 +13,60 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: button
+          - type: tile
             entity: script.mood_lights
+            hide_state: true
             theme: round_button
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
-          - type: button
+          - type: tile
             entity: script.dinner_lights
+            hide_state: true
             theme: round_button
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
 
-          - type: button
-            entity: light.house
-            name: "Lights"
-            icon: mdi:lightbulb-group
-            theme: round_button
-            tap_action:
-              action: more-info
+      # lights
+      - type: 'custom:mod-card'
+        style: |
+          ha-card {
+            --ha-card-border-color: var(--secondary-background-color);
 
-      # what's on
-      - type: entity-filter
+            margin-top: 25px;
+            padding: 6px 0;
+            background-color: var(--secondary-background-color);
+          }
         card:
-          state_color: true
-          show_header_toggle: false
-          theme: padded_card
-        entities:
-          - light.living_room
-          - light.dining_table
-          - light.recessed
-          - light.picture
-          - light.guest_bed
-          - light.kitchen_sink
-          - light.kitchen_cabinets
-          - light.kitchen_lights
-          - light.desk
-          - light.hallway
-          - light.bunk_bed
-          - light.master_bedroom
-          - light.master_reading_1
-          - light.master_reading_2
-          - light.master_wall
-          - light.front_yard
-          - light.back_yard
-          - light.upstairs_deck
-        conditions:
-          - condition: state
-            state: "on"
-        show_empty: false
+          type: vertical-stack
+          cards:
+            - type: tile
+              entity: light.downstairs
+              hide_state: true
+              features_position: inline
+              features:
+                - type: light-brightness
+
+            - type: tile
+              entity: light.upstairs
+              hide_state: true
+              features_position: inline
+              features:
+                - type: light-brightness
+
+            - type: tile
+              entity: light.outside
+              hide_state: true
 
       # settings
       - type: entities
-        title: "Advanced"
         state_color: true
-        theme: padded_card
+        theme: settings_card
         entities:
-          - type: divider
           - entity: automation.lights_automatic_outside_lights
             name: "Opening doors turns on lights"
             icon: mdi:creation

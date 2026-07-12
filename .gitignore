@@ -11,6 +11,8 @@ www/community/
 www/cameras/
 custom_components/
 __pycache__
+.cache/
+.ha_run.lock
 .DS_Store
 .HA_VERSION
 .storage

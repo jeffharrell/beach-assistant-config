@@ -5,10 +5,6 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.ups_status
-        to: "Online Battery Charging"
-      - platform: state
-        entity_id: sensor.ups_status
-        to: "On Battery Battery Discharging"
     action:
       service: notify.mobile_app_jeffs_iphone
       data_template:

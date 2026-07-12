@@ -15,5 +15,7 @@ logs:
   pychromecast.socket_client: critical
   custom_components.hacs: critical
   jaraco.abode.socketio: error
+  serialx.platforms.serial_linux: error
+  components.usb.utils: error
   lomond: error
   abodepy: error

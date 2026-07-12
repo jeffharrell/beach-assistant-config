@@ -27,7 +27,7 @@ cards:
         card_mod:
           style: |
             ha-card { 
-              margin-top: -65px;
+              margin-top: -45px;
               padding-bottom: 20px;
               transition: none;
               line-height: 1.8em;
@@ -88,7 +88,7 @@ cards:
               navigation_path: advanced?disable_km
             
           - type: button
-            entity: group.media_player_speakers_and_tvs
+            entity: binary_sensor.media_players
             theme: no_card
             name: "Media"
             icon_height: 25px
@@ -130,12 +130,10 @@ cards:
         title: " "
         cards:
           # mood lights
-          - type: button
+          - type: tile
             entity: script.mood_lights
+            hide_state: true
             theme: round_button
-            icon_height: 24px
-            tap_action:
-              action: toggle
             visibility:
               - condition: state
                 entity: schedule.quick_actions_mood_lights
@@ -145,14 +143,16 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-
-          # movie time
-          - type: button
-            entity: script.movie_time
-            theme: round_button
-            icon_height: 24px
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
+
+          # movie time
+          - type: tile
+            entity: script.movie_time
+            hide_state: true
+            theme: round_button
             visibility:
               - condition: state
                 entity: schedule.quick_actions_movie_time
@@ -162,14 +162,16 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-
-          # dinner lights
-          - type: button
-            entity: script.dinner_lights
-            theme: round_button
-            icon_height: 24px
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
+
+          # dinner lights
+          - type: tile
+            entity: script.dinner_lights
+            hide_state: true
+            theme: round_button
             visibility:
               - condition: state
                 entity: schedule.quick_actions_dinner_time
@@ -179,14 +181,16 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
-              
-          # good night
-          - type: button
-            entity: script.good_night
-            theme: round_button
-            icon_height: 24px
             tap_action:
               action: toggle
+            icon_tap_action:
+              action: toggle
+
+          # good night
+          - type: tile
+            entity: script.good_night
+            hide_state: true
+            theme: round_button
             visibility:
               - condition: state
                 entity: schedule.quick_actions_good_night
@@ -196,13 +200,19 @@ cards:
                   - condition: state
                     entity: alarm_control_panel.alarm
                     state: "disarmed"
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
 
           # alarm
-          - type: button
+          - type: tile
             entity: alarm_control_panel.alarm_panel_ui
+            hide_state: true
             theme: round_button
-            icon_height: 24px
             tap_action:
+              action: more-info
+            icon_tap_action:
               action: more-info
             card_mod:
               style: |

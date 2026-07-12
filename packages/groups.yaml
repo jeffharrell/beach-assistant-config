@@ -67,10 +67,9 @@ light:
       - light.back_yard_right
 
   - platform: group
-    name: "House"
-    unique_id: house
+    name: "Downstairs"
+    unique_id: downstairs
     entities:
-      # downstairs
       - light.living_room
       - light.dining_table
       - light.recessed
@@ -80,18 +79,33 @@ light:
       - light.desk
       - light.picture
       - light.guest_bed
-      # upstairs
+
+  - platform: group
+    name: "Upstairs"
+    unique_id: upstairs
+    entities:
       - light.hallway
       - light.bunk_bed
       - light.master_bedroom
       - light.master_reading_1
       - light.master_reading_2
       - light.master_wall
-      # outside
+
+  - platform: group
+    name: "Outside"
+    unique_id: outside
+    entities:
       - light.front_yard
       - light.back_yard
       - light.upstairs_deck
-      - light.back_landscape
+
+  - platform: group
+    name: "House"
+    unique_id: house
+    entities:
+      - light.downstairs
+      - light.upstairs
+      - light.outside
 
 binary_sensor:
   # Groups
@@ -126,32 +140,6 @@ binary_sensor:
       - binary_sensor.bay_window_right
 
 group:
-  media_player_speakers_and_tvs:
-    name: "Speakers and TVs"
-    icon: "mdi:television"
-    entities:
-      - group.media_player_speakers
-      - group.media_player_tvs
-
-  media_player_speakers:
-    name: "Speakers"
-    entities:
-      - media_player.back_speakers
-      - media_player.front_speakers
-      - media_player.kitchen_speakers
-      - media_player.living_room_speakers
-      - media_player.master_bedroom_speakers
-      - media_player.upstairs_deck_speakers
-      - media_player.master_bedroom_wifi
-      - media_player.bunk_bedroom_wifi
-
-  media_player_tvs:
-    name: "TVs"
-    entities:
-      - media_player.downstairs_apple_tv
-      - media_player.master_bedroom_apple_tv
-      - media_player.bunk_bed_apple_tv
-
   climate:
     name: "Climate"
     entities:
@@ -187,3 +175,10 @@ group:
       - cover.master_shade_4
       - cover.master_shade_5
       - cover.master_shade_6
+
+template:
+  - binary_sensor:
+      - name: "Media"
+        unique_id: media_players
+        state: >
+          {{ states.media_player | selectattr('state', 'eq', 'playing') | list | count > 0 }}

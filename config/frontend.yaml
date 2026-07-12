@@ -16,7 +16,7 @@ themes:
 
     card-mod-card-yaml: |
       .: |
-        .type-button ha-state-icon {
+        ha-state-icon {
           filter: none !important;
         }
 
@@ -36,42 +36,39 @@ themes:
 
         ha-card h1 {
           padding: 5px 15px 10px;
-        }  
+        }
+
+  settings_card:
+    card-mod-theme: settings_card
+
+    primary-text-color: "#fff"
+    secondary-text-color: "#ccc"
+    card-background-color: "transparent"
+
+    card-mod-card-yaml: |
+      .: |
+        ha-card {
+          --ha-icon-display: none;
+          --primary-text-color: #E0E0E0;
+
+          border-color: transparent;
+
+          margin: 40px 0 0 -40px;
+          height: auto;
+          transition: none;
+        }
+
+        #states {
+          padding: 0;
+        }
 
   round_button: 
     card-mod-theme: round_button
 
-    primary-text-color: "#fff"
-    secondary-text-color: "#ccc"
-
-    ha-card-border-width: "1px"
-    ha-card-border-radius: "28px"
-
     card-mod-card-yaml: |
-      .: |
-        .type-button {
-          display: grid;
-          grid-template-columns: 50px auto auto;
-          justify-content: start;
-          padding: 6px;
-          transition: none !important;
-        }
-
-        .type-button ha-state-icon {
-          padding: 10px;
-          background: var(--primary-background-color);
-          border-radius: 24px;
-          filter: none !important;
-        }
-
-        .type-button ha-state-icon + span {
-          margin-top: 0 !important;
-        }
-
-        .type-button .state:before {
-          content:" • ";
-          white-space: pre;
-        }
+      ha-card {
+        border-radius: 28px !important;
+      }
 
   secondary_view:
     card-mod-theme: secondary_view 
@@ -102,11 +99,12 @@ themes:
 
     # Cards
     ha-card-border-width: "1px"
-    ha-card-border-radius: "12px"
+    ha-card-border-radius: "28px"
     ha-card-header-font-size: "15px"
 
     divider-color: "rgba(0, 0, 0, 0.15)"
     code-editor-background-color: "#000"
+    input-ink-color: "#000"
 
     # Icons
     state-icon-color: "#E0E0E0"
@@ -124,6 +122,10 @@ themes:
     state-climate-fan_only-color: "var(--state-active-color)"
 
     # CSS Overrides
+    card-mod-more-info-yaml: |
+      ha-more-info-info $ more-info-content $ more-info-light $: |
+          .controls {  }
+
     card-mod-root: |
       .header {
         position: relative !important;
@@ -135,6 +137,14 @@ themes:
       .header .main-title {
         font-size: 1.3em;
         font-weight: bold;
+      }
+
+      .header .toolbar {
+        border: 0 !important;
+      }
+
+      #view {
+        padding: 40px 0 0 !important;
       }
 
       @media only screen and (hover: none) and (pointer: coarse) {

@@ -13,27 +13,35 @@ cards:
         columns: 2
         square: false
         cards:
-          - type: button
+          - type: tile
             entity: group.downstairs_shades
             name: "Downstairs"
             icon: mdi:window-shutter
+            hide_state: true
             theme: round_button
             tap_action:
               action: more-info
+            icon_tap_action:
+              action: more-info
 
-          - type: button
+          - type: tile
             entity: group.upstairs_shades
             name: "Upstairs"
             icon: mdi:window-shutter
+            hide_state: true
             theme: round_button
             tap_action:
               action: more-info
+            icon_tap_action:
+              action: more-info
 
-          - type: button
+          - type: tile
             entity: group.shade_automation
-            name: "Automagical"
+            hide_state: true
             theme: round_button
             tap_action:
+              action: toggle
+            icon_tap_action:
               action: toggle
 
       # what's on
@@ -62,23 +70,11 @@ cards:
               state: "on"
         show_empty: false
 
-      # tides
-      - type: vertical-stack
-        title: "Tide"
-        cards:
-          - type: history-graph
-            theme: padded_card
-            show_names: false
-            entities:
-              - sensor.tides
-
       # settings
       - type: entities
-        title: "Advanced"
         state_color: true
-        theme: padded_card
+        theme: settings_card
         entities:
-          - type: divider
           - entity: input_boolean.camera_motion_enabled
             name: "Motion alerts"
             icon: mdi:creation
