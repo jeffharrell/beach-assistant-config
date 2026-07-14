@@ -139,7 +139,7 @@ automation:
             - action: persistent_notification.create
               data:
                 notification_id: "low_battery_{{ repeat.item }}"
-                title: "Low battery
+                title: "Low battery"
                 message: >
                   {{ state_attr(repeat.item, 'friendly_name') }}
                   ({{ repeat.item }}) is reporting a low battery.
