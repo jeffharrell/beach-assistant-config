@@ -37,6 +37,7 @@ cards:
 
           - type: tile
             entity: group.shade_automation
+            name: "Automate"
             hide_state: true
             theme: round_button
             tap_action:

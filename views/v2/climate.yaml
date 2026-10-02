@@ -14,16 +14,16 @@ cards:
         square: false
         cards:
           - type: tile
-            entity: climate.upstairs
+            entity: climate.downstairs
             hide_state: true
             theme: round_button
             tap_action:
               action: more-info
             icon_tap_action:
               action: more-info
-
+              
           - type: tile
-            entity: climate.downstairs
+            entity: climate.upstairs
             hide_state: true
             theme: round_button
             tap_action:

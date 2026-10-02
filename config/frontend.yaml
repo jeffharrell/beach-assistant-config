@@ -1,6 +1,3 @@
-extra_module_url:
-  - /local/community/lovelace-card-mod/card-mod.js
-
 themes:
   app_theme:
     card-mod-theme: app_theme
@@ -146,7 +143,7 @@ themes:
     md-sys-color-surface:                   *main-surface
     md-sys-color-surface-container-lowest:  *main-surface
     md-sys-color-surface-container-low:     *main-surface
-    mda-sys-color-surface-container:         *main-pop
+    md-sys-color-surface-container:         *main-pop
     md-sys-color-surface-container-high:    *main-pop
     md-sys-color-surface-container-highest: *main-pop
     md-sys-color-on-surface:              *white

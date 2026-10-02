@@ -95,7 +95,7 @@ automation:
           message: "Alarm alert!"
           data:
             entity_id: camera.driveway
-            url: "/lovelace/cameras"
+            url: "/my-home/cameras"
             push:
               sound:
                 name: "default"
@@ -104,7 +104,9 @@ automation:
       - service: homeassistant.turn_on
         entity_id: light.house
       - service: script.turn_on
-        entity_id: script.shades_up
+        entity_id: script.downstairs_shades_up
+      - service: script.turn_on
+        entity_id: script.upstairs_shades_up
 
   - alias: "Alarm - Are you away"
     initial_state: True
@@ -128,6 +130,8 @@ automation:
         entity_id: alarm_control_panel.alarm
         to: "disarmed"
         from: "armed_away"
+      - trigger: homeassistant
+        event: start
     actions:
       - repeat:
           for_each: >

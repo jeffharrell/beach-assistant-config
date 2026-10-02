@@ -28,8 +28,6 @@ google_assistant: !include config/google_assistant.yaml
 
 history: !include config/history.yaml
 
-http: !include config/http.yaml
-
 ios:
 
 logger: !include config/logger.yaml

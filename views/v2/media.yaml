@@ -14,6 +14,26 @@ cards:
         square: false
         cards:
           - type: tile
+            entity: input_boolean.play_downstairs_music
+            name: "Downstairs"
+            hide_state: true
+            theme: round_button
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle        
+
+          - type: tile
+            entity: input_boolean.play_front_deck_music
+            name: "Front Deck"
+            hide_state: true
+            theme: round_button
+            tap_action:
+              action: toggle
+            icon_tap_action:
+              action: toggle
+
+          - type: tile
             entity: script.movie_time
             hide_state: true
             theme: round_button

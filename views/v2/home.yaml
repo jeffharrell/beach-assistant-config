@@ -193,7 +193,7 @@ cards:
             theme: round_button
             visibility:
               - condition: state
-                entity: schedule.quick_actions_good_night
+                entity: schedule.quick_actions_goodnight
                 state: "on"
               - condition: and
                 conditions:

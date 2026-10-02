@@ -1,3 +1,12 @@
+input_boolean:
+  play_downstairs_music:
+    name: "Play Downstairs"
+    icon: "mdi:music"
+
+  play_front_deck_music:
+    name: "Play Deck"
+    icon: "mdi:music"
+
 automation:
   - alias: "System - Theme"
     initial_state: True
@@ -9,6 +18,21 @@ automation:
       data_template:
         name: app_theme
 
+  - alias: "System - Reset switches"
+    mode: parallel
+    trigger:
+      platform: state
+      entity_id: 
+        - input_boolean.play_downstairs_music
+        - input_boolean.play_front_deck_music
+      to: "on"
+      for:
+        minutes: 1
+    actions:
+      - action: homeassistant.turn_off
+        target:
+          entity_id: "{{ trigger.entity_id }}"
+          
   - alias: "System - Reset settings"
     initial_state: True
     trigger:
@@ -62,7 +86,6 @@ automation:
       - action: notify.mobile_app_jeffs_iphone
         data:
           message: "Resetting {{ trigger.entity_id }}"
-
 
   - alias: "System - Trash Reminder"
     initial_state: True
