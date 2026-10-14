@@ -173,6 +173,14 @@ group:
       - cover.master_shade_5
       - cover.master_shade_6
 
+
+  doors_and_windows_and_shades:
+    name: "Doors and Windows and Shades"
+    entities:
+      - binary_sensor.doors_and_windows
+      - group.downstairs_shades
+      - group.upstairs_shades
+
 template:
   - binary_sensor:
       - name: "Media"

@@ -154,7 +154,7 @@ camera_snapshot_notify:
         message: "{{ generated_content.data | default('', true) }}"
         data:
           image: "/local/cameras/{{ filename }}"
-          url: "/lovelace/cameras"
+          url: "/my-home/cameras"
     - action: counter.increment
       target:
         entity_id: counter.camera_motion

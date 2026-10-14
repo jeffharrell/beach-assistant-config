@@ -2,7 +2,7 @@ title: "Media"
 path: "media"
 back_path: "home"
 subview: true
-theme: secondary_view
+theme: subview
 cards:
   
   - type: vertical-stack

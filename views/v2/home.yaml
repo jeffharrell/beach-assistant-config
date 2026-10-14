@@ -19,9 +19,16 @@ cards:
           {% set list = expand('binary_sensor.doors_and_windows') | selectattr('state', 'eq', 'on') | list  %}
           {% set len = list | count %}
           {% if len == 1 %} 
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
+            <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} {% if list[0].name.endswith('s') %}are{% else %}is{% endif %} open
           {% elif len > 1 %}
-             <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ len - 1 }} more are open
+            <ha-icon icon="mdi:door"></ha-icon> {{ list[0].name|capitalize }} and {{ len - 1 }} more are open
+          {%- endif %}
+          
+          {% set alerts = states('sensor.nws_alerts_alerts') | int(default=0)  %}
+          {% if alerts == 1 -%} 
+            {% for alert_num in range(alerts) -%}
+            <font color="red"><ha-icon icon="mdi:alert" style="color: red"></ha-icon> {{ state_attr('sensor.nws_alerts_alerts', 'Alerts')[alert_num].Headline | lower | capitalize }}</font>
+            {% endfor %}
           {%- endif %}
         text_only: true
         card_mod:
@@ -113,7 +120,7 @@ cards:
               action: none
 
           - type: button
-            entity: binary_sensor.doors_and_windows
+            entity: group.doors_and_windows_and_shades
             theme: no_card
             name: "Outside"
             icon: mdi:door

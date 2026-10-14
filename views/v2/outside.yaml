@@ -2,7 +2,7 @@ title: "Outside"
 path: "outside"
 back_path: "home"
 subview: true
-theme: secondary_view
+theme: subview
 cards:
 
   - type: vertical-stack
@@ -65,8 +65,6 @@ cards:
         conditions:
           - condition: or
             conditions:
-            - condition: state
-              state: "open"
             - condition: state
               state: "on"
         show_empty: false

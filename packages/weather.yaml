@@ -55,3 +55,45 @@ template:
       state: >
         {{ states("weather.kmry_daynight")|replace("-", " ")|replace("partlycloudy", "partly cloudy")|default("") }}
       
+
+automation:
+  - alias: "Severe Weather Alerts"
+    mode: single
+    trigger:
+      - trigger: state
+        entity_id: sensor.nws_alerts_alerts
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state | int(0) > trigger.from_state.state | int(0) }}"
+    action:
+      - variables:
+          alerts: "{{ state_attr('sensor.nws_alerts_alerts', 'Alerts') }}"
+
+      # notify in the UI
+      - action: persistent_notification.create
+        data:
+          title: "⚠️ New Weather Alert"
+          message: >-
+            {% if alerts and alerts | length > 0 %}
+              {{ alerts[0].Headline }}
+              
+              **Severity:** {{ alerts[0].Severity }}
+              **Expires:** {{ alerts[0].Expires }}
+              **Description:** 
+              {{ alerts[0].Description }}
+            {% else %}
+              New weather alert received.
+            {% endif %}
+
+      # message phones
+      - action: notify.phones
+        data:
+          title: "Beach"
+          message: "{{ alerts[0].Headline if alerts and alerts | length > 0 else 'Unknown' }}"
+          data:
+            url: "/my-home/home"
+            push:
+              sound:
+                name: "default"
+                critical: 1
+                volume: 0
