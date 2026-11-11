@@ -65,31 +65,41 @@ automation:
     condition:
       - condition: template
         value_template: "{{ trigger.to_state.state | int(0) > trigger.from_state.state | int(0) }}"
+
+      - condition: template
+        value_template: >-
+          {% set alerts = state_attr('sensor.nws_alerts_alerts', 'Alerts') %}
+          {% if alerts and alerts | length > 0 %}
+            {% set text = (alerts[0].Event | default('')) ~ ' ' ~ (alerts[0].Description | default('')) %}
+            {{ text | regex_search('flood|wave|tsunami|tide|water|rain', ignorecase=True) }}
+          {% else %}
+            false
+          {% endif %}
     action:
       - variables:
           alerts: "{{ state_attr('sensor.nws_alerts_alerts', 'Alerts') }}"
+          latest: "{{ alerts[0] if alerts and alerts | length > 0 else none }}"
+
+      - condition: template
+        value_template: "{{ latest is not none }}"
 
       # notify in the UI
       - action: persistent_notification.create
         data:
-          title: "⚠️ New Weather Alert"
+          title: "⚠️ {{ latest.Event }}"
           message: >-
-            {% if alerts and alerts | length > 0 %}
-              {{ alerts[0].Headline }}
-              
-              **Severity:** {{ alerts[0].Severity }}
-              **Expires:** {{ alerts[0].Expires }}
-              **Description:** 
-              {{ alerts[0].Description }}
-            {% else %}
-              New weather alert received.
-            {% endif %}
+            {{ latest.Headline }}
+
+            **Severity:** {{ latest.Severity }}
+            **Expires:** {{ latest.Expires }}
+            **Description:** 
+            {{ latest.Description }}
 
       # message phones
       - action: notify.phones
         data:
-          title: "Beach"
-          message: "{{ alerts[0].Headline if alerts and alerts | length > 0 else 'Unknown' }}"
+          title: "{{ latest.Event }}"
+          message: "{{ alerts[0].Headline }}"
           data:
             url: "/my-home/home"
             push:
@@ -97,3 +107,42 @@ automation:
                 name: "default"
                 critical: 1
                 volume: 0
+
+#   - alias: "Severe Weather Alerts"
+#     mode: single
+#     trigger:
+#       - trigger: state
+#         entity_id: sensor.nws_alerts_alerts
+#     condition:
+#       - condition: template
+#         value_template: "{{ trigger.to_state.state | int(0) > trigger.from_state.state | int(0) }}"
+#     action:
+#       - variables:
+#           alerts: "{{ state_attr('sensor.nws_alerts_alerts', 'Alerts') }}"
+
+#       # notify in the UI
+#       - action: persistent_notification.create
+#         data:
+#           title: "⚠️ {{ alerts[0].Event }}"
+#           message: >-
+#             {% if alerts and alerts | length > 0 %}
+#               {{ alerts[0].Headline }}
+              
+#               **Severity:** {{ alerts[0].Severity }}
+#               **Expires:** {{ alerts[0].Expires }}
+#               **Description:** 
+#               {{ alerts[0].Description }}
+#             {% endif %}
+
+#       # message phones
+#       - action: notify.phones
+#         data:
+#           title: "Beach"
+#           message: "{{ alerts[0].Headline if alerts and alerts | length > 0 else 'Unknown' }}"
+#           data:
+#             url: "/my-home/home"
+#             push:
+#               sound:
+#                 name: "default"
+#                 critical: 1
+#                 volume: 0
